@@ -1,0 +1,132 @@
+{
+  "platform": "react",
+  "code": {
+    "lang": "ts",
+    "scheme": "blackbox"
+  },
+  "images": {
+    "scheme": "files",
+  },
+  "style": {
+    "scheme": "css",
+    "defaultStyleCssFilePath": "plasmic/plasmic__default_style.css"
+  },
+  "tokens": {
+    "scheme": "theo",
+    "tokensFilePath": "plasmic-tokens.theo.json"
+  },
+  "srcDir": "./src/components",
+  "defaultPlasmicDir": "./plasmic",
+  "projects": [
+    {
+      "projectId": "9pr9hBu15oVRTwBRL9Gnwi",
+      "projectName": "Login Page",
+      "version": "latest",
+      "cssFilePath": "plasmic/login_page/plasmic_login_page.css",
+      "components": [
+        {
+          "id": "mUenpOOz61",
+          "name": "LoginPage",
+          "type": "managed",
+          "projectId": "9pr9hBu15oVRTwBRL9Gnwi",
+          "renderModuleFilePath": "plasmic/login_page/PlasmicLoginPage.jsx",
+          "importSpec": {
+            "modulePath": "LoginPage.jsx"
+          },
+          "cssFilePath": "plasmic/login_page/PlasmicLoginPage.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        }
+      ],
+      "icons": [],
+      "dependencies": []
+    },
+    {
+      "projectId": "sxwiVrVtwgyciBtFBrphc5",
+      "projectName": "Buttons",
+      "version": "^2.0.2",
+      "cssFilePath": "plasmic/buttons/plasmic_buttons.css",
+      "components": [
+        {
+          "id": "WNCRIbDI-m",
+          "name": "Button",
+          "type": "managed",
+          "projectId": "sxwiVrVtwgyciBtFBrphc5",
+          "renderModuleFilePath": "plasmic/buttons/PlasmicButton.jsx",
+          "importSpec": {
+            "modulePath": "Button.jsx"
+          },
+          "cssFilePath": "plasmic/buttons/PlasmicButton.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        }
+      ],
+      "icons": [
+        {
+          "id": "GbOtzqdgr",
+          "name": "PlasmicsvgIcon",
+          "moduleFilePath": "plasmic/login_page/PlasmicIcon__Plasmicsvg.tsx"
+        }
+      ]
+    }
+  ],
+  "globalVariants": {
+    "variantGroups": [
+      {
+        "id": "0_5sqO0BtSLgf1",
+        "name": "Theme",
+        "projectId": "wGm6WRYg9QLZDauuwajumw",
+        "contextFilePath": "plasmic/PP__GlobalVariant__Theme.tsx"
+      }
+    ]
+  },
+  "cliVersion": "0.1.45"
+}
+
+
+
+
+{
+  "platform": "react",
+  "code": {
+    "lang": "js",
+    "scheme": "blackbox",
+    "reactRuntime": "classic"
+  },
+  "style": {
+    "scheme": "css-modules",
+    "defaultStyleCssFilePath": "plasmic/defaultStyles.css"
+  },
+    "images": {
+    "scheme": "files"
+  },
+  "tokens": {
+    "scheme": "theo",
+    "tokensFilePath": "plasmic-tokens.theo.json"
+  },
+  "srcDir": "./frontend/src",
+  "defaultPlasmicDir": "plasmic",
+  "projects": [
+    {
+      "projectId": "kPtL4UpULb2Exm5C4cyhzL",
+      "projectName": "my-bible-app-next-generation",
+      "version": "latest",
+      "scheme": "codegen",
+      "platform": "react",
+      "cssFilePath": "plasmic/plasmic_my_project.css",
+      "components": [],
+      "icons": [],
+      "images": [],
+      "indirect": true,
+      "globalContextsFilePath": "",
+      "splitsProviderFilePath": "",
+      "codeComponents": [],
+      "customFunctions": [],
+      "jsBundleThemes": []
+    }
+  ],
+  "globalVariants": [],
+  "wrapPagesWithGlobalContexts": true,
+  "cliVersion": "0.1.338",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.338/dist/plasmic.schema.json"
+}
