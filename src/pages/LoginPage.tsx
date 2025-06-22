@@ -1,3 +1,5 @@
+import { PlasmicComponent } from "@plasmicapp/loader-react";
+
 export default function LoginPage() {
-  return <div>Login Page (Supabase integration coming soon)</div>;
+  return <PlasmicComponent component="Login" />;
 }

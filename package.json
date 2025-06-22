@@ -9,6 +9,7 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "@ant-design/pro-components": "^2.6.4",
+    "@plasmicapp/loader-react": "^1.0.392",
     "@plasmicapp/react-web": "^0.2.393",
     "@plasmicpkgs/antd5": "^0.0.295",
     "@plasmicpkgs/plasmic-basic-components": "^0.0.249",

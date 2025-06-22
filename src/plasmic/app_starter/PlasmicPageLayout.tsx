@@ -56,7 +56,9 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { RichLayout } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-layout";
-import { LoadingBoundary } from "@plasmicpkgs/plasmic-basic-components";
+import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 import "../defaultStyles.css"; // plasmic-import: global/defaultcss
@@ -65,7 +67,6 @@ import "../plasmic_rich_components/plasmic.css"; // plasmic-import: jkU633o1Cz7H
 import "../../components/plasmic/plasmic_my_project.css"; // plasmic-import: kPtL4UpULb2Exm5C4cyhzL/projectcss
 import "./PlasmicPageLayout.css"; // plasmic-import: D3ERqMs8fd9D/css
 
-import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: APj-uinxyuOe/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: 12qPaiRMfWCK/icon
 
 createPlasmicElementProxy;
@@ -75,17 +76,19 @@ export type PlasmicPageLayout__VariantsArgs = {};
 type VariantPropType = keyof PlasmicPageLayout__VariantsArgs;
 export const PlasmicPageLayout__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicPageLayout__ArgsType = { children?: React.ReactNode };
+export type PlasmicPageLayout__ArgsType = {};
 type ArgPropType = keyof PlasmicPageLayout__ArgsType;
-export const PlasmicPageLayout__ArgProps = new Array<ArgPropType>("children");
+export const PlasmicPageLayout__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicPageLayout__OverridesType = {
-  pageLayout?: Flex__<typeof RichLayout>;
-  loadingBoundary?: Flex__<typeof LoadingBoundary>;
+  login?: Flex__<typeof RichLayout>;
+  freeBox?: Flex__<"div">;
+  input?: Flex__<typeof AntdInput>;
+  submit?: Flex__<typeof AntdButton>;
+  svg?: Flex__<"svg">;
 };
 
 export interface DefaultPageLayoutProps {
-  children?: React.ReactNode;
   className?: string;
 }
 
@@ -121,10 +124,30 @@ function PlasmicPageLayout__RenderFunc(props: {
 
   const currentUser = useCurrentUser?.() || {};
 
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "input.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   return (
     <RichLayout
-      data-plasmic-name={"pageLayout"}
-      data-plasmic-override={overrides.pageLayout}
+      data-plasmic-name={"login"}
+      data-plasmic-override={overrides.login}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
       className={classNames(
@@ -133,10 +156,12 @@ function PlasmicPageLayout__RenderFunc(props: {
         "plasmic_default_styles",
         "plasmic_mixins",
         "plasmic_tokens",
-        "PageLayout__pageLayout__eJfL"
+        "PageLayout__login__eJfL"
       )}
       logoElement={
         <Icon2Icon
+          data-plasmic-name={"svg"}
+          data-plasmic-override={overrides.svg}
           className={classNames(
             "plasmic_default__all",
             "plasmic_default__svg",
@@ -160,7 +185,7 @@ function PlasmicPageLayout__RenderFunc(props: {
         __composite["3"]["path"] = "/profile";
         __composite["3"]["name"] = "Profile";
         __composite["4"]["path"] = "/scriptures";
-        __composite["4"]["name"] = "Scripture";
+        __composite["4"]["name"] = "Scriptures";
         return __composite;
       })()}
       simpleNavTheme={(() => {
@@ -170,94 +195,96 @@ function PlasmicPageLayout__RenderFunc(props: {
       })()}
       title={"My Bible App"}
     >
-      <LoadingBoundary
-        data-plasmic-name={"loadingBoundary"}
-        data-plasmic-override={overrides.loadingBoundary}
-        loadingState={
-          <DataCtxReader__>
-            {$ctx => (
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "PageLayout__freeBox__nf9O4"
-                )}
-              >
-                <IconIcon
-                  className={classNames(
-                    "plasmic_default__all",
-                    "plasmic_default__svg",
-                    "PageLayout__svg__aysAa"
-                  )}
-                  role={"img"}
-                />
-              </div>
-            )}
-          </DataCtxReader__>
-        }
+      <div
+        data-plasmic-name={"freeBox"}
+        data-plasmic-override={overrides.freeBox}
+        className={classNames(
+          "plasmic_default__all",
+          "plasmic_default__div",
+          "PageLayout__freeBox___49Nh1"
+        )}
       >
-        <DataCtxReader__>
-          {$ctx => (
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "PageLayout__freeBox___9XhZy"
-              )}
-            >
-              {renderPlasmicSlot({
-                defaultContents: (
-                  <section
-                    className={classNames(
-                      "plasmic_default__all",
-                      "plasmic_default__section",
-                      "PageLayout__section__ahpdF"
-                    )}
-                  >
-                    <h1
-                      className={classNames(
-                        "plasmic_default__all",
-                        "plasmic_default__h1",
-                        "__wab_text",
-                        "PageLayout__h1__fsEbO"
-                      )}
-                    >
-                      {"Untitled page"}
-                    </h1>
-                    <div
-                      className={classNames(
-                        "plasmic_default__all",
-                        "plasmic_default__div",
-                        "__wab_text",
-                        "PageLayout__text__y58NI"
-                      )}
-                    >
-                      {
-                        "Press the big blue + button to insert components like Tables, Text, Buttons, and Forms.\n\nJoin our Slack Community (icon in bottom left) for help!"
-                      }
-                    </div>
-                  </section>
-                ),
-                value: args.children
-              })}
-            </div>
+        <div
+          className={classNames(
+            "plasmic_default__all",
+            "plasmic_default__div",
+            "__wab_text",
+            "PageLayout__text__tEv5L"
           )}
-        </DataCtxReader__>
-      </LoadingBoundary>
+        >
+          {"Enter your phone number:"}
+        </div>
+        {(() => {
+          const child$Props = {
+            className: classNames("__wab_instance", "PageLayout__input__knXUu"),
+            onChange: async (...eventArgs: any) => {
+              generateStateOnChangePropForCodeComponents(
+                $state,
+                "value",
+                ["input", "value"],
+                AntdInput_Helpers
+              ).apply(null, eventArgs);
+            },
+            value: generateStateValueProp($state, ["input", "value"])
+          };
+          initializeCodeComponentStates(
+            $state,
+            [
+              {
+                name: "value",
+                plasmicStateName: "input.value"
+              }
+            ],
+            [],
+            AntdInput_Helpers ?? {},
+            child$Props
+          );
+
+          return (
+            <AntdInput
+              data-plasmic-name={"input"}
+              data-plasmic-override={overrides.input}
+              {...child$Props}
+            />
+          );
+        })()}
+        <AntdButton
+          data-plasmic-name={"submit"}
+          data-plasmic-override={overrides.submit}
+          className={classNames("__wab_instance", "PageLayout__submit__ge6Af")}
+        >
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "__wab_text",
+              "PageLayout__text__miCHm"
+            )}
+          >
+            {"Button"}
+          </div>
+        </AntdButton>
+      </div>
     </RichLayout>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  pageLayout: ["pageLayout", "loadingBoundary"],
-  loadingBoundary: ["loadingBoundary"]
+  login: ["login", "freeBox", "input", "submit", "svg"],
+  freeBox: ["freeBox", "input", "submit"],
+  input: ["input"],
+  submit: ["submit"],
+  svg: ["svg"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  pageLayout: typeof RichLayout;
-  loadingBoundary: typeof LoadingBoundary;
+  login: typeof RichLayout;
+  freeBox: "div";
+  input: typeof AntdInput;
+  submit: typeof AntdButton;
+  svg: "svg";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -307,7 +334,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "pageLayout") {
+  if (nodeName === "login") {
     func.displayName = "PlasmicPageLayout";
   } else {
     func.displayName = `PlasmicPageLayout.${nodeName}`;
@@ -317,10 +344,13 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicPageLayout = Object.assign(
   // Top-level PlasmicPageLayout renders the root element
-  makeNodeComponent("pageLayout"),
+  makeNodeComponent("login"),
   {
     // Helper components rendering sub-elements
-    loadingBoundary: makeNodeComponent("loadingBoundary"),
+    freeBox: makeNodeComponent("freeBox"),
+    input: makeNodeComponent("input"),
+    submit: makeNodeComponent("submit"),
+    svg: makeNodeComponent("svg"),
 
     // Metadata about props expected for PlasmicPageLayout
     internalVariantProps: PlasmicPageLayout__VariantProps,
