@@ -23,7 +23,7 @@
   "projects": [
     {
       "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-      "projectName": "App starter",
+      "projectName": "my-bible-app-next-generation",
       "projectApiToken": "YOUR_API_KEY",
       "version": "latest",
       "scheme": "codegen",
@@ -70,6 +70,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/login"
+        },
+        {
+          "id": "V2tTGAx8KTsP",
+          "name": "Profile",
+          "type": "managed",
+          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
+          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicProfile.tsx",
+          "importSpec": {
+            "modulePath": "Profile.tsx"
+          },
+          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicProfile.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/profile"
         }
       ],
       "icons": [

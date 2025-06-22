@@ -1,0 +1,229 @@
+.Profile__root___7Q1S8 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+  min-height: 0;
+  padding: 8px;
+}
+.Profile__profile__qZCys {
+  display: grid;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-content: flex-start;
+  justify-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  min-height: 0;
+  grid-template-columns:
+    var(--plsmc-viewport-gap) 1fr minmax(0, var(--plsmc-wide-chunk))
+    min(
+      var(--plsmc-standard-width),
+      calc(100% - var(--plsmc-viewport-gap) - var(--plsmc-viewport-gap))
+    )
+    minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
+}
+.Profile__profile__qZCys > * {
+  grid-column: 4;
+}
+.Profile__freeBox__iM38F {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__freeBox__a9DIl {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__text__hafCk {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: #000000;
+  margin-bottom: 0px;
+  font-size: 18px;
+  text-align: right;
+  min-width: 0;
+}
+.Profile__freeBox__eVjFp {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__telephoneInput__ja46N.__wab_instance {
+  max-width: 100%;
+  object-fit: cover;
+}
+.Profile__freeBox___0UPly {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__freeBox__wdYc {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__text__uy4Bi {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: #310c0c;
+  font-size: 18px;
+  text-align: right;
+  min-width: 0;
+}
+.Profile__freeBox__ol0Nx {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__nameInput__wdNuo.__wab_instance {
+  max-width: 100%;
+  object-fit: cover;
+}
+.Profile__freeBox___41FOp {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__freeBox__ycNuQ {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__text__afOJ {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: #000000;
+  font-size: 18px;
+  text-align: right;
+  min-width: 0;
+}
+.Profile__freeBox___39Gb3 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__emailInput__mgWwa.__wab_instance {
+  max-width: 100%;
+  object-fit: cover;
+}
+.Profile__freeBox__q4AaH {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__freeBox__ms0Uy {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__text__lu9A {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: #2f1010;
+  font-size: 18px;
+  text-align: right;
+  min-width: 0;
+}
+.Profile__freeBox__fnlhU {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__emailVerifiedInput__fTbi.__wab_instance {
+  max-width: 100%;
+  object-fit: cover;
+}
