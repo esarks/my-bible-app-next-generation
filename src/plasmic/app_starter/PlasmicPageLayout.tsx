@@ -159,7 +159,7 @@ function PlasmicPageLayout__RenderFunc(props: {
         __composite["2"]["name"] = "Login";
         __composite["3"]["path"] = "/profile";
         __composite["3"]["name"] = "Profile";
-        __composite["4"]["path"] = "/scripture";
+        __composite["4"]["path"] = "/scriptures";
         __composite["4"]["name"] = "Scripture";
         return __composite;
       })()}
