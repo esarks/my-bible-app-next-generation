@@ -14,6 +14,7 @@
     "@plasmicpkgs/antd5": "^0.0.295",
     "@plasmicpkgs/plasmic-basic-components": "^0.0.249",
     "@plasmicpkgs/plasmic-rich-components": "^1.0.218",
+    "@plasmicpkgs/react-aria": "^0.0.145",
     "@supabase/supabase-js": "^2.50.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,0 +1,82 @@
+.Select__ariaSelect__wpTWs.__wab_instance {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  row-gap: var(--token-KX3GitdiTH91);
+}
+.Select__ariaSelect__wpTWs[data-disabled].__wab_instance {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.Select__ariaButton___8I2Kn.__wab_instance {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: inset 0px 0px 0px 1px var(--token-KkkfAYAoVFkI);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  outline-style: none;
+  background: var(--token-5Yj-ZMo0VzQm);
+  min-width: 0;
+  border-radius: var(--token-gz-3ROK-x6WT);
+  padding: 0px;
+  border-style: none;
+}
+.Select__ariaSelect__wpTWs[data-focus-visible]
+  .Select__ariaButton___8I2Kn.__wab_instance {
+  outline-style: solid;
+  outline-width: var(--token-9ap3sghCd3Ip);
+  outline-offset: 1px;
+  outline-color: var(--token-CWnNPRN4Y62X);
+}
+.Select__ariaSelectedValue__oyYas.__wab_instance {
+  font-size: var(--token-EpyY6291TWy_);
+  line-height: var(--token-_PUeWmFzxHc3);
+  padding-top: var(--token-gz-3ROK-x6WT);
+  padding-bottom: var(--token-gz-3ROK-x6WT);
+  padding-left: var(--token-jy0IJPDezsB7);
+}
+.Select__text___60X46 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  color: var(--token-wp4fJcUYb17m);
+  min-width: 0;
+}
+.Select__freeBox__vx7Ii {
+  display: flex;
+  position: relative;
+  width: var(--token-cKmmHNC-ASzh);
+  height: var(--token-cKmmHNC-ASzh);
+  justify-content: center;
+  align-items: center;
+}
+.Select__svg__i2Nbf {
+  width: var(--token-khVWr8w_MOE8);
+  height: var(--token-khVWr8w_MOE8);
+  flex-shrink: 0;
+}
+.Select__description__fDoZy.__wab_instance.__wab_instance {
+  position: relative;
+}
+.Select__menuPopover__eyZsg.__wab_instance.__wab_instance {
+  position: relative;
+  top: auto;
+  left: auto;
+}
+.Select__menuSection__dNz3N.__wab_instance.__wab_instance {
+  max-width: 100%;
+}
+.Select__text__lZkSx {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}

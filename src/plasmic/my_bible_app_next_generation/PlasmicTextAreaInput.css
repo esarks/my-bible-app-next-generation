@@ -1,0 +1,59 @@
+.TextAreaInput__ariaTextArea___4VSsu.__wab_instance {
+  box-sizing: border-box;
+  object-fit: cover;
+  position: relative;
+  box-shadow: inset 0px 0px 0px 1px var(--token-KkkfAYAoVFkI);
+  font-size: var(--token-EpyY6291TWy_);
+  line-height: var(--token-_PUeWmFzxHc3);
+  width: 100%;
+  color: var(--token-ylB27QgVfaj5);
+  font-family: var(--token-NMoCiMcX1m03);
+  min-width: 0;
+  border-radius: var(--token-gz-3ROK-x6WT);
+  padding: var(--token-gz-3ROK-x6WT) var(--token-jy0IJPDezsB7);
+  border-style: none;
+}
+.TextAreaInput__ariaTextArea___4VSsu[data-focused].__wab_instance {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: var(--token-CWnNPRN4Y62X);
+  outline-offset: 1px;
+}
+.TextAreaInput__ariaTextArea___4VSsu[data-disabled].__wab_instance {
+  cursor: not-allowed;
+}
+.TextAreaInput__ariaTextAreatype_soft___4VSsUouxl5.__wab_instance {
+  background: var(--token-RCLge9wcv1Hp);
+  box-shadow: none;
+}
+.TextAreaInput__ariaTextAreatype_soft___4VSsUouxl5[data-hovered].__wab_instance {
+  background: var(--token-B8ESywvTjOip);
+}
+.TextAreaInput__ariaTextAreatype_plain___4VSsUuHfzt.__wab_instance {
+  box-shadow: none;
+}
+.TextAreaInput__ariaTextAreatype_plain___4VSsUuHfzt[data-hovered].__wab_instance {
+  background: var(--token-RCLge9wcv1Hp);
+}
+.TextAreaInput__ariaTextAreaflat_top___4VSsUzwlbo.__wab_instance {
+  border-top-left-radius: 0rem;
+  border-top-right-radius: 0rem;
+}
+.TextAreaInput__ariaTextAreaflat_right___4VSsuOhEi0.__wab_instance {
+  border-top-right-radius: 0rem;
+  border-bottom-right-radius: 0rem;
+}
+.TextAreaInput__ariaTextAreaflat_bottom___4VSsUvfGq.__wab_instance {
+  border-bottom-left-radius: 0rem;
+  border-bottom-right-radius: 0rem;
+}
+.TextAreaInput__ariaTextAreaflat_left___4VSsu8UC9I.__wab_instance {
+  border-top-left-radius: 0rem;
+  border-bottom-left-radius: 0rem;
+}
+.TextAreaInput__ariaTextAreapadded_left___4VSsUipV9G.__wab_instance {
+  padding-left: var(--token-cKmmHNC-ASzh);
+}
+.TextAreaInput__ariaTextAreapadded_right___4VSsukm00D.__wab_instance {
+  padding-right: var(--token-cKmmHNC-ASzh);
+}

@@ -80,6 +80,7 @@
   padding: 8px;
 }
 .Profile__telephoneInput__ja46N.__wab_instance {
+  color: #000000;
   max-width: 100%;
   object-fit: cover;
 }
@@ -128,6 +129,7 @@
   padding: 8px;
 }
 .Profile__nameInput__wdNuo.__wab_instance {
+  color: #000000;
   max-width: 100%;
   object-fit: cover;
 }
@@ -176,6 +178,7 @@
   padding: 8px;
 }
 .Profile__emailInput__mgWwa.__wab_instance {
+  color: #000000;
   max-width: 100%;
   object-fit: cover;
 }
@@ -224,6 +227,55 @@
   padding: 8px;
 }
 .Profile__emailVerifiedInput__fTbi.__wab_instance {
+  color: #000000;
   max-width: 100%;
   object-fit: cover;
+}
+.Profile__freeBox__cxOgp {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__freeBox___9Y6Ba {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__freeBox__gYcoC {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Profile__saveButton__wAObl.__wab_instance {
+  color: #ffffff;
+  max-width: 100%;
+  object-fit: cover;
+  background: #0000ff;
+}
+.Profile__text__wi5B {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  padding-right: 0px;
+  text-align: left;
 }

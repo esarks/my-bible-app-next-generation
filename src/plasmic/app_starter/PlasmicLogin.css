@@ -58,9 +58,14 @@
   text-align: right;
   min-width: 0;
 }
-.Login__input__fnn6C.__wab_instance {
+.Login__telephoneInput__nH2R4.__wab_instance {
+  color: #000000;
   max-width: 100%;
   object-fit: cover;
+  position: relative;
+  left: auto;
+  top: auto;
+  z-index: 1;
 }
 .Login__button__ssxCc.__wab_instance {
   max-width: 100%;
@@ -68,11 +73,11 @@
   background: #0000ff;
   color: #ffffff;
 }
-.Login__text__m0H5Y {
+.Login__submitButton__m0H5Y {
+  color: #ffffff;
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
-  color: #ffffff;
   min-width: 0;
 }

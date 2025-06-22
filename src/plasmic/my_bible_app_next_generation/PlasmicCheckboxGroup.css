@@ -1,0 +1,55 @@
+.CheckboxGroup__ariaCheckboxGroup__boaeI.__wab_instance {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  row-gap: var(--token-KX3GitdiTH91);
+}
+.CheckboxGroup__ariaCheckboxGroup__boaeI[data-disabled].__wab_instance {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.CheckboxGroup__ariaCheckboxGroup__boaeI[data-readonly].__wab_instance {
+  pointer-events: none;
+  cursor: default;
+}
+.CheckboxGroup__label__gmbGv.__wab_instance.__wab_instance {
+  position: relative;
+}
+.CheckboxGroup__freeBox__h4D0 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.CheckboxGroup__freeBox__h4D0 > .__wab_flex-container {
+  flex-direction: column;
+  margin-top: calc(0px - var(--token-KX3GitdiTH91));
+  height: calc(100% + var(--token-KX3GitdiTH91));
+}
+.CheckboxGroup__freeBox__h4D0 > .__wab_flex-container > *,
+.CheckboxGroup__freeBox__h4D0 > .__wab_flex-container > .__wab_slot > *,
+.CheckboxGroup__freeBox__h4D0 > .__wab_flex-container > picture > img,
+.CheckboxGroup__freeBox__h4D0
+  > .__wab_flex-container
+  > .__wab_slot
+  > picture
+  > img {
+  margin-top: var(--token-KX3GitdiTH91);
+}
+.CheckboxGroup__checkbox__o5IKf.__wab_instance.__wab_instance {
+  max-width: 100%;
+}
+.CheckboxGroup__checkbox__gKen3.__wab_instance.__wab_instance {
+  max-width: 100%;
+  position: relative;
+}
+.CheckboxGroup__checkbox___69P8N.__wab_instance.__wab_instance {
+  max-width: 100%;
+  position: relative;
+}
+.CheckboxGroup__description__t9QaE.__wab_instance.__wab_instance {
+  position: relative;
+}

@@ -1,0 +1,20 @@
+.SliderThumb__root__lKeb8.__wab_instance {
+  position: relative;
+  background: var(--token-5Yj-ZMo0VzQm);
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  height: var(--token-PW29dbzVrEKs);
+  width: var(--token-PW29dbzVrEKs);
+  border-radius: 99px;
+  border: 1px solid var(--token-CWnNPRN4Y62X);
+}
+.SliderThumb__root__lKeb8[data-hovered].__wab_instance {
+  border-width: 2px;
+}
+.SliderThumb__root__lKeb8[data-focus-visible].__wab_instance {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: var(--token-CWnNPRN4Y62X);
+  outline-offset: 1px;
+}

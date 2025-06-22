@@ -66,6 +66,8 @@ import "@plasmicapp/react-web/lib/plasmic.css";
 import "../defaultStyles.css"; // plasmic-import: global/defaultcss
 import "../antd_5_hostless/plasmic.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import "../plasmic_rich_components/plasmic.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import "../library_tailwind_3_4_color_tokens/plasmic.css"; // plasmic-import: 5ZtnypMovRHeeP3YTdPCYL/projectcss
+import "../library_tailwind_3_4_number_tokens/plasmic.css"; // plasmic-import: 4vjRXvnb4XuY6J15w9oRcQ/projectcss
 import "../../components/plasmic/plasmic_my_project.css"; // plasmic-import: kPtL4UpULb2Exm5C4cyhzL/projectcss
 import "./PlasmicLogin.css"; // plasmic-import: ti8lvmbBkGxm/css
 
@@ -84,8 +86,10 @@ export type PlasmicLogin__OverridesType = {
   root?: Flex__<"div">;
   login?: Flex__<"div">;
   freeBox?: Flex__<"div">;
-  input?: Flex__<typeof AntdInput>;
+  text?: Flex__<"div">;
+  telephoneInput?: Flex__<typeof AntdInput>;
   button?: Flex__<typeof AntdButton>;
+  submitButton?: Flex__<"div">;
 };
 
 export interface DefaultLoginProps {
@@ -127,10 +131,11 @@ function PlasmicLogin__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "input.value",
+        path: "telephoneInput.value",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          "Enter Telephone Number",
 
         onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       }
@@ -181,6 +186,8 @@ function PlasmicLogin__RenderFunc(props: {
               )}
             >
               <div
+                data-plasmic-name={"text"}
+                data-plasmic-override={overrides.text}
                 className={classNames(
                   "plasmic_default__all",
                   "plasmic_default__div",
@@ -192,26 +199,31 @@ function PlasmicLogin__RenderFunc(props: {
               </div>
               {(() => {
                 const child$Props = {
+                  allowClear: false,
                   className: classNames(
                     "__wab_instance",
-                    "Login__input__fnn6C"
+                    "Login__telephoneInput__nH2R4"
                   ),
                   onChange: async (...eventArgs: any) => {
                     generateStateOnChangePropForCodeComponents(
                       $state,
                       "value",
-                      ["input", "value"],
+                      ["telephoneInput", "value"],
                       AntdInput_Helpers
                     ).apply(null, eventArgs);
                   },
-                  value: generateStateValueProp($state, ["input", "value"])
+                  type: "number",
+                  value: generateStateValueProp($state, [
+                    "telephoneInput",
+                    "value"
+                  ])
                 };
                 initializeCodeComponentStates(
                   $state,
                   [
                     {
                       name: "value",
-                      plasmicStateName: "input.value"
+                      plasmicStateName: "telephoneInput.value"
                     }
                   ],
                   [],
@@ -221,8 +233,8 @@ function PlasmicLogin__RenderFunc(props: {
 
                 return (
                   <AntdInput
-                    data-plasmic-name={"input"}
-                    data-plasmic-override={overrides.input}
+                    data-plasmic-name={"telephoneInput"}
+                    data-plasmic-override={overrides.telephoneInput}
                     {...child$Props}
                   />
                 );
@@ -233,11 +245,13 @@ function PlasmicLogin__RenderFunc(props: {
                 className={classNames("__wab_instance", "Login__button__ssxCc")}
               >
                 <div
+                  data-plasmic-name={"submitButton"}
+                  data-plasmic-override={overrides.submitButton}
                   className={classNames(
                     "plasmic_default__all",
                     "plasmic_default__div",
                     "__wab_text",
-                    "Login__text__m0H5Y"
+                    "Login__submitButton__m0H5Y"
                   )}
                 >
                   {"Button"}
@@ -252,11 +266,28 @@ function PlasmicLogin__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "login", "freeBox", "input", "button"],
-  login: ["login", "freeBox", "input", "button"],
-  freeBox: ["freeBox", "input", "button"],
-  input: ["input"],
-  button: ["button"]
+  root: [
+    "root",
+    "login",
+    "freeBox",
+    "text",
+    "telephoneInput",
+    "button",
+    "submitButton"
+  ],
+  login: [
+    "login",
+    "freeBox",
+    "text",
+    "telephoneInput",
+    "button",
+    "submitButton"
+  ],
+  freeBox: ["freeBox", "text", "telephoneInput", "button", "submitButton"],
+  text: ["text"],
+  telephoneInput: ["telephoneInput"],
+  button: ["button", "submitButton"],
+  submitButton: ["submitButton"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -265,8 +296,10 @@ type NodeDefaultElementType = {
   root: "div";
   login: "div";
   freeBox: "div";
-  input: typeof AntdInput;
+  text: "div";
+  telephoneInput: typeof AntdInput;
   button: typeof AntdButton;
+  submitButton: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -356,8 +389,10 @@ export const PlasmicLogin = Object.assign(
     // Helper components rendering sub-elements
     login: makeNodeComponent("login"),
     freeBox: makeNodeComponent("freeBox"),
-    input: makeNodeComponent("input"),
+    text: makeNodeComponent("text"),
+    telephoneInput: makeNodeComponent("telephoneInput"),
     button: makeNodeComponent("button"),
+    submitButton: makeNodeComponent("submitButton"),
 
     // Metadata about props expected for PlasmicLogin
     internalVariantProps: PlasmicLogin__VariantProps,

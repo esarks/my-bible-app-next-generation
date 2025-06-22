@@ -60,11 +60,14 @@ import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 import "../defaultStyles.css"; // plasmic-import: global/defaultcss
 import "../antd_5_hostless/plasmic.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import "../plasmic_rich_components/plasmic.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
+import "../library_tailwind_3_4_color_tokens/plasmic.css"; // plasmic-import: 5ZtnypMovRHeeP3YTdPCYL/projectcss
+import "../library_tailwind_3_4_number_tokens/plasmic.css"; // plasmic-import: 4vjRXvnb4XuY6J15w9oRcQ/projectcss
 import "../../components/plasmic/plasmic_my_project.css"; // plasmic-import: kPtL4UpULb2Exm5C4cyhzL/projectcss
 import "./PlasmicProfile.css"; // plasmic-import: V2tTGAx8KTsP/css
 
@@ -86,6 +89,7 @@ export type PlasmicProfile__OverridesType = {
   nameInput?: Flex__<typeof AntdInput>;
   emailInput?: Flex__<typeof AntdInput>;
   emailVerifiedInput?: Flex__<typeof AntdInput>;
+  saveButton?: Flex__<typeof AntdButton>;
 };
 
 export interface DefaultProfileProps {
@@ -491,6 +495,49 @@ function PlasmicProfile__RenderFunc(props: {
                 })()}
               </div>
             </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox__cxOgp"
+              )}
+            >
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "Profile__freeBox___9Y6Ba"
+                )}
+              />
+
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "Profile__freeBox__gYcoC"
+                )}
+              >
+                <AntdButton
+                  data-plasmic-name={"saveButton"}
+                  data-plasmic-override={overrides.saveButton}
+                  className={classNames(
+                    "__wab_instance",
+                    "Profile__saveButton__wAObl"
+                  )}
+                >
+                  <div
+                    className={classNames(
+                      "plasmic_default__all",
+                      "plasmic_default__div",
+                      "__wab_text",
+                      "Profile__text__wi5B"
+                    )}
+                  >
+                    {"Save"}
+                  </div>
+                </AntdButton>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -505,19 +552,22 @@ const PlasmicDescendants = {
     "telephoneInput",
     "nameInput",
     "emailInput",
-    "emailVerifiedInput"
+    "emailVerifiedInput",
+    "saveButton"
   ],
   profile: [
     "profile",
     "telephoneInput",
     "nameInput",
     "emailInput",
-    "emailVerifiedInput"
+    "emailVerifiedInput",
+    "saveButton"
   ],
   telephoneInput: ["telephoneInput"],
   nameInput: ["nameInput"],
   emailInput: ["emailInput"],
-  emailVerifiedInput: ["emailVerifiedInput"]
+  emailVerifiedInput: ["emailVerifiedInput"],
+  saveButton: ["saveButton"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -529,6 +579,7 @@ type NodeDefaultElementType = {
   nameInput: typeof AntdInput;
   emailInput: typeof AntdInput;
   emailVerifiedInput: typeof AntdInput;
+  saveButton: typeof AntdButton;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -621,6 +672,7 @@ export const PlasmicProfile = Object.assign(
     nameInput: makeNodeComponent("nameInput"),
     emailInput: makeNodeComponent("emailInput"),
     emailVerifiedInput: makeNodeComponent("emailVerifiedInput"),
+    saveButton: makeNodeComponent("saveButton"),
 
     // Metadata about props expected for PlasmicProfile
     internalVariantProps: PlasmicProfile__VariantProps,
