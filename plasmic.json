@@ -3,7 +3,9 @@
   "code": {
     "lang": "ts",
     "scheme": "blackbox",
-    "reactRuntime": "classic"
+    "reactRuntime": "classic",
+    "bundler": "vite",
+    "initModulePath": "./src/components/plasmic-init.tsx"
   },
   "style": {
     "scheme": "css",
@@ -26,22 +28,8 @@
       "version": "latest",
       "scheme": "codegen",
       "platform": "react",
-      "cssFilePath": "../plasmic/plasmic_my_project.css",
+      "cssFilePath": "./plasmic/plasmic_my_project.css",
       "components": [
-        {
-          "id": "Nyx2bjgpZrcu",
-          "name": "Homepage",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/app_starter/PlasmicHomepage.tsx",
-          "importSpec": {
-            "modulePath": "Homepage.tsx"
-          },
-          "cssFilePath": "../plasmic/app_starter/PlasmicHomepage.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/"
-        },
         {
           "id": "D3ERqMs8fd9D",
           "name": "PageLayout",
@@ -54,6 +42,20 @@
           "cssFilePath": "../plasmic/app_starter/PlasmicPageLayout.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "Nyx2bjgpZrcu",
+          "name": "Home",
+          "type": "managed",
+          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
+          "renderModuleFilePath": "../plasmic/app_starter/PlasmicHome.tsx",
+          "importSpec": {
+            "modulePath": "Home.tsx"
+          },
+          "cssFilePath": "../plasmic/app_starter/PlasmicHome.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/"
         }
       ],
       "icons": [
@@ -109,8 +111,7 @@
           "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "jkU633o1Cz7HrJdwdxhVHk",
@@ -164,8 +165,7 @@
           }
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "ohDidvG9XsCeFumugENU3J",
@@ -565,8 +565,7 @@
           "componentImportPath": "@plasmicpkgs/antd5/skinny/registerBreadcrumb"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     }
   ],
   "globalVariants": {
