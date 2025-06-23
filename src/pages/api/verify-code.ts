@@ -1,19 +1,19 @@
 // pages/api/verify-code.ts
 import type { NextApiRequest, NextApiResponse } from "next";
-import twilio from "twilio";
+import codeStore from "../../lib/code-store";
 
-const client = twilio(process.env.TWILIO_SID!, process.env.TWILIO_AUTH_TOKEN!);
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { phone, code } = req.body;
 
-  try {
-    const result = await client.verify
-      .services(process.env.TWILIO_VERIFY_SID!)
-      .verificationChecks.create({ to: phone, code });
+  if (!phone || !code) {
+    return res.status(400).json({ error: "Missing phone or code" });
+  }
 
-    res.status(200).json({ success: result.status === "approved" });
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
+  const expectedCode = codeStore.get(phone);
+  if (expectedCode === code) {
+    codeStore.delete(phone); // Optional: one-time use
+    return res.status(200).json({ success: true });
+  } else {
+    return res.status(401).json({ success: false, error: "Incorrect code" });
   }
 }
