@@ -1,4 +1,3 @@
-// src/pages/LoginPage.tsx
 import { PlasmicComponent } from "@plasmicapp/loader-react";
 import { useState } from "react";
 
@@ -17,15 +16,11 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Failed to send code");
+        throw new Error("Failed to send code");
       }
 
+      setCode(data.code); // Pre-fill code input for testing
       alert("Verification code sent!");
-
-      // For dev: auto-fill the code input with the returned code
-      if (data.code) {
-        setCode(data.code);
-      }
     } catch (err) {
       console.error(err);
       alert("Error sending code.");
@@ -44,7 +39,7 @@ export default function LoginPage() {
 
       if (data.success) {
         alert("Code verified! Logging in...");
-        // TODO: navigate to profile or set login state
+        // TODO: Navigate or set login state
       } else {
         alert("Verification failed.");
       }
@@ -58,18 +53,18 @@ export default function LoginPage() {
     <PlasmicComponent
       component="Login"
       componentProps={{
-        phoneInput: {
+        inputPhone: {
           value: phone,
           onChange: (e: any) => setPhone(e.target.value),
         },
-        codeInput: {
+        inputVerification: {
           value: code,
           onChange: (e: any) => setCode(e.target.value),
         },
-        sendCodeButton: {
+        sendButton: {
           onClick: sendCode,
         },
-        verifyCodeButton: {
+        verifyButton: {
           onClick: verifyCode,
         },
       }}
