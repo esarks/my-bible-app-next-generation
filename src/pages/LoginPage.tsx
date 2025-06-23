@@ -1,3 +1,4 @@
+// src/pages/LoginPage.tsx
 import { PlasmicComponent } from "@plasmicapp/loader-react";
 import { useState } from "react";
 
@@ -13,11 +14,18 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        throw new Error("Failed to send code");
+        throw new Error(data.error || "Failed to send code");
       }
 
       alert("Verification code sent!");
+
+      // For dev: auto-fill the code input with the returned code
+      if (data.code) {
+        setCode(data.code);
+      }
     } catch (err) {
       console.error(err);
       alert("Error sending code.");
@@ -36,7 +44,7 @@ export default function LoginPage() {
 
       if (data.success) {
         alert("Code verified! Logging in...");
-        // TODO: Navigate or set login state
+        // TODO: navigate to profile or set login state
       } else {
         alert("Verification failed.");
       }
