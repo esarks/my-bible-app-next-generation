@@ -1,12 +1,13 @@
-import * as React from "react";
-import { PlasmicRootProvider as PlasmicRootProviderImpl } from "@plasmicapp/react-web";
-import { BrowserRouter } from "react-router-dom";
 
-// No GlobalContextsProvider needed here
-export function PlasmicRootProvider(props: React.PropsWithChildren<{}>) {
-  return (
-    <PlasmicRootProviderImpl Head={React.Fragment} prefetchedQueryData={{}}>
-      <BrowserRouter>{props.children}</BrowserRouter>
-    </PlasmicRootProviderImpl>
-  );
-}
+// src/plasmic-init.ts
+import { initPlasmicLoader } from "@plasmicapp/loader-react";
+
+export const PLASMIC = initPlasmicLoader({
+  projects: [
+    {
+      id: "kPtL4UpULb2Exm5C4cyhzL", // Replace with your real Project ID
+      token: "KhK3gU6aLw4gWXFiC6FDZzYMB1JfsWewrNsbDqaYp0zTSfqCHQ3fpg3PyB7Ar7PYzZ3Dy4gZJp5ynYoZmQ", // Replace with your real public token
+    },
+  ],
+  preview: true,
+});
