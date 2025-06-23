@@ -14,12 +14,8 @@ export default function LoginPage() {
       });
 
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error("Failed to send code");
-      }
-
-      setCode(data.code); // Pre-fill code input for testing
+      if (!res.ok) throw new Error("Failed to send code");
+      setCode(data.code);
       alert("Verification code sent!");
     } catch (err) {
       console.error(err);
@@ -36,10 +32,9 @@ export default function LoginPage() {
       });
 
       const data = await res.json();
-
       if (data.success) {
-        alert("Code verified! Logging in...");
-        // TODO: Navigate or set login state
+        alert("Code verified!");
+        // Navigate to profile or home
       } else {
         alert("Verification failed.");
       }
