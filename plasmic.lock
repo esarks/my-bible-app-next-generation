@@ -54,7 +54,7 @@
         "ohDidvG9XsCeFumugENU3J": "6.31.0",
         "jkU633o1Cz7HrJdwdxhVHk": "16.15.0",
         "9Vr5YWkf3w7jj6SsTcCEta": "0.15.0",
-        "gmeH6XgPaBtkt51HunAo4g": "18.19.1",
+        "gmeH6XgPaBtkt51HunAo4g": "18.20.0",
         "d2Pfbr6bN5UwJ4ss7Fh3HB": "1.0.1",
         "5ZtnypMovRHeeP3YTdPCYL": "0.0.2",
         "4vjRXvnb4XuY6J15w9oRcQ": "2.0.0"
@@ -26553,7 +26553,7 @@
     },
     {
       "projectId": "gmeH6XgPaBtkt51HunAo4g",
-      "version": "18.19.1",
+      "version": "18.20.0",
       "dependencies": {},
       "lang": "ts",
       "fileLocks": [
