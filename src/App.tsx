@@ -1,3 +1,4 @@
+// src/App.tsx
 import { Routes, Route } from "react-router-dom";
 import PageLayout from "./components/PageLayout";
 import LoginPage from "./pages/LoginPage";
@@ -8,7 +9,7 @@ function App() {
   return (
     <Routes>
       <Route element={<PageLayout />}>
-        <Route index element={<div>Home</div>} />
+        <Route index element={<div>Home Page</div>} />
         <Route path="login" element={<LoginPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="scriptures" element={<ScripturePage />} />

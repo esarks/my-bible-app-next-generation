@@ -1,11 +1,12 @@
-import React from "react";
-import { PlasmicPageLayout } from "../plasmic/app_starter/PlasmicPageLayout";
+// src/components/PageLayout.tsx
+import { PlasmicComponent } from "@plasmicapp/loader-react";
 import { Outlet } from "react-router-dom";
 
 export default function PageLayout() {
   return (
-    <PlasmicPageLayout>
+    <>
+      <PlasmicComponent component="PageLayout" />
       <Outlet />
-    </PlasmicPageLayout>
+    </>
   );
 }
