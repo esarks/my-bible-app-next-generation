@@ -44,25 +44,25 @@ export default function LoginPage() {
     }
   };
 
-  return (
+  return (Add commentMore actions
     <PlasmicComponent
       component="Login"
       componentProps={{
-        inputPhone: {
+        phoneInput: {
           value: phone,
           onChange: (e: any) => setPhone(e.target.value),
         },
-        inputVerification: {
+        codeInput: {
           value: code,
           onChange: (e: any) => setCode(e.target.value),
         },
-        sendButton: {
+        sendCodeButton: {
           onClick: sendCode,
         },
-        verifyButton: {
+        verifyCodeButton: {
           onClick: verifyCode,
         },
-      }}
+      }}Add commentMore actions
     />
   );
 }
