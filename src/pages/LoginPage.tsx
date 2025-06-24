@@ -1,7 +1,7 @@
 // src/pages/LoginPage.tsx
 import { useState } from "react";
-import { PlasmicRootProvider, PlasmicComponent } from "@plasmicapp/loader-react";
-import { PLASMIC } from "@/plasmic-init";
+import { PlasmicComponent, PlasmicRootProvider } from "@plasmicapp/loader-react";
+import { PLASMIC } from "../components/plasmic-init";
 
 export default function LoginPage() {
   const [phone, setPhone] = useState("");
@@ -15,12 +15,11 @@ export default function LoginPage() {
         body: JSON.stringify({ phone }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error("Failed to send code");
-      setCode(data.code); // optional for dev
-      alert("Verification code sent!");
+      setCode(data.code); // dev mode only
+      alert("Code sent!");
     } catch (err) {
       console.error(err);
-      alert("Error sending code.");
+      alert("Failed to send code.");
     }
   };
 
@@ -32,14 +31,10 @@ export default function LoginPage() {
         body: JSON.stringify({ phone, code }),
       });
       const data = await res.json();
-      if (data.success) {
-        alert("Code verified!");
-      } else {
-        alert("Verification failed.");
-      }
+      alert(data.success ? "Verified!" : "Failed verification");
     } catch (err) {
       console.error(err);
-      alert("Error verifying code.");
+      alert("Failed to verify code.");
     }
   };
 
@@ -56,12 +51,8 @@ export default function LoginPage() {
             value: code,
             onChange: (e: any) => setCode(e.target.value),
           },
-          sendCodeButton: {
-            onClick: sendCode,
-          },
-          verifyCodeButton: {
-            onClick: verifyCode,
-          },
+          sendCodeButton: { onClick: sendCode },
+          verifyCodeButton: { onClick: verifyCode },
         }}
       />
     </PlasmicRootProvider>

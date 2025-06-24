@@ -1,3 +1,4 @@
+// src/pages/ScripturePage.tsx
 import React from "react";
 
 export default function ScripturePage() {
