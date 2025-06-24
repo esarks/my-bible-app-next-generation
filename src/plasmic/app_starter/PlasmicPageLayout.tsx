@@ -83,7 +83,7 @@ type ArgPropType = keyof PlasmicPageLayout__ArgsType;
 export const PlasmicPageLayout__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicPageLayout__OverridesType = {
-  login?: Flex__<typeof RichLayout>;
+  pageLayout?: Flex__<typeof RichLayout>;
   freeBox?: Flex__<"div">;
   input?: Flex__<typeof AntdInput>;
   submit?: Flex__<typeof AntdButton>;
@@ -148,8 +148,8 @@ function PlasmicPageLayout__RenderFunc(props: {
 
   return (
     <RichLayout
-      data-plasmic-name={"login"}
-      data-plasmic-override={overrides.login}
+      data-plasmic-name={"pageLayout"}
+      data-plasmic-override={overrides.pageLayout}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
       className={classNames(
@@ -158,7 +158,7 @@ function PlasmicPageLayout__RenderFunc(props: {
         "plasmic_default_styles",
         "plasmic_mixins",
         "plasmic_tokens",
-        "PageLayout__login__eJfL"
+        "PageLayout__pageLayout__eJfL"
       )}
       logoElement={
         <Icon2Icon
@@ -174,20 +174,17 @@ function PlasmicPageLayout__RenderFunc(props: {
       }
       navMenuItems={(() => {
         const __composite = [
-          { path: null, name: null },
-          {},
+          { path: "/", name: "Home" },
           { path: null, name: null },
           { path: null, name: null },
           { path: null, name: null }
         ];
-        __composite["0"]["path"] = `/`;
-        __composite["0"]["name"] = "Home";
-        __composite["2"]["path"] = "/login";
-        __composite["2"]["name"] = "Login";
-        __composite["3"]["path"] = "/profile";
-        __composite["3"]["name"] = "Profile";
-        __composite["4"]["path"] = "/scriptures";
-        __composite["4"]["name"] = "Scriptures";
+        __composite["1"]["path"] = "login";
+        __composite["1"]["name"] = "Login";
+        __composite["2"]["path"] = "profile";
+        __composite["2"]["name"] = "Profile";
+        __composite["3"]["path"] = "Scriptures";
+        __composite["3"]["name"] = "Scriptures";
         return __composite;
       })()}
       simpleNavTheme={(() => {
@@ -272,7 +269,7 @@ function PlasmicPageLayout__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  login: ["login", "freeBox", "input", "submit", "svg"],
+  pageLayout: ["pageLayout", "freeBox", "input", "submit", "svg"],
   freeBox: ["freeBox", "input", "submit"],
   input: ["input"],
   submit: ["submit"],
@@ -282,7 +279,7 @@ type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
-  login: typeof RichLayout;
+  pageLayout: typeof RichLayout;
   freeBox: "div";
   input: typeof AntdInput;
   submit: typeof AntdButton;
@@ -336,7 +333,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "login") {
+  if (nodeName === "pageLayout") {
     func.displayName = "PlasmicPageLayout";
   } else {
     func.displayName = `PlasmicPageLayout.${nodeName}`;
@@ -346,7 +343,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
 
 export const PlasmicPageLayout = Object.assign(
   // Top-level PlasmicPageLayout renders the root element
-  makeNodeComponent("login"),
+  makeNodeComponent("pageLayout"),
   {
     // Helper components rendering sub-elements
     freeBox: makeNodeComponent("freeBox"),

@@ -54,7 +54,7 @@
           },
           "cssFilePath": "../plasmic/app_starter/PlasmicHome.css",
           "scheme": "blackbox",
-          "componentType": "page",
+          "componentType": "component",
           "path": "/"
         },
         {
@@ -68,7 +68,7 @@
           },
           "cssFilePath": "../plasmic/app_starter/PlasmicLogin.css",
           "scheme": "blackbox",
-          "componentType": "page",
+          "componentType": "component",
           "path": "/login"
         },
         {
@@ -82,7 +82,7 @@
           },
           "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicProfile.css",
           "scheme": "blackbox",
-          "componentType": "page",
+          "componentType": "component",
           "path": "/profile"
         },
         {
@@ -396,6 +396,20 @@
           "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicTooltip.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "2Xn_R2kvXkVD",
+          "name": "Scripture",
+          "type": "managed",
+          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
+          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicScripture.tsx",
+          "importSpec": {
+            "modulePath": "Scripture.tsx"
+          },
+          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicScripture.css",
+          "scheme": "blackbox",
+          "componentType": "component",
+          "path": "/scripture"
         }
       ],
       "icons": [

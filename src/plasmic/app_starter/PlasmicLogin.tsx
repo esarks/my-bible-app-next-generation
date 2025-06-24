@@ -54,9 +54,6 @@ import {
   useDataEnv,
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
-import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
-
-import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -156,238 +153,231 @@ function PlasmicLogin__RenderFunc(props: {
   });
 
   return (
-    <React.Fragment>
-      <div className={"plasmic_page_wrapper"}>
+    <div
+      data-plasmic-name={"root"}
+      data-plasmic-override={overrides.root}
+      data-plasmic-root={true}
+      data-plasmic-for-node={forNode}
+      className={classNames(
+        "plasmic_default__all",
+        "plasmic_default__div",
+        "root_reset_kPtL4UpULb2Exm5C4cyhzL",
+        "plasmic_default_styles",
+        "plasmic_mixins",
+        "plasmic_tokens",
+        "Login__root__bBtqC"
+      )}
+    >
+      <div
+        data-plasmic-name={"login"}
+        data-plasmic-override={overrides.login}
+        className={classNames(
+          "plasmic_default__all",
+          "plasmic_default__div",
+          "Login__login__baCQe"
+        )}
+      >
         <div
-          data-plasmic-name={"root"}
-          data-plasmic-override={overrides.root}
-          data-plasmic-root={true}
-          data-plasmic-for-node={forNode}
           className={classNames(
             "plasmic_default__all",
             "plasmic_default__div",
-            "root_reset_kPtL4UpULb2Exm5C4cyhzL",
-            "plasmic_default_styles",
-            "plasmic_mixins",
-            "plasmic_tokens",
-            "Login__root__bBtqC"
+            "Login__freeBox__jo0F"
           )}
         >
           <div
-            data-plasmic-name={"login"}
-            data-plasmic-override={overrides.login}
             className={classNames(
               "plasmic_default__all",
               "plasmic_default__div",
-              "Login__login__baCQe"
+              "Login__freeBox__dkUqo"
             )}
           >
             <div
               className={classNames(
                 "plasmic_default__all",
                 "plasmic_default__div",
-                "Login__freeBox__jo0F"
+                "__wab_text",
+                "Login__text___2CSl"
+              )}
+            >
+              {"Enter Phone Number:"}
+            </div>
+          </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Login__freeBox__crMKf"
+            )}
+          >
+            {(() => {
+              const child$Props = {
+                className: classNames(
+                  "__wab_instance",
+                  "Login__inputPhone__tYl9H"
+                ),
+                onChange: async (...eventArgs: any) => {
+                  generateStateOnChangePropForCodeComponents(
+                    $state,
+                    "value",
+                    ["inputPhone", "value"],
+                    AntdInput_Helpers
+                  ).apply(null, eventArgs);
+                },
+                value: generateStateValueProp($state, ["inputPhone", "value"])
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "value",
+                    plasmicStateName: "inputPhone.value"
+                  }
+                ],
+                [],
+                AntdInput_Helpers ?? {},
+                child$Props
+              );
+
+              return (
+                <AntdInput
+                  data-plasmic-name={"inputPhone"}
+                  data-plasmic-override={overrides.inputPhone}
+                  {...child$Props}
+                />
+              );
+            })()}
+          </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Login__freeBox__wgtIt"
+            )}
+          >
+            <AntdButton
+              data-plasmic-name={"sendButton"}
+              data-plasmic-override={overrides.sendButton}
+              className={classNames(
+                "__wab_instance",
+                "Login__sendButton__gcdZg"
               )}
             >
               <div
                 className={classNames(
                   "plasmic_default__all",
                   "plasmic_default__div",
-                  "Login__freeBox__dkUqo"
+                  "__wab_text",
+                  "Login__text__sgxkJ"
                 )}
               >
-                <div
-                  className={classNames(
-                    "plasmic_default__all",
-                    "plasmic_default__div",
-                    "__wab_text",
-                    "Login__text___2CSl"
-                  )}
-                >
-                  {"Enter Phone Number:"}
-                </div>
+                {"Send"}
               </div>
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "Login__freeBox__crMKf"
-                )}
-              >
-                {(() => {
-                  const child$Props = {
-                    className: classNames(
-                      "__wab_instance",
-                      "Login__inputPhone__tYl9H"
-                    ),
-                    onChange: async (...eventArgs: any) => {
-                      generateStateOnChangePropForCodeComponents(
-                        $state,
-                        "value",
-                        ["inputPhone", "value"],
-                        AntdInput_Helpers
-                      ).apply(null, eventArgs);
-                    },
-                    value: generateStateValueProp($state, [
-                      "inputPhone",
-                      "value"
-                    ])
-                  };
-                  initializeCodeComponentStates(
-                    $state,
-                    [
-                      {
-                        name: "value",
-                        plasmicStateName: "inputPhone.value"
-                      }
-                    ],
-                    [],
-                    AntdInput_Helpers ?? {},
-                    child$Props
-                  );
-
-                  return (
-                    <AntdInput
-                      data-plasmic-name={"inputPhone"}
-                      data-plasmic-override={overrides.inputPhone}
-                      {...child$Props}
-                    />
-                  );
-                })()}
-              </div>
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "Login__freeBox__wgtIt"
-                )}
-              >
-                <AntdButton
-                  data-plasmic-name={"sendButton"}
-                  data-plasmic-override={overrides.sendButton}
-                  className={classNames(
-                    "__wab_instance",
-                    "Login__sendButton__gcdZg"
-                  )}
-                >
-                  <div
-                    className={classNames(
-                      "plasmic_default__all",
-                      "plasmic_default__div",
-                      "__wab_text",
-                      "Login__text__sgxkJ"
-                    )}
-                  >
-                    {"Send"}
-                  </div>
-                </AntdButton>
-              </div>
-            </div>
+            </AntdButton>
+          </div>
+        </div>
+        <div
+          className={classNames(
+            "plasmic_default__all",
+            "plasmic_default__div",
+            "Login__freeBox__nQoLf"
+          )}
+        >
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Login__freeBox__sAvfw"
+            )}
+          >
             <div
               className={classNames(
                 "plasmic_default__all",
                 "plasmic_default__div",
-                "Login__freeBox__nQoLf"
+                "__wab_text",
+                "Login__text__qptP4"
+              )}
+            >
+              {"Enter Verification Code:"}
+            </div>
+          </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Login__freeBox___5FXnH"
+            )}
+          >
+            {(() => {
+              const child$Props = {
+                className: classNames(
+                  "__wab_instance",
+                  "Login__inputVerification__sv7OL"
+                ),
+                onChange: async (...eventArgs: any) => {
+                  generateStateOnChangePropForCodeComponents(
+                    $state,
+                    "value",
+                    ["inputVerification", "value"],
+                    AntdInput_Helpers
+                  ).apply(null, eventArgs);
+                },
+                value: generateStateValueProp($state, [
+                  "inputVerification",
+                  "value"
+                ])
+              };
+              initializeCodeComponentStates(
+                $state,
+                [
+                  {
+                    name: "value",
+                    plasmicStateName: "inputVerification.value"
+                  }
+                ],
+                [],
+                AntdInput_Helpers ?? {},
+                child$Props
+              );
+
+              return (
+                <AntdInput
+                  data-plasmic-name={"inputVerification"}
+                  data-plasmic-override={overrides.inputVerification}
+                  {...child$Props}
+                />
+              );
+            })()}
+          </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Login__freeBox__uLa49"
+            )}
+          >
+            <AntdButton
+              data-plasmic-name={"verifyButton"}
+              data-plasmic-override={overrides.verifyButton}
+              className={classNames(
+                "__wab_instance",
+                "Login__verifyButton__t6XH0"
               )}
             >
               <div
                 className={classNames(
                   "plasmic_default__all",
                   "plasmic_default__div",
-                  "Login__freeBox__sAvfw"
+                  "__wab_text",
+                  "Login__text__xsq0J"
                 )}
               >
-                <div
-                  className={classNames(
-                    "plasmic_default__all",
-                    "plasmic_default__div",
-                    "__wab_text",
-                    "Login__text__qptP4"
-                  )}
-                >
-                  {"Enter Verification Code:"}
-                </div>
+                {"Verify"}
               </div>
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "Login__freeBox___5FXnH"
-                )}
-              >
-                {(() => {
-                  const child$Props = {
-                    className: classNames(
-                      "__wab_instance",
-                      "Login__inputVerification__sv7OL"
-                    ),
-                    onChange: async (...eventArgs: any) => {
-                      generateStateOnChangePropForCodeComponents(
-                        $state,
-                        "value",
-                        ["inputVerification", "value"],
-                        AntdInput_Helpers
-                      ).apply(null, eventArgs);
-                    },
-                    value: generateStateValueProp($state, [
-                      "inputVerification",
-                      "value"
-                    ])
-                  };
-                  initializeCodeComponentStates(
-                    $state,
-                    [
-                      {
-                        name: "value",
-                        plasmicStateName: "inputVerification.value"
-                      }
-                    ],
-                    [],
-                    AntdInput_Helpers ?? {},
-                    child$Props
-                  );
-
-                  return (
-                    <AntdInput
-                      data-plasmic-name={"inputVerification"}
-                      data-plasmic-override={overrides.inputVerification}
-                      {...child$Props}
-                    />
-                  );
-                })()}
-              </div>
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "Login__freeBox__uLa49"
-                )}
-              >
-                <AntdButton
-                  data-plasmic-name={"verifyButton"}
-                  data-plasmic-override={overrides.verifyButton}
-                  className={classNames(
-                    "__wab_instance",
-                    "Login__verifyButton__t6XH0"
-                  )}
-                >
-                  <div
-                    className={classNames(
-                      "plasmic_default__all",
-                      "plasmic_default__div",
-                      "__wab_text",
-                      "Login__text__xsq0J"
-                    )}
-                  >
-                    {"Verify"}
-                  </div>
-                </AntdButton>
-              </div>
-            </div>
+            </AntdButton>
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   ) as React.ReactElement | null;
 }
 
@@ -479,34 +469,9 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   return func;
 }
 
-function withUsePlasmicAuth<P extends object>(
-  WrappedComponent: React.ComponentType<P>
-) {
-  const WithUsePlasmicAuthComponent: React.FC<P> = props => {
-    const dataSourceCtx = usePlasmicDataSourceContext() ?? {};
-    const { isUserLoading, user, token } = plasmicAuth.usePlasmicAuth({
-      appId: "kPtL4UpULb2Exm5C4cyhzL"
-    });
-
-    return (
-      <PlasmicDataSourceContextProvider__
-        value={{
-          ...dataSourceCtx,
-          isUserLoading,
-          userAuthToken: token,
-          user
-        }}
-      >
-        <WrappedComponent {...props} />
-      </PlasmicDataSourceContextProvider__>
-    );
-  };
-  return WithUsePlasmicAuthComponent;
-}
-
 export const PlasmicLogin = Object.assign(
   // Top-level PlasmicLogin renders the root element
-  withUsePlasmicAuth(makeNodeComponent("root")),
+  makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
     login: makeNodeComponent("login"),
@@ -517,15 +482,7 @@ export const PlasmicLogin = Object.assign(
 
     // Metadata about props expected for PlasmicLogin
     internalVariantProps: PlasmicLogin__VariantProps,
-    internalArgProps: PlasmicLogin__ArgProps,
-
-    // Page metadata
-    pageMetadata: {
-      title: "",
-      description: "",
-      ogImageSrc: "",
-      canonical: ""
-    }
+    internalArgProps: PlasmicLogin__ArgProps
   }
 );
 
