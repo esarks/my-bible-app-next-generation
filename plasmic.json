@@ -410,6 +410,19 @@
           "scheme": "blackbox",
           "componentType": "component",
           "path": "/scripture"
+        },
+        {
+          "id": "aEGoFoT_c228",
+          "name": "SendButton",
+          "type": "managed",
+          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
+          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSendButton.tsx",
+          "importSpec": {
+            "modulePath": "SendButton.tsx"
+          },
+          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSendButton.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

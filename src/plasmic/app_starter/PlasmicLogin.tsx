@@ -57,6 +57,7 @@ import {
 
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
+import SendButton from "../../components/SendButton"; // plasmic-import: aEGoFoT_c228/component
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -83,7 +84,7 @@ export type PlasmicLogin__OverridesType = {
   root?: Flex__<"div">;
   login?: Flex__<"div">;
   inputPhone?: Flex__<typeof AntdInput>;
-  sendButton?: Flex__<typeof AntdButton>;
+  sendButton?: Flex__<typeof SendButton>;
   inputVerification?: Flex__<typeof AntdInput>;
   verifyButton?: Flex__<typeof AntdButton>;
 };
@@ -254,25 +255,14 @@ function PlasmicLogin__RenderFunc(props: {
               "Login__freeBox__wgtIt"
             )}
           >
-            <AntdButton
+            <SendButton
               data-plasmic-name={"sendButton"}
               data-plasmic-override={overrides.sendButton}
               className={classNames(
                 "__wab_instance",
-                "Login__sendButton__gcdZg"
+                "Login__sendButton__gCeOe"
               )}
-            >
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "__wab_text",
-                  "Login__text__sgxkJ"
-                )}
-              >
-                {"Send"}
-              </div>
-            </AntdButton>
+            />
           </div>
         </div>
         <div
@@ -409,7 +399,7 @@ type NodeDefaultElementType = {
   root: "div";
   login: "div";
   inputPhone: typeof AntdInput;
-  sendButton: typeof AntdButton;
+  sendButton: typeof SendButton;
   inputVerification: typeof AntdInput;
   verifyButton: typeof AntdButton;
 };
