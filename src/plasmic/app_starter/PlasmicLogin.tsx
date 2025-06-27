@@ -131,7 +131,7 @@ function PlasmicLogin__RenderFunc(props: {
         path: "inputPhone.value",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+        initFunc: ({ $props, $state, $queries, $ctx }) => ``,
 
         onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
@@ -139,9 +139,28 @@ function PlasmicLogin__RenderFunc(props: {
         path: "inputVerification.value",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return undefined;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })(),
 
         onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
+      },
+      {
+        path: "variable",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ""
       }
     ],
     [$props, $ctx, $refs]
@@ -310,6 +329,45 @@ function PlasmicLogin__RenderFunc(props: {
                     ["inputVerification", "value"],
                     AntdInput_Helpers
                   ).apply(null, eventArgs);
+
+                  (async event => {
+                    const $steps = {};
+
+                    $steps["updateInputPhoneValue"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["inputPhone", "value"]
+                            },
+                            operation: 0
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateInputPhoneValue"] != null &&
+                      typeof $steps["updateInputPhoneValue"] === "object" &&
+                      typeof $steps["updateInputPhoneValue"].then === "function"
+                    ) {
+                      $steps["updateInputPhoneValue"] = await $steps[
+                        "updateInputPhoneValue"
+                      ];
+                    }
+                  }).apply(null, eventArgs);
                 },
                 value: generateStateValueProp($state, [
                   "inputVerification",
