@@ -1,13 +1,13 @@
-.Scripture__root__h1DL1 {
+.Login__root__hjpmq {
   display: grid;
   flex-direction: column;
   position: relative;
+  width: 100%;
+  height: 100%;
   align-content: flex-start;
   justify-items: center;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
-  height: 100%;
   min-width: 0;
   min-height: 0;
   grid-template-columns:
@@ -18,6 +18,6 @@
     )
     minmax(0, var(--plsmc-wide-chunk)) 1fr var(--plsmc-viewport-gap);
 }
-.Scripture__root__h1DL1 > * {
+.Login__root__hjpmq > * {
   grid-column: 4;
 }

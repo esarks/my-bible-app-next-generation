@@ -22,7 +22,7 @@
   "defaultPlasmicDir": "../plasmic",
   "projects": [
     {
-      "projectId": "kPtL4UpULb2Exm5C4cyhzL",
+      "projectId": "chwrzvw5hacDdCDtmYaSSb",
       "projectName": "my-bible-app-next-generation",
       "projectApiToken": "YOUR_API_KEY",
       "version": "latest",
@@ -31,435 +31,85 @@
       "cssFilePath": "./plasmic/plasmic_my_project.css",
       "components": [
         {
-          "id": "D3ERqMs8fd9D",
+          "id": "x1hJPf_4D3tT",
+          "name": "Homepage",
+          "type": "managed",
+          "projectId": "chwrzvw5hacDdCDtmYaSSb",
+          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicHomepage.tsx",
+          "importSpec": {
+            "modulePath": "Homepage.tsx"
+          },
+          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicHomepage.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/"
+        },
+        {
+          "id": "TZVmFGETAb0O",
           "name": "PageLayout",
           "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/app_starter/PlasmicPageLayout.tsx",
+          "projectId": "chwrzvw5hacDdCDtmYaSSb",
+          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicPageLayout.tsx",
           "importSpec": {
             "modulePath": "PageLayout.tsx"
           },
-          "cssFilePath": "../plasmic/app_starter/PlasmicPageLayout.css",
+          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicPageLayout.css",
           "scheme": "blackbox",
           "componentType": "component"
         },
         {
-          "id": "Nyx2bjgpZrcu",
-          "name": "Home",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/app_starter/PlasmicHome.tsx",
-          "importSpec": {
-            "modulePath": "Home.tsx"
-          },
-          "cssFilePath": "../plasmic/app_starter/PlasmicHome.css",
-          "scheme": "blackbox",
-          "componentType": "component",
-          "path": "/"
-        },
-        {
-          "id": "ti8lvmbBkGxm",
+          "id": "eZWdX0Swbbbk",
           "name": "Login",
           "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/app_starter/PlasmicLogin.tsx",
+          "projectId": "chwrzvw5hacDdCDtmYaSSb",
+          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicLogin.tsx",
           "importSpec": {
             "modulePath": "Login.tsx"
           },
-          "cssFilePath": "../plasmic/app_starter/PlasmicLogin.css",
+          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicLogin.css",
           "scheme": "blackbox",
-          "componentType": "component",
+          "componentType": "page",
           "path": "/login"
         },
         {
-          "id": "V2tTGAx8KTsP",
+          "id": "IV3Lp_147vp7",
           "name": "Profile",
           "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
+          "projectId": "chwrzvw5hacDdCDtmYaSSb",
           "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicProfile.tsx",
           "importSpec": {
             "modulePath": "Profile.tsx"
           },
           "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicProfile.css",
           "scheme": "blackbox",
-          "componentType": "component",
+          "componentType": "page",
           "path": "/profile"
         },
         {
-          "id": "BYOvFrXHBGpA",
-          "name": "Button",
+          "id": "zxnu1SLrha_c",
+          "name": "Scriptures",
           "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicButton.tsx",
+          "projectId": "chwrzvw5hacDdCDtmYaSSb",
+          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicScriptures.tsx",
           "importSpec": {
-            "modulePath": "Button.tsx"
+            "modulePath": "Scriptures.tsx"
           },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicButton.css",
+          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicScriptures.css",
           "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "gUReRUczsHZA",
-          "name": "Label",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicLabel.tsx",
-          "importSpec": {
-            "modulePath": "Label.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicLabel.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "RRW12aDuT7PW",
-          "name": "Checkbox",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicCheckbox.tsx",
-          "importSpec": {
-            "modulePath": "Checkbox.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicCheckbox.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "llEoanJcw0VW",
-          "name": "Description",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicDescription.tsx",
-          "importSpec": {
-            "modulePath": "Description.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicDescription.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "GLHJ3ReHes-o",
-          "name": "CheckboxGroup",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicCheckboxGroup.tsx",
-          "importSpec": {
-            "modulePath": "CheckboxGroup.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicCheckboxGroup.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "s1OeCTr-GGwd",
-          "name": "Radio",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicRadio.tsx",
-          "importSpec": {
-            "modulePath": "Radio.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicRadio.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "KGk0kmz39FIi",
-          "name": "RadioGroup",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicRadioGroup.tsx",
-          "importSpec": {
-            "modulePath": "RadioGroup.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicRadioGroup.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "DagU6BDaFn4T",
-          "name": "MenuItem",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicMenuItem.tsx",
-          "importSpec": {
-            "modulePath": "MenuItem.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicMenuItem.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "gaLdDYdQC1XP",
-          "name": "MenuSection",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicMenuSection.tsx",
-          "importSpec": {
-            "modulePath": "MenuSection.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicMenuSection.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "qzuX3pTXiwbo",
-          "name": "MenuPopover",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicMenuPopover.tsx",
-          "importSpec": {
-            "modulePath": "MenuPopover.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicMenuPopover.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "43fdnYH-QOfq",
-          "name": "Select",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSelect.tsx",
-          "importSpec": {
-            "modulePath": "Select.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSelect.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "hMFViv7GZeka",
-          "name": "Combobox",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicCombobox.tsx",
-          "importSpec": {
-            "modulePath": "Combobox.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicCombobox.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "5jTkT4gx1xaQ",
-          "name": "Switch",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSwitch.tsx",
-          "importSpec": {
-            "modulePath": "Switch.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSwitch.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "mC8H6YvKA7jj",
-          "name": "TextInput",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicTextInput.tsx",
-          "importSpec": {
-            "modulePath": "TextInput.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicTextInput.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "D6FiH7xsZPV1",
-          "name": "TextAreaInput",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicTextAreaInput.tsx",
-          "importSpec": {
-            "modulePath": "TextAreaInput.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicTextAreaInput.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "azoEbzJKJVEF",
-          "name": "TextField",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicTextField.tsx",
-          "importSpec": {
-            "modulePath": "TextField.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicTextField.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "aa9XOKWcbA6W",
-          "name": "SliderThumb",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSliderThumb.tsx",
-          "importSpec": {
-            "modulePath": "SliderThumb.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSliderThumb.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "d3zuxQJVh6QB",
-          "name": "Slider",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSlider.tsx",
-          "importSpec": {
-            "modulePath": "Slider.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSlider.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "5ri_YqKTrc2w",
-          "name": "RangeSlider",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicRangeSlider.tsx",
-          "importSpec": {
-            "modulePath": "RangeSlider.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicRangeSlider.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "I_tEepmA34La",
-          "name": "Modal",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicModal.tsx",
-          "importSpec": {
-            "modulePath": "Modal.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicModal.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "Y63mtqn2B6Aq",
-          "name": "OverlayArrow",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicOverlayArrow.tsx",
-          "importSpec": {
-            "modulePath": "OverlayArrow.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicOverlayArrow.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "8yMnSwEkzwYe",
-          "name": "Popover",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicPopover.tsx",
-          "importSpec": {
-            "modulePath": "Popover.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicPopover.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "Lz2rVBqKrPRv",
-          "name": "Drawer",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicDrawer.tsx",
-          "importSpec": {
-            "modulePath": "Drawer.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicDrawer.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "CPyQYMD6rfbs",
-          "name": "Tooltip",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicTooltip.tsx",
-          "importSpec": {
-            "modulePath": "Tooltip.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicTooltip.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
-          "id": "2Xn_R2kvXkVD",
-          "name": "Scripture",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicScripture.tsx",
-          "importSpec": {
-            "modulePath": "Scripture.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicScripture.css",
-          "scheme": "blackbox",
-          "componentType": "component",
-          "path": "/scripture"
-        },
-        {
-          "id": "aEGoFoT_c228",
-          "name": "SendButton",
-          "type": "managed",
-          "projectId": "kPtL4UpULb2Exm5C4cyhzL",
-          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSendButton.tsx",
-          "importSpec": {
-            "modulePath": "SendButton.tsx"
-          },
-          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicSendButton.css",
-          "scheme": "blackbox",
-          "componentType": "component"
+          "componentType": "page",
+          "path": "/scriptures"
         }
       ],
       "icons": [
         {
-          "id": "APj-uinxyuOe",
+          "id": "YbXQoJNTtI7M",
           "name": "IconIcon",
-          "moduleFilePath": "../plasmic/app_starter/icons/PlasmicIcon__Icon.tsx"
+          "moduleFilePath": "../plasmic/my_bible_app_next_generation/icons/PlasmicIcon__Icon.tsx"
         },
         {
-          "id": "12qPaiRMfWCK",
+          "id": "aiVfj0sSwEfU",
           "name": "Icon2Icon",
-          "moduleFilePath": "../plasmic/app_starter/icons/PlasmicIcon__Icon2.tsx"
-        },
-        {
-          "id": "b0QDi7GnhEEB",
-          "name": "CircleIcon",
-          "moduleFilePath": "../plasmic/my_bible_app_next_generation/icons/PlasmicIcon__Circle.tsx"
-        },
-        {
-          "id": "a5i7ADyOn1ty",
-          "name": "ChevronDownIcon",
-          "moduleFilePath": "../plasmic/my_bible_app_next_generation/icons/PlasmicIcon__ChevronDown.tsx"
-        },
-        {
-          "id": "L7Q1-0etGCjV",
-          "name": "CheckIcon",
-          "moduleFilePath": "../plasmic/my_bible_app_next_generation/icons/PlasmicIcon__Check.tsx"
-        },
-        {
-          "id": "K4s34baXpivI",
-          "name": "MinusIcon",
-          "moduleFilePath": "../plasmic/my_bible_app_next_generation/icons/PlasmicIcon__Minus.tsx"
-        },
-        {
-          "id": "AuJ0j2MHl3zh",
-          "name": "TriangleFilledIcon",
-          "moduleFilePath": "../plasmic/my_bible_app_next_generation/icons/PlasmicIcon__TriangleFilled.tsx"
+          "moduleFilePath": "../plasmic/my_bible_app_next_generation/icons/PlasmicIcon__Icon2.tsx"
         }
       ],
       "dependencies": [],
@@ -469,13 +119,13 @@
       "splitsProviderFilePath": "",
       "codeComponents": [
         {
-          "id": "6MZxK8lvzIc6",
+          "id": "xGu6tLnnTCn1",
           "name": "PlasmicHead",
           "displayName": "hostless-plasmic-head",
           "componentImportPath": "@plasmicapp/react-web"
         },
         {
-          "id": "-KsyxqaP1VLW",
+          "id": "y6N0ZJAm7F6h",
           "name": "Fetcher",
           "displayName": "plasmic-data-source-fetcher",
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
@@ -985,7 +635,8 @@
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "5ZtnypMovRHeeP3YTdPCYL",
@@ -1013,7 +664,8 @@
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "d2Pfbr6bN5UwJ4ss7Fh3HB",
@@ -27142,7 +26794,8 @@
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     },
     {
       "projectId": "gmeH6XgPaBtkt51HunAo4g",
@@ -27350,7 +27003,8 @@
           "componentImportPath": "@plasmicpkgs/react-aria/skinny/registerDialog"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     }
   ],
   "globalVariants": {
@@ -27378,6 +27032,12 @@
         "name": "Screen",
         "projectId": "d2Pfbr6bN5UwJ4ss7Fh3HB",
         "contextFilePath": "../plasmic/library_tabler_3_2_icons/PlasmicGlobalVariant__Screen.tsx"
+      },
+      {
+        "id": "B6cZtl2FPe1f",
+        "name": "Screen",
+        "projectId": "chwrzvw5hacDdCDtmYaSSb",
+        "contextFilePath": "../plasmic/my_bible_app_next_generation/PlasmicGlobalVariant__Screen.tsx"
       }
     ]
   },

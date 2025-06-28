@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   PlasmicHomepage,
   DefaultHomepageProps
-} from "../plasmic/app_starter/PlasmicHomepage";
+} from "../plasmic/my_bible_app_next_generation/PlasmicHomepage";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 
 // Your component props start with props for variants and slots you defined
@@ -38,7 +38,7 @@ function Homepage_(props: HomepageProps, ref: HTMLElementRefOf<"div">) {
   // By default, we are just piping all HomepageProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicHomepage root={{ ref }} {...props} />;
+  return <PlasmicHomepage homePage={{ ref }} {...props} />;
 }
 
 const Homepage = React.forwardRef(Homepage_);
