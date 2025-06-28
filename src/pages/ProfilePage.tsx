@@ -1,7 +1,11 @@
-// src/pages/ProfilePage.tsx
 import React from "react";
-import PlasmicProfile from "../components/Profile";
+import PageLayoutWrapper from "../components/PageLayoutWrapper";
+import { PlasmicComponent } from "@plasmicapp/loader-react";
 
 export default function ProfilePage() {
-  return <PlasmicProfile />;
+  return (
+    <PageLayoutWrapper>
+      <PlasmicComponent component="Profile" />
+    </PageLayoutWrapper>
+  );
 }

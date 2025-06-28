@@ -1,7 +1,11 @@
-// src/pages/HomePage.tsx
 import React from "react";
-import Home from "../components/Home";
+import PageLayoutWrapper from "../components/PageLayoutWrapper";
+import { PlasmicComponent } from "@plasmicapp/loader-react";
 
 export default function HomePage() {
-  return <Home />;
+  return (
+    <PageLayoutWrapper>
+      <PlasmicComponent component="Homepage" />
+    </PageLayoutWrapper>
+  );
 }

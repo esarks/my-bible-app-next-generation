@@ -1,5 +1,7 @@
+// src/components/PageLayoutWrapper.tsx
+
 import * as React from "react";
-import { PlasmicPageLayout } from "../plasmic/app_starter/PlasmicPageLayout";
+import { PlasmicPageLayout } from "../plasmic/my_bible_app_next_generation/PlasmicPageLayout";
 import { Link } from "react-router-dom";
 
 export default function PageLayoutWrapper({ children }: { children: React.ReactNode }) {
@@ -11,12 +13,11 @@ export default function PageLayoutWrapper({ children }: { children: React.ReactN
             <Link to="/" style={{ marginRight: "1rem" }}>Home</Link>
             <Link to="/login" style={{ marginRight: "1rem" }}>Login</Link>
             <Link to="/profile" style={{ marginRight: "1rem" }}>Profile</Link>
-            <Link to="/scripture">Scripture</Link>
+            <Link to="/scriptures">Scriptures</Link>
           </nav>
         ),
       }}
-    >
-      {children}
-    </PlasmicPageLayout>
+      children={children}
+    />
   );
 }

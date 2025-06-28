@@ -1,12 +1,16 @@
-// src/main.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { PlasmicRootProvider } from "@plasmicapp/loader-react";
+import { BrowserRouter } from "react-router-dom";
+import { PLASMIC } from "./plasmic-init";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <React.StrictMode>
+    <PlasmicRootProvider loader={PLASMIC}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PlasmicRootProvider>
+  </React.StrictMode>
 );
-

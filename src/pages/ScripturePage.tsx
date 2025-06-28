@@ -1,7 +1,11 @@
-// src/pages/ScripturePage.tsx
 import React from "react";
-import PlasmicScripture from "../components/Scripture";
+import PageLayoutWrapper from "../components/PageLayoutWrapper";
+import { PlasmicComponent } from "@plasmicapp/loader-react";
 
-export default function ScripturePage() {
-  return <PlasmicScripture />;
+export default function ScripturesPage() {
+  return (
+    <PageLayoutWrapper>
+      <PlasmicComponent component="Scriptures" />
+    </PageLayoutWrapper>
+  );
 }

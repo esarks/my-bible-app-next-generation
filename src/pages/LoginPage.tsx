@@ -1,27 +1,14 @@
-import React, { useState } from "react";
-import Login from "../components/Login";
+// src/pages/LoginPage.tsx
+import * as React from "react";
+import {
+  PlasmicLogin,
+  DefaultLoginProps
+} from "../plasmic/my_bible_app_next_generation/PlasmicLogin";
 
-export default function LoginPage() {
-  const [phone, setPhone] = useState("");
-  const [code, setCode] = useState("");
+export interface LoginPageProps extends DefaultLoginProps {}
 
-  const sendCode = () => {
-    alert("Pretend code was sent");
-    setCode("1234");
-  };
-
-  const verifyCode = () => {
-    alert(code === "1234" ? "Code verified!" : "Invalid code");
-  };
-
-  return (
-    <Login
-      phone={phone}
-      setPhone={setPhone}
-      code={code}
-      setCode={setCode}
-      sendCode={sendCode}
-      verifyCode={verifyCode}
-    />
-  );
+function LoginPage(props: LoginPageProps) {
+  return <PlasmicLogin {...props} />;
 }
+
+export default LoginPage;
