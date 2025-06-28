@@ -131,7 +131,20 @@ function PlasmicLogin__RenderFunc(props: {
         path: "inputPhone.value",
         type: "private",
         variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ``,
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return undefined;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return ``;
+              }
+              throw e;
+            }
+          })(),
 
         onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },

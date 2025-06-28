@@ -1,4 +1,3 @@
-// src/pages/LoginPage.tsx
 import React, { useState } from "react";
 import Login from "../components/Login";
 
@@ -6,7 +5,7 @@ export default function LoginPage() {
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
 
-  const sendCode = async () => {
+  const sendCode = () => {
     alert("Pretend code was sent");
     setCode("1234");
   };
@@ -17,22 +16,12 @@ export default function LoginPage() {
 
   return (
     <Login
-      phoneInput={{
-        value: phone,
-        onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-          setPhone(e.target.value),
-      }}
-      verificationInput={{
-        value: code,
-        onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-          setCode(e.target.value),
-      }}
-      sendCodeButton={{
-        onClick: sendCode,
-      }}
-      verifyCodeButton={{
-        onClick: verifyCode,
-      }}
+      phone={phone}
+      setPhone={setPhone}
+      code={code}
+      setCode={setCode}
+      sendCode={sendCode}
+      verifyCode={verifyCode}
     />
   );
 }
