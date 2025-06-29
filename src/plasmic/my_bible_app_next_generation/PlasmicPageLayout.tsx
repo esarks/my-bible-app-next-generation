@@ -56,9 +56,6 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { RichLayout } from "@plasmicpkgs/plasmic-rich-components/skinny/rich-layout";
-import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
-import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
-import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 import "../defaultStyles.css"; // plasmic-import: global/defaultcss
@@ -82,10 +79,6 @@ export const PlasmicPageLayout__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicPageLayout__OverridesType = {
   root?: Flex__<typeof RichLayout>;
-  inputPhone?: Flex__<typeof AntdInput>;
-  sendButton?: Flex__<typeof AntdButton>;
-  inputVerification?: Flex__<typeof AntdInput>;
-  validateButton?: Flex__<typeof AntdButton>;
   svg?: Flex__<"svg">;
 };
 
@@ -124,34 +117,6 @@ function PlasmicPageLayout__RenderFunc(props: {
   const $refs = refsRef.current;
 
   const currentUser = useCurrentUser?.() || {};
-
-  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
-    () => [
-      {
-        path: "inputPhone.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
-      },
-      {
-        path: "inputVerification.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
-      }
-    ],
-    [$props, $ctx, $refs]
-  );
-  const $state = useDollarState(stateSpecs, {
-    $props,
-    $ctx,
-    $queries: {},
-    $refs
-  });
 
   return (
     <RichLayout
@@ -202,262 +167,12 @@ function PlasmicPageLayout__RenderFunc(props: {
         return __composite;
       })()}
       title={"App title"}
-    >
-      <div
-        className={classNames(
-          "plasmic_default__all",
-          "plasmic_default__div",
-          "PageLayout__freeBox__g5NU"
-        )}
-      >
-        <div
-          className={classNames(
-            "plasmic_default__all",
-            "plasmic_default__div",
-            "PageLayout__freeBox___29P5"
-          )}
-        >
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "PageLayout__freeBox__vFUwt"
-            )}
-          >
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "__wab_text",
-                "PageLayout__text___3HvM"
-              )}
-            >
-              {"Enter Phone"}
-            </div>
-          </div>
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "PageLayout__freeBox___2E04Q"
-            )}
-          >
-            {(() => {
-              const child$Props = {
-                className: classNames(
-                  "__wab_instance",
-                  "PageLayout__inputPhone__ldW8B"
-                ),
-                onChange: async (...eventArgs: any) => {
-                  generateStateOnChangePropForCodeComponents(
-                    $state,
-                    "value",
-                    ["inputPhone", "value"],
-                    AntdInput_Helpers
-                  ).apply(null, eventArgs);
-                },
-                value: generateStateValueProp($state, ["inputPhone", "value"])
-              };
-              initializeCodeComponentStates(
-                $state,
-                [
-                  {
-                    name: "value",
-                    plasmicStateName: "inputPhone.value"
-                  }
-                ],
-                [],
-                AntdInput_Helpers ?? {},
-                child$Props
-              );
-
-              return (
-                <AntdInput
-                  data-plasmic-name={"inputPhone"}
-                  data-plasmic-override={overrides.inputPhone}
-                  {...child$Props}
-                />
-              );
-            })()}
-          </div>
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "PageLayout__freeBox__tNaaw"
-            )}
-          >
-            <AntdButton
-              data-plasmic-name={"sendButton"}
-              data-plasmic-override={overrides.sendButton}
-              className={classNames(
-                "__wab_instance",
-                "PageLayout__sendButton__q5R"
-              )}
-            >
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "__wab_text",
-                  "PageLayout__text__otyuu"
-                )}
-              >
-                {"Send"}
-              </div>
-            </AntdButton>
-          </div>
-        </div>
-        <div
-          className={classNames(
-            "plasmic_default__all",
-            "plasmic_default__div",
-            "PageLayout__freeBox__rdd1O"
-          )}
-        >
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "PageLayout__freeBox__py4JM"
-            )}
-          >
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "__wab_text",
-                "PageLayout__text__yVwNs"
-              )}
-            >
-              {"Enter Verification Code"}
-            </div>
-          </div>
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "PageLayout__freeBox__qDd7A"
-            )}
-          >
-            {(() => {
-              const child$Props = {
-                className: classNames(
-                  "__wab_instance",
-                  "PageLayout__inputVerification___5Yj9Q"
-                ),
-                onChange: async (...eventArgs: any) => {
-                  generateStateOnChangePropForCodeComponents(
-                    $state,
-                    "value",
-                    ["inputVerification", "value"],
-                    AntdInput_Helpers
-                  ).apply(null, eventArgs);
-                },
-                value: generateStateValueProp($state, [
-                  "inputVerification",
-                  "value"
-                ])
-              };
-              initializeCodeComponentStates(
-                $state,
-                [
-                  {
-                    name: "value",
-                    plasmicStateName: "inputVerification.value"
-                  }
-                ],
-                [],
-                AntdInput_Helpers ?? {},
-                child$Props
-              );
-
-              return (
-                <AntdInput
-                  data-plasmic-name={"inputVerification"}
-                  data-plasmic-override={overrides.inputVerification}
-                  {...child$Props}
-                />
-              );
-            })()}
-          </div>
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "PageLayout__freeBox__rl1Kp"
-            )}
-          >
-            <AntdButton
-              data-plasmic-name={"validateButton"}
-              data-plasmic-override={overrides.validateButton}
-              className={classNames(
-                "__wab_instance",
-                "PageLayout__validateButton___54Kpm"
-              )}
-            >
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "__wab_text",
-                  "PageLayout__text__mlVw2"
-                )}
-              >
-                {"Validate"}
-              </div>
-            </AntdButton>
-          </div>
-        </div>
-        <div
-          className={classNames(
-            "plasmic_default__all",
-            "plasmic_default__div",
-            "PageLayout__freeBox__avRd8"
-          )}
-        >
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "PageLayout__freeBox__fzleq"
-            )}
-          />
-
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "PageLayout__freeBox__hxSso"
-            )}
-          />
-
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "PageLayout__freeBox__fBdNc"
-            )}
-          />
-        </div>
-      </div>
-    </RichLayout>
+    />
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: [
-    "root",
-    "inputPhone",
-    "sendButton",
-    "inputVerification",
-    "validateButton",
-    "svg"
-  ],
-  inputPhone: ["inputPhone"],
-  sendButton: ["sendButton"],
-  inputVerification: ["inputVerification"],
-  validateButton: ["validateButton"],
+  root: ["root", "svg"],
   svg: ["svg"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -465,10 +180,6 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: typeof RichLayout;
-  inputPhone: typeof AntdInput;
-  sendButton: typeof AntdButton;
-  inputVerification: typeof AntdInput;
-  validateButton: typeof AntdButton;
   svg: "svg";
 };
 
@@ -532,10 +243,6 @@ export const PlasmicPageLayout = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    inputPhone: makeNodeComponent("inputPhone"),
-    sendButton: makeNodeComponent("sendButton"),
-    inputVerification: makeNodeComponent("inputVerification"),
-    validateButton: makeNodeComponent("validateButton"),
     svg: makeNodeComponent("svg"),
 
     // Metadata about props expected for PlasmicPageLayout
