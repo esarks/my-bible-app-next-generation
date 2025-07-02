@@ -32,7 +32,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
       console.log("[handleSend] Response:", data);
 
       if (data.success) {
-        alert(`Verification code sent to ${phone}`);
+        alert(`Verification code sent to ${phone} — CODE: ${data.code}`);
       } else {
         alert(`Failed to send: ${data.error}`);
       }
