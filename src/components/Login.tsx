@@ -4,12 +4,16 @@ import {
   DefaultLoginProps,
 } from "../plasmic/my_bible_app_next_generation/PlasmicLogin";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabaseClient";
 
 export interface LoginProps extends DefaultLoginProps {}
 
 function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
+  const navigate = useNavigate();
   const [phone, setPhone] = React.useState("");
   const [code, setCode] = React.useState("");
+  const [profile, setProfile] = React.useState<any>(null);
 
   const handleSend = async () => {
     console.log("[handleSend] Invoked");
@@ -63,7 +67,19 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
       console.log("[handleVerify] Response:", data);
 
       if (data.success) {
-        alert("Phone verified!");
+        const { data: profileData, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('phone', phone)
+          .single();
+
+        if (error) {
+          console.error('[handleVerify] Supabase error:', error);
+        } else {
+          setProfile(profileData);
+        }
+
+        navigate('/profile');
       } else {
         alert(`Verification failed: ${data.error}`);
       }
