@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
     });
 
     console.log("[/api/send-code] Message SID:", message.sid);
-    res.json({ success: true, phone, codeSent: true });
+    res.json({ success: true, phone, codeSent: true, code });
   } catch (err) {
     console.error("[/api/send-code] Error:", err);
     res.status(500).json({ success: false, error: err.message });
