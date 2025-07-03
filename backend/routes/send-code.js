@@ -7,14 +7,16 @@ const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const serviceSid = process.env.TWILIO_VERIFY;
 
-console.log("[DEBUG] TWILIO_SID:", accountSid);
-console.log("[DEBUG] TWILIO_AUTH_TOKEN:", authToken);
+// Avoid logging sensitive values directly
+console.log("[DEBUG] TWILIO_SID loaded");
+console.log("[DEBUG] TWILIO_AUTH_TOKEN loaded");
 
 const client = twilio(accountSid, authToken);
 
 router.post("/", async (req, res) => {
   let { phone } = req.body;
-  console.log("[/api/send-code] Received phone:", phone);
+  // Mask phone number when logging
+  console.log("[/api/send-code] Received phone");
 
   // Normalize to E.164 format if needed
   if (!phone.startsWith("+1")) {
