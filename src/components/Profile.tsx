@@ -4,21 +4,26 @@ import {
   DefaultProfileProps,
 } from "../plasmic/my_bible_app_next_generation/PlasmicProfile";
 import { supabase } from "../lib/supabaseClient";
+import { useAuth } from "../AuthContext";
 
 export interface ProfileProps extends DefaultProfileProps {}
 
 function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
-  const [phone, setPhone] = React.useState("");
+  const { profile: authProfile } = useAuth();
+  const [phone, setPhone] = React.useState(authProfile?.phone ?? "");
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [notes, setNotes] = React.useState("");
 
   React.useEffect(() => {
     const fetchProfile = async () => {
+      if (!authProfile?.phone) {
+        return;
+      }
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
-        .limit(1)
+        .eq("phone", authProfile.phone)
         .single();
 
       if (error) {
@@ -32,7 +37,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
     };
 
     fetchProfile();
-  }, []);
+  }, [authProfile?.phone]);
 
   const handleSave = async () => {
     const { error } = await supabase.from("profiles").upsert({
