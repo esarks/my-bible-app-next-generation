@@ -3,31 +3,40 @@ const express = require("express");
 const router = express.Router();
 const twilio = require("twilio");
 
-//TWILIO_VERIFY=VAdd281d2f09c45e85e9ad9466b2ef3929
-//TWILIO_SID=ACba43e938d7270668a6c8758b35a362db
-//TWILIO_AUTH_TOKEN=4aacb429a7d0105a48cee5ce5092a993
-//TWILIO_PHONE_NUMBER=+17275917765
-
 const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const serviceSid = process.env.TWILIO_VERIFY;
+const phoneFrom = process.env.TWILIO_PHONE_NUMBER;
 
-console.log("[DEBUG] TWILIO_SID:", process.env.TWILIO_SID);
-console.log("[DEBUG] TWILIO_AUTH_TOKEN:", process.env.TWILIO_AUTH_TOKEN);
-console.log("[DEBUG] TWILIO_SERVICE_SID:", process.env.TWILIO_VERIFY);
+console.log("[DEBUG] TWILIO_SID:", accountSid);
+console.log("[DEBUG] TWILIO_AUTH_TOKEN:", authToken);
+console.log("[DEBUG] TWILIO_PHONE_NUMBER:", phoneFrom);
 
 const client = twilio(accountSid, authToken);
 
+// In-memory storage for codes — replace with DB or Redis in production
+const verificationCodes = {}; // { "+17278040148": "123456" }
+
 router.post("/", async (req, res) => {
-  const { phone } = req.body;
+  let { phone } = req.body;
   console.log("[/api/send-code] Received phone:", phone);
 
-  try {
-    const verification = await client.verify
-      .v2.services(serviceSid)
-      .verifications.create({ to: phone, channel: "sms" });
+  // Normalize to E.164 format if needed
+  if (!phone.startsWith("+1")) {
+    phone = "+1" + phone.replace(/\D/g, "");
+  }
 
-    res.json({ success: true, code: "(not returned from Twilio)" });
+  const code = Math.floor(100000 + Math.random() * 900000).toString();
+  verificationCodes[phone] = code;
+
+  try {
+    const message = await client.messages.create({
+      body: `Your MyBibleApp login code is: ${code}`,
+      from: phoneFrom,
+      to: phone,
+    });
+
+    console.log("[/api/send-code] Message SID:", message.sid);
+    res.json({ success: true, phone, codeSent: true });
   } catch (err) {
     console.error("[/api/send-code] Error:", err);
     res.status(500).json({ success: false, error: err.message });
