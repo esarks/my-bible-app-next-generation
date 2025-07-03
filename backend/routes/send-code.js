@@ -1,76 +1,28 @@
-import React, { useState } from "react";
+// backend/routes/send-code.js
+const express = require("express");
+const router = express.Router();
+const twilio = require("twilio");
 
-const Login = () => {
-  const [phone, setPhone] = useState("");
-  const [codeInput, setCodeInput] = useState("");
+const accountSid = process.env.TWILIO_VERIFY;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const serviceSid = process.env.TWILIO_SERVICE_SID;
 
-  const handleSend = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/api/send-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone }),
-      });
+const client = twilio(accountSid, authToken);
 
-      const data = await res.json();
+router.post("/", async (req, res) => {
+  const { phone } = req.body;
+  console.log("[/api/send-code] Received phone:", phone);
 
-      if (res.ok) {
-        alert(`Verification code sent to ${phone} — CODE: ${data.code}`);
-      } else {
-        alert(`Failed to send: ${data.error}`);
-      }
-    } catch (err) {
-      console.error("[handleSend] Error:", err);
-      alert("Error sending code.");
-    }
-  };
+  try {
+    const verification = await client.verify
+      .v2.services(serviceSid)
+      .verifications.create({ to: phone, channel: "sms" });
 
-  const handleVerify = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/api/verify-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, code: codeInput }),
-      });
+    res.json({ success: true, code: "(not returned from Twilio)" });
+  } catch (err) {
+    console.error("[/api/send-code] Error:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
-      const data = await res.json();
-
-      if (res.ok) {
-        alert("Verification successful!");
-      } else {
-        alert(`Verification failed: ${data.error}`);
-      }
-    } catch (err) {
-      console.error("[handleVerify] Error:", err);
-      alert("Error verifying code.");
-    }
-  };
-
-  return (
-    <div>
-      <h2>Login</h2>
-      <label>
-        Enter Phone Number:
-        <input
-          type="tel"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-      </label>
-      <button onClick={handleSend}>Send</button>
-
-      <br />
-      <label>
-        Enter Verification Code:
-        <input
-          type="text"
-          value={codeInput}
-          onChange={(e) => setCodeInput(e.target.value)}
-        />
-      </label>
-      <button onClick={handleVerify}>Verify</button>
-    </div>
-  );
-};
-
-export default Login;
+module.exports = router;
