@@ -6,6 +6,7 @@ import {
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
+import { useAuth } from "../AuthContext";
 
 export interface LoginProps extends DefaultLoginProps {}
 
@@ -13,7 +14,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
   const navigate = useNavigate();
   const [phone, setPhone] = React.useState("");
   const [code, setCode] = React.useState("");
-  const [profile, setProfile] = React.useState<any>(null);
+  const { setProfile, setIsVerified } = useAuth();
 
   const handleSend = async () => {
     console.log("[handleSend] Invoked");
@@ -78,6 +79,8 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         } else {
           setProfile(profileData);
         }
+
+        setIsVerified(true);
 
         navigate('/profile');
       } else {
