@@ -59,6 +59,9 @@ import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 
 import PageLayout from "../../components/PageLayout"; // plasmic-import: TZVmFGETAb0O/component
+import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 import "../defaultStyles.css"; // plasmic-import: global/defaultcss
@@ -81,6 +84,11 @@ export const PlasmicProfile__ArgProps = new Array<ArgPropType>();
 export type PlasmicProfile__OverridesType = {
   root?: Flex__<"div">;
   pageLayout?: Flex__<typeof PageLayout>;
+  input?: Flex__<typeof AntdInput>;
+  input2?: Flex__<typeof AntdInput>;
+  input3?: Flex__<typeof AntdInput>;
+  input4?: Flex__<typeof AntdInput>;
+  button?: Flex__<typeof AntdButton>;
 };
 
 export interface DefaultProfileProps {
@@ -119,6 +127,50 @@ function PlasmicProfile__RenderFunc(props: {
 
   const currentUser = useCurrentUser?.() || {};
 
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "input.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
+      },
+      {
+        path: "input2.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
+      },
+      {
+        path: "input3.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
+      },
+      {
+        path: "input4.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
+
   return (
     <React.Fragment>
       <div className={"plasmic_page_wrapper"}>
@@ -141,6 +193,334 @@ function PlasmicProfile__RenderFunc(props: {
             data-plasmic-name={"pageLayout"}
             data-plasmic-override={overrides.pageLayout}
           />
+
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Profile__freeBox__uJx6W"
+            )}
+          >
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox__hmvVl"
+              )}
+            >
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Profile__text__vYow4"
+                )}
+              >
+                {"Telephone Number:"}
+              </div>
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox__mhdoc"
+              )}
+            >
+              {(() => {
+                const child$Props = {
+                  className: classNames(
+                    "__wab_instance",
+                    "Profile__input__zufGw"
+                  ),
+                  onChange: async (...eventArgs: any) => {
+                    generateStateOnChangePropForCodeComponents(
+                      $state,
+                      "value",
+                      ["input", "value"],
+                      AntdInput_Helpers
+                    ).apply(null, eventArgs);
+                  },
+                  value: generateStateValueProp($state, ["input", "value"])
+                };
+                initializeCodeComponentStates(
+                  $state,
+                  [
+                    {
+                      name: "value",
+                      plasmicStateName: "input.value"
+                    }
+                  ],
+                  [],
+                  AntdInput_Helpers ?? {},
+                  child$Props
+                );
+
+                return (
+                  <AntdInput
+                    data-plasmic-name={"input"}
+                    data-plasmic-override={overrides.input}
+                    {...child$Props}
+                  />
+                );
+              })()}
+            </div>
+          </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Profile__freeBox___0HkO"
+            )}
+          >
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox__kbcUv"
+              )}
+            >
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Profile__text__oG9It"
+                )}
+              >
+                {"Name:"}
+              </div>
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox__f8U"
+              )}
+            >
+              {(() => {
+                const child$Props = {
+                  className: classNames(
+                    "__wab_instance",
+                    "Profile__input2__vd1Xn"
+                  ),
+                  onChange: async (...eventArgs: any) => {
+                    generateStateOnChangePropForCodeComponents(
+                      $state,
+                      "value",
+                      ["input2", "value"],
+                      AntdInput_Helpers
+                    ).apply(null, eventArgs);
+                  },
+                  value: generateStateValueProp($state, ["input2", "value"])
+                };
+                initializeCodeComponentStates(
+                  $state,
+                  [
+                    {
+                      name: "value",
+                      plasmicStateName: "input2.value"
+                    }
+                  ],
+                  [],
+                  AntdInput_Helpers ?? {},
+                  child$Props
+                );
+
+                return (
+                  <AntdInput
+                    data-plasmic-name={"input2"}
+                    data-plasmic-override={overrides.input2}
+                    {...child$Props}
+                  />
+                );
+              })()}
+            </div>
+          </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Profile__freeBox__q3RJ3"
+            )}
+          >
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox__sDpuE"
+              )}
+            >
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Profile__text__rtPpq"
+                )}
+              >
+                {"Email Address:"}
+              </div>
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox__fpCd"
+              )}
+            >
+              {(() => {
+                const child$Props = {
+                  className: classNames(
+                    "__wab_instance",
+                    "Profile__input3__nQiXd"
+                  ),
+                  onChange: async (...eventArgs: any) => {
+                    generateStateOnChangePropForCodeComponents(
+                      $state,
+                      "value",
+                      ["input3", "value"],
+                      AntdInput_Helpers
+                    ).apply(null, eventArgs);
+                  },
+                  value: generateStateValueProp($state, ["input3", "value"])
+                };
+                initializeCodeComponentStates(
+                  $state,
+                  [
+                    {
+                      name: "value",
+                      plasmicStateName: "input3.value"
+                    }
+                  ],
+                  [],
+                  AntdInput_Helpers ?? {},
+                  child$Props
+                );
+
+                return (
+                  <AntdInput
+                    data-plasmic-name={"input3"}
+                    data-plasmic-override={overrides.input3}
+                    {...child$Props}
+                  />
+                );
+              })()}
+            </div>
+          </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Profile__freeBox___11K8"
+            )}
+          >
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox__finz"
+              )}
+            >
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Profile__text__myrDr"
+                )}
+              >
+                {"Enter some text"}
+              </div>
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox___9WiD"
+              )}
+            >
+              {(() => {
+                const child$Props = {
+                  className: classNames(
+                    "__wab_instance",
+                    "Profile__input4__lHwQg"
+                  ),
+                  onChange: async (...eventArgs: any) => {
+                    generateStateOnChangePropForCodeComponents(
+                      $state,
+                      "value",
+                      ["input4", "value"],
+                      AntdInput_Helpers
+                    ).apply(null, eventArgs);
+                  },
+                  value: generateStateValueProp($state, ["input4", "value"])
+                };
+                initializeCodeComponentStates(
+                  $state,
+                  [
+                    {
+                      name: "value",
+                      plasmicStateName: "input4.value"
+                    }
+                  ],
+                  [],
+                  AntdInput_Helpers ?? {},
+                  child$Props
+                );
+
+                return (
+                  <AntdInput
+                    data-plasmic-name={"input4"}
+                    data-plasmic-override={overrides.input4}
+                    {...child$Props}
+                  />
+                );
+              })()}
+            </div>
+          </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Profile__freeBox__e5AnC"
+            )}
+          >
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox__jw0Dw"
+              )}
+            />
+
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Profile__freeBox___3QYhw"
+              )}
+            >
+              <AntdButton
+                data-plasmic-name={"button"}
+                data-plasmic-override={overrides.button}
+                className={classNames(
+                  "__wab_instance",
+                  "Profile__button___7Mui9"
+                )}
+              >
+                <div
+                  className={classNames(
+                    "plasmic_default__all",
+                    "plasmic_default__div",
+                    "__wab_text",
+                    "Profile__text__xkV5A"
+                  )}
+                >
+                  {"Button"}
+                </div>
+              </AntdButton>
+            </div>
+          </div>
         </div>
       </div>
     </React.Fragment>
@@ -148,8 +528,13 @@ function PlasmicProfile__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "pageLayout"],
-  pageLayout: ["pageLayout"]
+  root: ["root", "pageLayout", "input", "input2", "input3", "input4", "button"],
+  pageLayout: ["pageLayout"],
+  input: ["input"],
+  input2: ["input2"],
+  input3: ["input3"],
+  input4: ["input4"],
+  button: ["button"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -157,6 +542,11 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   pageLayout: typeof PageLayout;
+  input: typeof AntdInput;
+  input2: typeof AntdInput;
+  input3: typeof AntdInput;
+  input4: typeof AntdInput;
+  button: typeof AntdButton;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -245,6 +635,11 @@ export const PlasmicProfile = Object.assign(
   {
     // Helper components rendering sub-elements
     pageLayout: makeNodeComponent("pageLayout"),
+    input: makeNodeComponent("input"),
+    input2: makeNodeComponent("input2"),
+    input3: makeNodeComponent("input3"),
+    input4: makeNodeComponent("input4"),
+    button: makeNodeComponent("button"),
 
     // Metadata about props expected for PlasmicProfile
     internalVariantProps: PlasmicProfile__VariantProps,
