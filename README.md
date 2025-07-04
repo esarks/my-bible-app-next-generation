@@ -21,12 +21,13 @@ This project contains a Vite based React frontend and a simple Express backend.
    cp src/.env.example src/.env
    cp backend/.env.example backend/.env
    ```
-   After copying, open these files and replace the placeholder values with your own credentials. The `.env` files are ignored by git thanks to the `.env` entry in `.gitignore`.
+   After copying, open these files and replace the placeholder values with your own credentials. These `.env` files contain your secrets, so keep them safe.
 
    The following environment variables are required:
 
    - **Twilio**: `TWILIO_VERIFY`, `TWILIO_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_PHONE_NUMBER`
-   - **Database**: `DATABASE_URL` (e.g. your Supabase connection string)
+   - **Database**: `DATABASE_URL` (use your Supabase pooled connection string, e.g.
+     `postgresql://<username>:<password>@aws-0-us-east-2.pooler.supabase.com:6543/postgres?pgbouncer=true&statement_cache_size=0`)
    - **API.Bible**: `BIBLE_API_KEY`
    - **Supabase**: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
    - **Plasmic**: `PLASMIC_PROJECT_ID`, `PLASMIC_PUBLIC_TOKEN`
