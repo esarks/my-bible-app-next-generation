@@ -18,7 +18,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
 
   React.useEffect(() => {
     const fetchProfile = async () => {
-      if (!authProfile?.phone) {
+      if (!authProfile?.phoneNumber) {
         return;
       }
 
@@ -44,7 +44,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
     };
 
     fetchProfile();
-  }, [authProfile?.phone]);
+  }, [authProfile?.phoneNumber]);
 
   const handleSave = async () => {
     if (!supabase) {
