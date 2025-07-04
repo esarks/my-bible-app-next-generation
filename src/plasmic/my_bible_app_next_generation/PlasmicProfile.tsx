@@ -90,6 +90,7 @@ export type PlasmicProfile__OverridesType = {
   inputVerified?: Flex__<typeof AntdInput>;
   saveButton?: Flex__<typeof AntdButton>;
   save?: Flex__<"div">;
+  queryButton?: Flex__<typeof AntdButton>;
 };
 
 export interface DefaultProfileProps {
@@ -525,6 +526,25 @@ function PlasmicProfile__RenderFunc(props: {
                   {"Save"}
                 </div>
               </AntdButton>
+              <AntdButton
+                data-plasmic-name={"queryButton"}
+                data-plasmic-override={overrides.queryButton}
+                className={classNames(
+                  "__wab_instance",
+                  "Profile__queryButton___0CcoL"
+                )}
+              >
+                <div
+                  className={classNames(
+                    "plasmic_default__all",
+                    "plasmic_default__div",
+                    "__wab_text",
+                    "Profile__text__wewLh"
+                  )}
+                >
+                  {"Query"}
+                </div>
+              </AntdButton>
             </div>
           </div>
         </div>
@@ -542,7 +562,8 @@ const PlasmicDescendants = {
     "inputEmail",
     "inputVerified",
     "saveButton",
-    "save"
+    "save",
+    "queryButton"
   ],
   pageLayout: ["pageLayout"],
   inputPhone: ["inputPhone"],
@@ -550,7 +571,8 @@ const PlasmicDescendants = {
   inputEmail: ["inputEmail"],
   inputVerified: ["inputVerified"],
   saveButton: ["saveButton", "save"],
-  save: ["save"]
+  save: ["save"],
+  queryButton: ["queryButton"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -564,6 +586,7 @@ type NodeDefaultElementType = {
   inputVerified: typeof AntdInput;
   saveButton: typeof AntdButton;
   save: "div";
+  queryButton: typeof AntdButton;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -658,6 +681,7 @@ export const PlasmicProfile = Object.assign(
     inputVerified: makeNodeComponent("inputVerified"),
     saveButton: makeNodeComponent("saveButton"),
     save: makeNodeComponent("save"),
+    queryButton: makeNodeComponent("queryButton"),
 
     // Metadata about props expected for PlasmicProfile
     internalVariantProps: PlasmicProfile__VariantProps,
