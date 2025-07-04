@@ -21,6 +21,7 @@ This project contains a Vite based React frontend and a simple Express backend.
    cp src/.env.example src/.env
    cp backend/.env.example backend/.env
    ```
+   After copying, open these files and replace the placeholder values with your own credentials. The `.env` files are ignored by git thanks to the `.env` entry in `.gitignore`.
 
    The following environment variables are required:
 
