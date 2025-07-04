@@ -5,6 +5,7 @@ import {
 } from "../plasmic/my_bible_app_next_generation/PlasmicProfile";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../AuthContext";
+import { logger } from "../lib/logger";
 
 export interface ProfileProps extends DefaultProfileProps {}
 
@@ -22,7 +23,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       }
 
       if (!supabase) {
-        console.error("[fetchProfile] Supabase client is not initialized");
+        logger.error("[fetchProfile] Supabase client is not initialized");
         return;
       }
 
@@ -33,7 +34,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
         .single();
 
       if (error) {
-        console.error("[fetchProfile]", error);
+        logger.error("[fetchProfile]", error);
       } else if (data) {
         setPhone(data.phoneNumber ?? "");
         setName(data.name ?? "");
@@ -47,7 +48,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
 
   const handleSave = async () => {
     if (!supabase) {
-      console.error("[handleSave] Supabase client is not initialized");
+      logger.error("[handleSave] Supabase client is not initialized");
       alert("Supabase client is not available.");
       return;
     }
@@ -59,7 +60,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
     });
 
     if (error) {
-      console.error("[handleSave]", error);
+      logger.error("[handleSave]", error);
       alert("Failed to save profile");
     } else {
       alert("Profile saved successfully");

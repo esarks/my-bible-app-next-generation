@@ -7,6 +7,7 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../AuthContext";
+import { logger } from "../lib/logger";
 
 export interface LoginProps extends DefaultLoginProps {}
 
@@ -17,14 +18,14 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
   const { setProfile, setIsVerified } = useAuth();
 
   const handleSend = async () => {
-    console.log("[handleSend] Invoked");
+    logger.debug("[handleSend] Invoked");
 
     if (!phone) {
       alert("Please enter a phone number.");
       return;
     }
 
-    console.log(`[handleSend] Sending code to ${phone}`);
+    logger.info(`[handleSend] Sending code to ${phone}`);
 
     try {
       const res = await fetch("http://localhost:5000/api/send-code", {
@@ -34,7 +35,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
       });
 
       const data = await res.json();
-      console.log("[handleSend] Response:", data);
+      logger.debug("[handleSend] Response:", data);
 
       if (data.success) {
         setPhone(data.phone);
@@ -43,20 +44,20 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         alert(`Failed to send: ${data.error}`);
       }
     } catch (err) {
-      console.error("[handleSend] Error:", err);
+      logger.error("[handleSend] Error:", err);
       alert("Failed to send verification code.");
     }
   };
 
   const handleVerify = async () => {
-    console.log("[handleVerify] Invoked");
+    logger.debug("[handleVerify] Invoked");
 
     if (!code) {
       alert("Please enter the verification code.");
       return;
     }
 
-    console.log(`[handleVerify] Verifying code "${code}" for ${phone}`);
+    logger.info(`[handleVerify] Verifying code "${code}" for ${phone}`);
 
     try {
       const res = await fetch("http://localhost:5000/api/verify-code", {
@@ -65,14 +66,14 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         body: JSON.stringify({ phone, code }),
       });
 
-      console.debug("[handleVerify] HTTP status", res.status);
+      logger.debug("[handleVerify] HTTP status", res.status);
 
       const data = await res.json();
-      console.log("[handleVerify] Response:", data);
+      logger.debug("[handleVerify] Response:", data);
 
       if (data.success) {
         if (!supabase) {
-          console.error('[handleVerify] Supabase client is not initialized');
+          logger.error('[handleVerify] Supabase client is not initialized');
           alert('Verification succeeded, but Supabase is not configured.');
           setIsVerified(true);
           navigate('/profile');
@@ -86,7 +87,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
           .single();
 
         if (error) {
-          console.error('[handleVerify] Supabase error:', error);
+          logger.error('[handleVerify] Supabase error:', error);
         } else {
           setProfile(profileData);
         }
@@ -95,11 +96,11 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
 
         navigate('/profile');
       } else {
-        console.warn('[handleVerify] Verification failed:', data.error);
+        logger.warn('[handleVerify] Verification failed:', data.error);
         alert(`Verification failed: ${data.error}`);
       }
     } catch (err) {
-      console.error("[handleVerify] Error:", err);
+      logger.error("[handleVerify] Error:", err);
       alert("Failed to verify code.");
     }
   };
@@ -113,7 +114,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
           value: phone,
           onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             const val = e.target.value;
-            console.log("[inputPhone] Changed:", val);
+            logger.debug("[inputPhone] Changed:", val);
             setPhone(val);
           },
         },
@@ -123,7 +124,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
           value: code,
           onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             const val = e.target.value;
-            console.log("[inputVerification] Changed:", val);
+            logger.debug("[inputVerification] Changed:", val);
             setCode(val);
           },
         },
@@ -131,7 +132,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
       sendButton={{
         props: {
           onClick: () => {
-            console.log("[sendButton] Clicked");
+            logger.debug("[sendButton] Clicked");
             handleSend();
           },
         },
@@ -139,7 +140,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
       verifyButton={{
         props: {
           onClick: () => {
-            console.log("[verifyButton] Clicked");
+            logger.debug("[verifyButton] Clicked");
             handleVerify();
           },
         },

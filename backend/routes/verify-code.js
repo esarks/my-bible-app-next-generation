@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const twilio = require("twilio");
 const { normalizePhone } = require("../utils/phone");
+const logger = require("../utils/logger");
 
 const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -11,14 +12,14 @@ const serviceSid = process.env.TWILIO_VERIFY;
 const client = twilio(accountSid, authToken);
 
 router.post("/", async (req, res) => {
-  console.log("[/api/verify-code] Incoming request");
+  logger.info("[/api/verify-code] Incoming request");
   let { phone, code } = req.body;
-  console.debug("[/api/verify-code] Raw payload", { phone, code });
+  logger.debug("[/api/verify-code] Raw payload", { phone, code });
 
   // Normalize phone using shared utility
   try {
     phone = normalizePhone(phone);
-    console.debug(`[/api/verify-code] Normalized phone: ${phone}`);
+    logger.debug(`[/api/verify-code] Normalized phone: ${phone}`);
   } catch (err) {
     return res.status(400).json({ error: "Invalid phone number" });
   }
@@ -33,7 +34,7 @@ router.post("/", async (req, res) => {
     if (!accountSid) missing.push("TWILIO_SID");
     if (!authToken) missing.push("TWILIO_AUTH_TOKEN");
     if (!serviceSid) missing.push("TWILIO_VERIFY");
-    console.error(
+    logger.error(
       "[/api/verify-code] Missing environment variables:",
       missing.join(", ")
     );
@@ -47,20 +48,20 @@ router.post("/", async (req, res) => {
       .v2.services(serviceSid)
       .verificationChecks.create({ to: phone, code });
 
-    console.debug("[/api/verify-code] Twilio response", verificationCheck);
+    logger.debug("[/api/verify-code] Twilio response", verificationCheck);
 
     if (verificationCheck.status === "approved") {
-      console.log("[/api/verify-code] Code approved");
+      logger.info("[/api/verify-code] Code approved");
       return res.status(200).json({ success: true });
     } else {
-      console.log(
+      logger.info(
         "[/api/verify-code] Invalid code status",
         verificationCheck.status
       );
       return res.status(401).json({ error: "Invalid verification code" });
     }
   } catch (err) {
-    console.error("[/api/verify-code] Error:", err);
+    logger.error("[/api/verify-code] Error:", err);
     return res.status(500).json({ error: err.message });
   }
 });

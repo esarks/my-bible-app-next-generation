@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
+const logger = require("./utils/logger");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,7 +16,7 @@ const requiredTwilioVars = [
 ];
 const missingTwilioVars = requiredTwilioVars.filter((v) => !process.env[v]);
 if (missingTwilioVars.length) {
-  console.error(
+  logger.error(
     `[server] Missing environment variables: ${missingTwilioVars.join(", ")}`
   );
   process.exit(1);
@@ -29,20 +30,20 @@ app.use(express.json());
 try {
   const sendCodeRoute = require(path.join(__dirname, "routes", "send-code"));
   app.use("/api/send-code", sendCodeRoute);
-  console.log("[server] Loaded /api/send-code");
+  logger.info("Loaded /api/send-code");
 } catch (err) {
-  console.error("[server] Failed to load ./routes/send-code.js", err.message);
+  logger.error("Failed to load ./routes/send-code.js", err.message);
 }
 
 try {
   const verifyCodeRoute = require(path.join(__dirname, "routes", "verify-code"));
   app.use("/api/verify-code", verifyCodeRoute);
-  console.log("[server] Loaded /api/verify-code");
+  logger.info("Loaded /api/verify-code");
 } catch (err) {
-  console.error("[server] Failed to load ./routes/verify-code.js", err.message);
+  logger.error("Failed to load ./routes/verify-code.js", err.message);
 }
 
 // Start server
 app.listen(port, () => {
-  console.log(`[server] Listening on port ${port}`);
+  logger.info(`Server listening on port ${port}`);
 });
