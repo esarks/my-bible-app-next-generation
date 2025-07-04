@@ -46,3 +46,8 @@ npm start
 ```
 The backend listens on the port specified in `backend/.env` (default `5000`).
 
+The backend now validates that `TWILIO_SID`, `TWILIO_AUTH_TOKEN` and
+`TWILIO_VERIFY` are set before it loads any routes. If any of these
+variables are missing, the server logs an error and exits immediately so
+configuration issues are caught right away.
+
