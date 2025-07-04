@@ -84,11 +84,12 @@ export const PlasmicProfile__ArgProps = new Array<ArgPropType>();
 export type PlasmicProfile__OverridesType = {
   root?: Flex__<"div">;
   pageLayout?: Flex__<typeof PageLayout>;
-  input?: Flex__<typeof AntdInput>;
-  input2?: Flex__<typeof AntdInput>;
-  input3?: Flex__<typeof AntdInput>;
-  input4?: Flex__<typeof AntdInput>;
-  button?: Flex__<typeof AntdButton>;
+  inputPhone?: Flex__<typeof AntdInput>;
+  inputName?: Flex__<typeof AntdInput>;
+  inputEmail?: Flex__<typeof AntdInput>;
+  inputVerified?: Flex__<typeof AntdInput>;
+  saveButton?: Flex__<typeof AntdButton>;
+  save?: Flex__<"div">;
 };
 
 export interface DefaultProfileProps {
@@ -130,7 +131,7 @@ function PlasmicProfile__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "input.value",
+        path: "inputPhone.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
@@ -138,7 +139,7 @@ function PlasmicProfile__RenderFunc(props: {
         onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
-        path: "input2.value",
+        path: "inputName.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
@@ -146,7 +147,7 @@ function PlasmicProfile__RenderFunc(props: {
         onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
-        path: "input3.value",
+        path: "inputEmail.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
@@ -154,7 +155,7 @@ function PlasmicProfile__RenderFunc(props: {
         onMutate: generateOnMutateForSpec("value", AntdInput_Helpers)
       },
       {
-        path: "input4.value",
+        path: "inputVerified.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
@@ -230,24 +231,24 @@ function PlasmicProfile__RenderFunc(props: {
                 const child$Props = {
                   className: classNames(
                     "__wab_instance",
-                    "Profile__input__zufGw"
+                    "Profile__inputPhone__zufGw"
                   ),
                   onChange: async (...eventArgs: any) => {
                     generateStateOnChangePropForCodeComponents(
                       $state,
                       "value",
-                      ["input", "value"],
+                      ["inputPhone", "value"],
                       AntdInput_Helpers
                     ).apply(null, eventArgs);
                   },
-                  value: generateStateValueProp($state, ["input", "value"])
+                  value: generateStateValueProp($state, ["inputPhone", "value"])
                 };
                 initializeCodeComponentStates(
                   $state,
                   [
                     {
                       name: "value",
-                      plasmicStateName: "input.value"
+                      plasmicStateName: "inputPhone.value"
                     }
                   ],
                   [],
@@ -257,8 +258,8 @@ function PlasmicProfile__RenderFunc(props: {
 
                 return (
                   <AntdInput
-                    data-plasmic-name={"input"}
-                    data-plasmic-override={overrides.input}
+                    data-plasmic-name={"inputPhone"}
+                    data-plasmic-override={overrides.inputPhone}
                     {...child$Props}
                   />
                 );
@@ -301,24 +302,24 @@ function PlasmicProfile__RenderFunc(props: {
                 const child$Props = {
                   className: classNames(
                     "__wab_instance",
-                    "Profile__input2__vd1Xn"
+                    "Profile__inputName__vd1Xn"
                   ),
                   onChange: async (...eventArgs: any) => {
                     generateStateOnChangePropForCodeComponents(
                       $state,
                       "value",
-                      ["input2", "value"],
+                      ["inputName", "value"],
                       AntdInput_Helpers
                     ).apply(null, eventArgs);
                   },
-                  value: generateStateValueProp($state, ["input2", "value"])
+                  value: generateStateValueProp($state, ["inputName", "value"])
                 };
                 initializeCodeComponentStates(
                   $state,
                   [
                     {
                       name: "value",
-                      plasmicStateName: "input2.value"
+                      plasmicStateName: "inputName.value"
                     }
                   ],
                   [],
@@ -328,8 +329,8 @@ function PlasmicProfile__RenderFunc(props: {
 
                 return (
                   <AntdInput
-                    data-plasmic-name={"input2"}
-                    data-plasmic-override={overrides.input2}
+                    data-plasmic-name={"inputName"}
+                    data-plasmic-override={overrides.inputName}
                     {...child$Props}
                   />
                 );
@@ -372,24 +373,24 @@ function PlasmicProfile__RenderFunc(props: {
                 const child$Props = {
                   className: classNames(
                     "__wab_instance",
-                    "Profile__input3__nQiXd"
+                    "Profile__inputEmail__nQiXd"
                   ),
                   onChange: async (...eventArgs: any) => {
                     generateStateOnChangePropForCodeComponents(
                       $state,
                       "value",
-                      ["input3", "value"],
+                      ["inputEmail", "value"],
                       AntdInput_Helpers
                     ).apply(null, eventArgs);
                   },
-                  value: generateStateValueProp($state, ["input3", "value"])
+                  value: generateStateValueProp($state, ["inputEmail", "value"])
                 };
                 initializeCodeComponentStates(
                   $state,
                   [
                     {
                       name: "value",
-                      plasmicStateName: "input3.value"
+                      plasmicStateName: "inputEmail.value"
                     }
                   ],
                   [],
@@ -399,8 +400,8 @@ function PlasmicProfile__RenderFunc(props: {
 
                 return (
                   <AntdInput
-                    data-plasmic-name={"input3"}
-                    data-plasmic-override={overrides.input3}
+                    data-plasmic-name={"inputEmail"}
+                    data-plasmic-override={overrides.inputEmail}
                     {...child$Props}
                   />
                 );
@@ -429,7 +430,7 @@ function PlasmicProfile__RenderFunc(props: {
                   "Profile__text__myrDr"
                 )}
               >
-                {"Enter some text"}
+                {"Is Email Verified?"}
               </div>
             </div>
             <div
@@ -443,24 +444,27 @@ function PlasmicProfile__RenderFunc(props: {
                 const child$Props = {
                   className: classNames(
                     "__wab_instance",
-                    "Profile__input4__lHwQg"
+                    "Profile__inputVerified__lHwQg"
                   ),
                   onChange: async (...eventArgs: any) => {
                     generateStateOnChangePropForCodeComponents(
                       $state,
                       "value",
-                      ["input4", "value"],
+                      ["inputVerified", "value"],
                       AntdInput_Helpers
                     ).apply(null, eventArgs);
                   },
-                  value: generateStateValueProp($state, ["input4", "value"])
+                  value: generateStateValueProp($state, [
+                    "inputVerified",
+                    "value"
+                  ])
                 };
                 initializeCodeComponentStates(
                   $state,
                   [
                     {
                       name: "value",
-                      plasmicStateName: "input4.value"
+                      plasmicStateName: "inputVerified.value"
                     }
                   ],
                   [],
@@ -470,8 +474,8 @@ function PlasmicProfile__RenderFunc(props: {
 
                 return (
                   <AntdInput
-                    data-plasmic-name={"input4"}
-                    data-plasmic-override={overrides.input4}
+                    data-plasmic-name={"inputVerified"}
+                    data-plasmic-override={overrides.inputVerified}
                     {...child$Props}
                   />
                 );
@@ -501,22 +505,24 @@ function PlasmicProfile__RenderFunc(props: {
               )}
             >
               <AntdButton
-                data-plasmic-name={"button"}
-                data-plasmic-override={overrides.button}
+                data-plasmic-name={"saveButton"}
+                data-plasmic-override={overrides.saveButton}
                 className={classNames(
                   "__wab_instance",
-                  "Profile__button___7Mui9"
+                  "Profile__saveButton___7Mui9"
                 )}
               >
                 <div
+                  data-plasmic-name={"save"}
+                  data-plasmic-override={overrides.save}
                   className={classNames(
                     "plasmic_default__all",
                     "plasmic_default__div",
                     "__wab_text",
-                    "Profile__text__xkV5A"
+                    "Profile__save__xkV5A"
                   )}
                 >
-                  {"Button"}
+                  {"Save"}
                 </div>
               </AntdButton>
             </div>
@@ -528,13 +534,23 @@ function PlasmicProfile__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "pageLayout", "input", "input2", "input3", "input4", "button"],
+  root: [
+    "root",
+    "pageLayout",
+    "inputPhone",
+    "inputName",
+    "inputEmail",
+    "inputVerified",
+    "saveButton",
+    "save"
+  ],
   pageLayout: ["pageLayout"],
-  input: ["input"],
-  input2: ["input2"],
-  input3: ["input3"],
-  input4: ["input4"],
-  button: ["button"]
+  inputPhone: ["inputPhone"],
+  inputName: ["inputName"],
+  inputEmail: ["inputEmail"],
+  inputVerified: ["inputVerified"],
+  saveButton: ["saveButton", "save"],
+  save: ["save"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -542,11 +558,12 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   pageLayout: typeof PageLayout;
-  input: typeof AntdInput;
-  input2: typeof AntdInput;
-  input3: typeof AntdInput;
-  input4: typeof AntdInput;
-  button: typeof AntdButton;
+  inputPhone: typeof AntdInput;
+  inputName: typeof AntdInput;
+  inputEmail: typeof AntdInput;
+  inputVerified: typeof AntdInput;
+  saveButton: typeof AntdButton;
+  save: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -635,11 +652,12 @@ export const PlasmicProfile = Object.assign(
   {
     // Helper components rendering sub-elements
     pageLayout: makeNodeComponent("pageLayout"),
-    input: makeNodeComponent("input"),
-    input2: makeNodeComponent("input2"),
-    input3: makeNodeComponent("input3"),
-    input4: makeNodeComponent("input4"),
-    button: makeNodeComponent("button"),
+    inputPhone: makeNodeComponent("inputPhone"),
+    inputName: makeNodeComponent("inputName"),
+    inputEmail: makeNodeComponent("inputEmail"),
+    inputVerified: makeNodeComponent("inputVerified"),
+    saveButton: makeNodeComponent("saveButton"),
+    save: makeNodeComponent("save"),
 
     // Metadata about props expected for PlasmicProfile
     internalVariantProps: PlasmicProfile__VariantProps,

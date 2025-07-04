@@ -66,7 +66,7 @@
   min-width: 0;
   padding: 8px;
 }
-.Profile__input__zufGw.__wab_instance {
+.Profile__inputPhone__zufGw.__wab_instance {
   max-width: 100%;
   object-fit: cover;
 }
@@ -114,7 +114,7 @@
   min-width: 0;
   padding: 8px;
 }
-.Profile__input2__vd1Xn.__wab_instance {
+.Profile__inputName__vd1Xn.__wab_instance {
   max-width: 100%;
   object-fit: cover;
 }
@@ -162,7 +162,7 @@
   min-width: 0;
   padding: 8px;
 }
-.Profile__input3__nQiXd.__wab_instance {
+.Profile__inputEmail__nQiXd.__wab_instance {
   max-width: 100%;
   object-fit: cover;
 }
@@ -194,6 +194,8 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  text-align: right;
+  font-size: 18px;
   min-width: 0;
 }
 .Profile__freeBox___9WiD {
@@ -208,7 +210,7 @@
   min-width: 0;
   padding: 8px;
 }
-.Profile__input4__lHwQg.__wab_instance {
+.Profile__inputVerified__lHwQg.__wab_instance {
   max-width: 100%;
   object-fit: cover;
 }
@@ -219,9 +221,11 @@
   width: 100%;
   height: auto;
   max-width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
   grid-column-start: 3 !important;
   grid-column-end: -3 !important;
-  padding: 8px;
 }
 .Profile__freeBox__jw0Dw {
   display: flex;
@@ -247,11 +251,11 @@
   min-width: 0;
   padding: 8px;
 }
-.Profile__button___7Mui9.__wab_instance {
+.Profile__saveButton___7Mui9.__wab_instance {
   max-width: 100%;
   object-fit: cover;
 }
-.Profile__text__xkV5A {
+.Profile__save__xkV5A {
   position: relative;
   width: 100%;
   height: auto;
