@@ -10,7 +10,12 @@ const serviceSid = process.env.TWILIO_VERIFY;
 const client = twilio(accountSid, authToken);
 
 router.post("/", async (req, res) => {
-  const { phone, code } = req.body;
+  let { phone, code } = req.body;
+
+  // Normalize to E.164 format if needed (consistent with send-code.js)
+  if (!phone.startsWith("+1")) {
+    phone = "+1" + phone.replace(/\D/g, "");
+  }
 
   if (!phone || !code) {
     return res.status(400).json({ error: "Missing phone or code" });
