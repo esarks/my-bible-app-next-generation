@@ -11,11 +11,14 @@ const serviceSid = process.env.TWILIO_VERIFY;
 const client = twilio(accountSid, authToken);
 
 router.post("/", async (req, res) => {
+  console.log("[/api/verify-code] Incoming request");
   let { phone, code } = req.body;
+  console.debug("[/api/verify-code] Raw payload", { phone, code });
 
   // Normalize phone using shared utility
   try {
     phone = normalizePhone(phone);
+    console.debug(`[/api/verify-code] Normalized phone: ${phone}`);
   } catch (err) {
     return res.status(400).json({ error: "Invalid phone number" });
   }
@@ -44,9 +47,16 @@ router.post("/", async (req, res) => {
       .v2.services(serviceSid)
       .verificationChecks.create({ to: phone, code });
 
+    console.debug("[/api/verify-code] Twilio response", verificationCheck);
+
     if (verificationCheck.status === "approved") {
+      console.log("[/api/verify-code] Code approved");
       return res.status(200).json({ success: true });
     } else {
+      console.log(
+        "[/api/verify-code] Invalid code status",
+        verificationCheck.status
+      );
       return res.status(401).json({ error: "Invalid verification code" });
     }
   } catch (err) {

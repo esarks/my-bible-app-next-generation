@@ -65,12 +65,15 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         body: JSON.stringify({ phone, code }),
       });
 
+      console.debug("[handleVerify] HTTP status", res.status);
+
       const data = await res.json();
       console.log("[handleVerify] Response:", data);
 
       if (data.success) {
         if (!supabase) {
           console.error('[handleVerify] Supabase client is not initialized');
+          alert('Verification succeeded, but Supabase is not configured.');
           return;
         }
 
@@ -90,6 +93,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
 
         navigate('/profile');
       } else {
+        console.warn('[handleVerify] Verification failed:', data.error);
         alert(`Verification failed: ${data.error}`);
       }
     } catch (err) {
