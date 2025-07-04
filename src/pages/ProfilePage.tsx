@@ -1,11 +1,11 @@
 import React from "react";
 import PageLayoutWrapper from "../components/PageLayoutWrapper";
-import { PlasmicComponent } from "@plasmicapp/loader-react";
+import Profile from "../components/Profile";
 
 export default function ProfilePage() {
   return (
     <PageLayoutWrapper>
-      <PlasmicComponent component="Profile" />
+      <Profile />
     </PageLayoutWrapper>
   );
 }
