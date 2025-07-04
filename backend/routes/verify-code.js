@@ -21,6 +21,21 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ error: "Missing phone or code" });
   }
 
+  // Verify all required Twilio environment variables are present
+  if (!accountSid || !authToken || !serviceSid) {
+    const missing = [];
+    if (!accountSid) missing.push("TWILIO_SID");
+    if (!authToken) missing.push("TWILIO_AUTH_TOKEN");
+    if (!serviceSid) missing.push("TWILIO_VERIFY");
+    console.error(
+      "[/api/verify-code] Missing environment variables:",
+      missing.join(", ")
+    );
+    return res
+      .status(500)
+      .json({ error: "Twilio configuration missing" });
+  }
+
   try {
     const verificationCheck = await client.verify
       .v2.services(serviceSid)

@@ -18,6 +18,21 @@ router.post("/", async (req, res) => {
   // Mask phone number when logging
   console.log("[/api/send-code] Received phone");
 
+  // Verify all required Twilio environment variables are present
+  if (!accountSid || !authToken || !serviceSid) {
+    const missing = [];
+    if (!accountSid) missing.push("TWILIO_SID");
+    if (!authToken) missing.push("TWILIO_AUTH_TOKEN");
+    if (!serviceSid) missing.push("TWILIO_VERIFY");
+    console.error(
+      "[/api/send-code] Missing environment variables:",
+      missing.join(", ")
+    );
+    return res
+      .status(500)
+      .json({ success: false, error: "Twilio configuration missing" });
+  }
+
   // Normalize to E.164 format if needed
   if (!phone.startsWith("+1")) {
     phone = "+1" + phone.replace(/\D/g, "");
