@@ -80,9 +80,9 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         }
 
         const { data: profileData, error } = await supabase
-          .from('profiles')
+          .from('UserProfile')
           .select('*')
-          .eq('phone', phone)
+          .eq('phoneNumber', phone)
           .single();
 
         if (error) {
