@@ -74,6 +74,8 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         if (!supabase) {
           console.error('[handleVerify] Supabase client is not initialized');
           alert('Verification succeeded, but Supabase is not configured.');
+          setIsVerified(true);
+          navigate('/profile');
           return;
         }
 
