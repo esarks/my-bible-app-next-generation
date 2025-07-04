@@ -14,7 +14,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
   const [phone, setPhone] = React.useState(authProfile?.phoneNumber ?? "");
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
-  const [notes, setNotes] = React.useState("");
+  const [isEmailVerified, setIsEmailVerified] = React.useState("");
 
   React.useEffect(() => {
     const fetchProfile = async () => {
@@ -39,7 +39,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
         setPhone(data.phoneNumber ?? "");
         setName(data.name ?? "");
         setEmail(data.email ?? "");
-        setNotes("");
+        setIsEmailVerified(data.emailVerified ? "true" : "false");
       }
     };
 
@@ -57,6 +57,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       phoneNumber: phone,
       name,
       email,
+      emailVerified: isEmailVerified === "true",
     });
 
     if (error) {
@@ -67,40 +68,69 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
     }
   };
 
+  const handleQuery = async () => {
+    if (!supabase) {
+      logger.error("[handleQuery] Supabase client is not initialized");
+      alert("Supabase client is not available.");
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("UserProfile")
+      .select("*")
+      .eq("phoneNumber", phone)
+      .maybeSingle();
+
+    if (error) {
+      logger.error("[handleQuery]", error);
+      alert("Failed to fetch profile");
+    } else if (data) {
+      setPhone(data.phoneNumber ?? "");
+      setName(data.name ?? "");
+      setEmail(data.email ?? "");
+      setIsEmailVerified(data.emailVerified ? "true" : "false");
+    } else {
+      alert("No profile found");
+    }
+  };
+
   return (
     <PlasmicProfile
       root={{ ref }}
       {...props}
-      input={{
+      inputPhone={{
         props: {
           value: phone,
           onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
             setPhone(e.target.value),
         },
       }}
-      input2={{
+      inputName={{
         props: {
           value: name,
           onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
             setName(e.target.value),
         },
       }}
-      input3={{
+      inputEmail={{
         props: {
           value: email,
           onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
             setEmail(e.target.value),
         },
       }}
-      input4={{
+      inputVerified={{
         props: {
-          value: notes,
+          value: isEmailVerified,
           onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-            setNotes(e.target.value),
+            setIsEmailVerified(e.target.value),
         },
       }}
       saveButton={{
         props: { onClick: handleSave },
+      }}
+      queryButton={{
+        props: { onClick: handleQuery },
       }}
     />
   );
