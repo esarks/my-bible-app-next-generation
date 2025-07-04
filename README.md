@@ -28,6 +28,7 @@ This project contains a Vite based React frontend and a simple Express backend.
    - **Database**: `DATABASE_URL` (e.g. your Supabase connection string)
    - **API.Bible**: `BIBLE_API_KEY`
    - **Supabase**: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+   - **Plasmic**: `PLASMIC_PROJECT_ID`, `PLASMIC_PUBLIC_TOKEN`
 
 ## Running the Project
 
