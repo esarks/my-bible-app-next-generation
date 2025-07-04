@@ -1,11 +1,20 @@
 // src/plasmic-init.ts
 import { initPlasmicLoader } from "@plasmicapp/loader-react";
 
+const projectId = import.meta.env.PLASMIC_PROJECT_ID as string | undefined;
+const publicToken = import.meta.env.PLASMIC_PUBLIC_TOKEN as string | undefined;
+
+if (!projectId || !publicToken) {
+  console.error(
+    "Plasmic credentials are missing. Please set PLASMIC_PROJECT_ID and PLASMIC_PUBLIC_TOKEN."
+  );
+}
+
 export const PLASMIC = initPlasmicLoader({
   projects: [
     {
-      id: "kPtL4UpULb2Exm5C4cyhzL",      // e.g., "abc123"
-      token: "OloXF2aF67tSsoOEJLmaqbUsPBgaC2evrguIgRwZ12zTKiORgoYrxrbZEZNAj6HA65vfknOmvsxHFHRFAwRTTg", // e.g., "xyz456"
+      id: projectId ?? "",
+      token: publicToken ?? "",
     },
   ],
   preview: true, // true for dev environment
