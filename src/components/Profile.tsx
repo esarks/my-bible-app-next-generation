@@ -98,7 +98,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
             setNotes(e.target.value),
         },
       }}
-      button={{
+      saveButton={{
         props: { onClick: handleSave },
       }}
     />
