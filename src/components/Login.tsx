@@ -68,6 +68,11 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
       console.log("[handleVerify] Response:", data);
 
       if (data.success) {
+        if (!supabase) {
+          console.error('[handleVerify] Supabase client is not initialized');
+          return;
+        }
+
         const { data: profileData, error } = await supabase
           .from('profiles')
           .select('*')

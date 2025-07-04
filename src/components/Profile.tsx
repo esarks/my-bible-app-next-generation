@@ -20,6 +20,12 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       if (!authProfile?.phone) {
         return;
       }
+
+      if (!supabase) {
+        console.error("[fetchProfile] Supabase client is not initialized");
+        return;
+      }
+
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
@@ -40,6 +46,12 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
   }, [authProfile?.phone]);
 
   const handleSave = async () => {
+    if (!supabase) {
+      console.error("[handleSave] Supabase client is not initialized");
+      alert("Supabase client is not available.");
+      return;
+    }
+
     const { error } = await supabase.from("profiles").upsert({
       phone,
       name,
