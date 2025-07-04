@@ -75,6 +75,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         if (!supabase) {
           logger.error('[handleVerify] Supabase client is not initialized');
           alert('Verification succeeded, but Supabase is not configured.');
+          setProfile({ phoneNumber: phone });
           setIsVerified(true);
           navigate('/profile');
           return;
@@ -87,9 +88,21 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
           .single();
 
         if (error) {
-          logger.error('[handleVerify] Supabase error:', error);
-        } else {
+          logger.warn('[handleVerify] Profile not found, creating new');
+          const { data: newProfile, error: insertError } = await supabase
+            .from('UserProfile')
+            .insert({ phoneNumber: phone })
+            .select('*')
+            .single();
+          if (insertError) {
+            logger.error('[handleVerify] Insert error:', insertError);
+          } else {
+            setProfile(newProfile);
+          }
+        } else if (profileData) {
           setProfile(profileData);
+        } else {
+          setProfile({ phoneNumber: phone });
         }
 
         setIsVerified(true);
