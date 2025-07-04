@@ -40,7 +40,7 @@ The server runs on port `5173` by default.
 In another terminal, start the backend API:
 ```bash
 cd backend
-node index.js
+npm start
 ```
 The backend listens on the port specified in `backend/.env` (default `5000`).
 
