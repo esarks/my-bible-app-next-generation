@@ -51,3 +51,15 @@ The backend now validates that `TWILIO_SID`, `TWILIO_AUTH_TOKEN` and
 variables are missing, the server logs an error and exits immediately so
 configuration issues are caught right away.
 
+
+## Running Backend Tests
+
+Jest is used for unit testing the backend utilities. To run the tests:
+
+```bash
+cd backend
+npm test
+```
+
+This executes all specs in `backend/test/` and verifies that phone numbers are
+normalized correctly.
