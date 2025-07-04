@@ -15,6 +15,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [isEmailVerified, setIsEmailVerified] = React.useState("");
+  const [profileId, setProfileId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const fetchProfile = async () => {
@@ -36,6 +37,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       if (error) {
         logger.error("[fetchProfile]", error);
       } else if (data) {
+        setProfileId(data.id ?? null);
         setPhone(data.phoneNumber ?? "");
         setName(data.name ?? "");
         setEmail(data.email ?? "");
@@ -53,17 +55,22 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       return;
     }
 
-    const { error } = await supabase.from("UserProfile").upsert({
+    const newId = profileId ?? crypto.randomUUID();
+    const profile = {
+      id: newId,
       phoneNumber: phone,
       name,
       email,
       emailVerified: isEmailVerified === "true",
-    });
+    };
+
+    const { error } = await supabase.from("UserProfile").upsert(profile);
 
     if (error) {
       logger.error("[handleSave]", error);
       alert("Failed to save profile");
     } else {
+      setProfileId(newId);
       alert("Profile saved successfully");
     }
   };
@@ -85,6 +92,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       logger.error("[handleQuery]", error);
       alert("Failed to fetch profile");
     } else if (data) {
+      setProfileId(data.id ?? null);
       setPhone(data.phoneNumber ?? "");
       setName(data.name ?? "");
       setEmail(data.email ?? "");
