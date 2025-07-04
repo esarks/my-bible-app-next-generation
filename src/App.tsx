@@ -1,11 +1,19 @@
 // src/App.tsx
-import { Routes, Route } from "react-router-dom";
+import * as React from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import ScripturePage from "./pages/ScripturePage";
 import HomePage from "./pages/HomePage";
+import { logger } from "./lib/logger";
 
 function App() {
+  const location = useLocation();
+
+  React.useEffect(() => {
+    logger.info(`Route changed to ${location.pathname}`);
+  }, [location.pathname]);
+
   return (
     <Routes>
       <Route index element={<HomePage />} />
