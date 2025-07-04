@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const twilio = require("twilio");
+const { normalizePhone } = require("../utils/phone");
 
 const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -12,9 +13,11 @@ const client = twilio(accountSid, authToken);
 router.post("/", async (req, res) => {
   let { phone, code } = req.body;
 
-  // Normalize to E.164 format if needed (consistent with send-code.js)
-  if (!phone.startsWith("+1")) {
-    phone = "+1" + phone.replace(/\D/g, "");
+  // Normalize phone using shared utility
+  try {
+    phone = normalizePhone(phone);
+  } catch (err) {
+    return res.status(400).json({ error: "Invalid phone number" });
   }
 
   if (!phone || !code) {

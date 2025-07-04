@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const twilio = require("twilio");
-const { parsePhoneNumber } = require("libphonenumber-js");
+const { normalizePhone } = require("../utils/phone");
 
 const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -34,13 +34,9 @@ router.post("/", async (req, res) => {
       .json({ success: false, error: "Twilio configuration missing" });
   }
 
-  // Normalize phone using libphonenumber-js
+  // Normalize phone using shared utility
   try {
-    const parsed = parsePhoneNumber(phone, "US");
-    if (!parsed.isValid()) {
-      throw new Error("Invalid phone number");
-    }
-    phone = parsed.number; // E.164 format
+    phone = normalizePhone(phone);
   } catch (err) {
     console.error("[/api/send-code] Invalid phone number:", err.message);
     return res.status(400).json({ success: false, error: "Invalid phone number" });
