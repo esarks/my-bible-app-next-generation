@@ -7,6 +7,20 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Verify critical Twilio environment variables before loading routes
+const requiredTwilioVars = [
+  "TWILIO_SID",
+  "TWILIO_AUTH_TOKEN",
+  "TWILIO_VERIFY",
+];
+const missingTwilioVars = requiredTwilioVars.filter((v) => !process.env[v]);
+if (missingTwilioVars.length) {
+  console.error(
+    `[server] Missing environment variables: ${missingTwilioVars.join(", ")}`
+  );
+  process.exit(1);
+}
+
 // Middleware
 app.use(cors());
 app.use(express.json());
