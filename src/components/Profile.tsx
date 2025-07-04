@@ -10,7 +10,7 @@ export interface ProfileProps extends DefaultProfileProps {}
 
 function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
   const { profile: authProfile } = useAuth();
-  const [phone, setPhone] = React.useState(authProfile?.phone ?? "");
+  const [phone, setPhone] = React.useState(authProfile?.phoneNumber ?? "");
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [notes, setNotes] = React.useState("");
@@ -27,18 +27,18 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       }
 
       const { data, error } = await supabase
-        .from("profiles")
+        .from("UserProfile")
         .select("*")
-        .eq("phone", authProfile.phone)
+        .eq("phoneNumber", authProfile.phoneNumber)
         .single();
 
       if (error) {
         console.error("[fetchProfile]", error);
       } else if (data) {
-        setPhone(data.phone ?? "");
+        setPhone(data.phoneNumber ?? "");
         setName(data.name ?? "");
         setEmail(data.email ?? "");
-        setNotes(data.notes ?? data.text ?? "");
+        setNotes("");
       }
     };
 
@@ -52,11 +52,10 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       return;
     }
 
-    const { error } = await supabase.from("profiles").upsert({
-      phone,
+    const { error } = await supabase.from("UserProfile").upsert({
+      phoneNumber: phone,
       name,
       email,
-      notes,
     });
 
     if (error) {
