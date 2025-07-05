@@ -7,6 +7,7 @@ import {
 } from "../plasmic/my_bible_app_next_generation/PlasmicScriptures";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
+import { bibleVersions } from "../lib/bibleVersions";
 
 interface Verse {
   verse: number;
@@ -32,21 +33,11 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
   const [book, setBook] = React.useState<string | undefined>(undefined);
   const [chapter, setChapter] = React.useState<number | undefined>(undefined);
   const [version, setVersion] = React.useState<string | undefined>(undefined);
-  const [versions, setVersions] = React.useState<{ value: string; label: string }[]>([]);
+  const versions = React.useMemo(
+    () => bibleVersions.map((v) => ({ value: v.module, label: v.shortname || v.name })),
+    []
+  );
   const [verses, setVerses] = React.useState<Verse[]>([]);
-
-  React.useEffect(() => {
-    fetch("/api/bibles")
-      .then((res) => res.json())
-      .then((data) =>
-        setVersions(
-          data.map((v: any) => ({ value: v.module, label: v.shortname || v.name }))
-        )
-      )
-      .catch((err) => {
-        console.error("Failed to load versions", err);
-      });
-  }, []);
 
   React.useEffect(() => {
     if (version && book && chapter) {
