@@ -43,6 +43,14 @@ try {
   logger.error("Failed to load ./routes/verify-code.js", err.message);
 }
 
+try {
+  const biblesRoute = require(path.join(__dirname, "routes", "bibles"));
+  app.use("/api/bibles", biblesRoute);
+  logger.info("Loaded /api/bibles");
+} catch (err) {
+  logger.error("Failed to load ./routes/bibles.js", err.message);
+}
+
 // Start server
 app.listen(port, () => {
   logger.info(`Server listening on port ${port}`);
