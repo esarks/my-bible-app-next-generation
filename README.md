@@ -39,6 +39,8 @@ Start the Vite dev server:
 npm run dev
 ```
 The server runs on port `5173` by default.
+Requests starting with `/api` are automatically proxied to the
+backend server at `http://localhost:5000`.
 
 In another terminal, start the backend API:
 ```bash
