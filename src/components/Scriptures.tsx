@@ -45,7 +45,13 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
         `/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`
       )
         .then((res) => res.json())
-        .then((data) => setVerses(data))
+        .then((data) => {
+          setVerses(data);
+          const found = bibleBooks.find((b) => b.name === book);
+          if (found) {
+            alert(`Book found: ${found.name} (${found.chapters} chapters)`);
+          }
+        })
         .catch((err) => {
           console.error("Failed to load verses", err);
           setVerses([]);
