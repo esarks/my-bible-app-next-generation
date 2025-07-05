@@ -169,27 +169,40 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
             },
           },
         }}
-      />
-      {book && chapter && (
-        <h2 style={{ padding: "1rem" }}>
-          {book} {chapter}
-        </h2>
-      )}
-      <div
-        style={{
-          padding: "1rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.5rem",
+        pageLayout={{
+          props: {
+            children: (
+              <div style={{ padding: "1rem" }}>
+                {book && chapter && (
+                  <h2>
+                    {book} {chapter}
+                  </h2>
+                )}
+                <div
+                  style={{
+                    paddingTop: "1rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.5rem",
+                  }}
+                >
+                  {verses.map((v) => (
+                    <div
+                      key={v.verse}
+                      style={{ display: "flex", gap: "0.5rem" }}
+                    >
+                      <div style={{ width: "2rem", textAlign: "right" }}>
+                        {v.verse}
+                      </div>
+                      <div>{v.text}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ),
+          },
         }}
-      >
-        {verses.map((v) => (
-          <div key={v.verse} style={{ display: "flex", gap: "0.5rem" }}>
-            <div style={{ width: "2rem", textAlign: "right" }}>{v.verse}</div>
-            <div>{v.text}</div>
-          </div>
-        ))}
-      </div>
+      />
     </div>
   );
 }
