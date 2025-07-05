@@ -132,7 +132,14 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
           },
         }}
       />
-      <div style={{ padding: "1rem" }}>
+      <div
+        style={{
+          padding: "1rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.5rem",
+        }}
+      >
         {verses.map((v) => (
           <div key={v.verse} style={{ display: "flex", gap: "0.5rem" }}>
             <div style={{ width: "2rem", textAlign: "right" }}>{v.verse}</div>
