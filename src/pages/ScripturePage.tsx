@@ -1,15 +1,10 @@
 import React from "react";
-import PageLayoutWrapper from "../components/PageLayoutWrapper";
 import Scriptures from "../components/Scriptures";
 import { logger } from "../lib/logger";
 
-export default function ScripturesPage() {
+export default function ScripturePage() {
   React.useEffect(() => {
     logger.info("Rendering ScripturePage");
   }, []);
-  return (
-    <PageLayoutWrapper>
-      <Scriptures />
-    </PageLayoutWrapper>
-  );
+  return <Scriptures />;
 }
