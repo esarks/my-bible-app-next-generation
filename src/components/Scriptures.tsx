@@ -8,6 +8,11 @@ import {
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
 
+interface Verse {
+  verse: number;
+  text: string;
+}
+
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
 // attach to named nodes in your component.
@@ -26,6 +31,38 @@ export interface ScripturesProps extends DefaultScripturesProps {}
 function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
   const [book, setBook] = React.useState<string | undefined>(undefined);
   const [chapter, setChapter] = React.useState<number | undefined>(undefined);
+  const [version, setVersion] = React.useState<string | undefined>(undefined);
+  const [versions, setVersions] = React.useState<{ value: string; label: string }[]>([]);
+  const [verses, setVerses] = React.useState<Verse[]>([]);
+
+  React.useEffect(() => {
+    fetch("/api/bibles")
+      .then((res) => res.json())
+      .then((data) =>
+        setVersions(
+          data.map((v: any) => ({ value: v.module, label: v.shortname || v.name }))
+        )
+      )
+      .catch((err) => {
+        console.error("Failed to load versions", err);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    if (version && book && chapter) {
+      fetch(
+        `/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`
+      )
+        .then((res) => res.json())
+        .then((data) => setVerses(data))
+        .catch((err) => {
+          console.error("Failed to load verses", err);
+          setVerses([]);
+        });
+    } else {
+      setVerses([]);
+    }
+  }, [version, book, chapter]);
 
   const bookOptions = React.useMemo(
     () => bibleBooks.map((b) => ({ value: b.name, label: b.name })),
@@ -44,27 +81,47 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
   }, [book]);
 
   return (
-    <PlasmicScriptures
-      root={{ ref }}
-      {...props}
-      bookSelect={{
-        props: {
-          options: bookOptions,
-          value: book,
-          onChange: (value: any) => {
-            setBook(value as string);
-            setChapter(undefined);
+    <div ref={ref}>
+      <PlasmicScriptures
+        {...props}
+        versionSelect={{
+          props: {
+            options: versions,
+            value: version,
+            onChange: (val: any) => {
+              setVersion(val as string);
+              setBook(undefined);
+              setChapter(undefined);
+            },
           },
-        },
-      }}
-      chapterSelect={{
-        props: {
-          options: chapterOptions,
-          value: chapter,
-          onChange: (value: any) => setChapter(value as number),
-        },
-      }}
-    />
+        }}
+        bookSelect={{
+          props: {
+            options: bookOptions,
+            value: book,
+            onChange: (value: any) => {
+              setBook(value as string);
+              setChapter(undefined);
+            },
+          },
+        }}
+        chapterSelect={{
+          props: {
+            options: chapterOptions,
+            value: chapter,
+            onChange: (value: any) => setChapter(value as number),
+          },
+        }}
+      />
+      <div style={{ padding: "1rem" }}>
+        {verses.map((v) => (
+          <div key={v.verse} style={{ display: "flex", gap: "0.5rem" }}>
+            <div style={{ width: "2rem", textAlign: "right" }}>{v.verse}</div>
+            <div>{v.text}</div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
