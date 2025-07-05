@@ -6,6 +6,7 @@ import {
   DefaultScripturesProps
 } from "../plasmic/my_bible_app_next_generation/PlasmicScriptures";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
+import { bibleBooks } from "../lib/bibleData";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -23,22 +24,48 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 export interface ScripturesProps extends DefaultScripturesProps {}
 
 function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
-  // Use PlasmicScriptures to render this component as it was
-  // designed in Plasmic, by activating the appropriate variants,
-  // attaching the appropriate event handlers, etc.  You
-  // can also install whatever React hooks you need here to manage state or
-  // fetch data.
-  //
-  // Props you can pass into PlasmicScriptures are:
-  // 1. Variants you want to activate,
-  // 2. Contents for slots you want to fill,
-  // 3. Overrides for any named node in the component to attach behavior and data,
-  // 4. Props to set on the root node.
-  //
-  // By default, we are just piping all ScripturesProps here, but feel free
-  // to do whatever works for you.
+  const [book, setBook] = React.useState<string | undefined>(undefined);
+  const [chapter, setChapter] = React.useState<number | undefined>(undefined);
 
-  return <PlasmicScriptures root={{ ref }} {...props} />;
+  const bookOptions = React.useMemo(
+    () => bibleBooks.map((b) => ({ value: b.name, label: b.name })),
+    []
+  );
+
+  const chapterOptions = React.useMemo(() => {
+    const selected = bibleBooks.find((b) => b.name === book);
+    if (!selected) {
+      return [] as { value: number; label: string }[];
+    }
+    return Array.from({ length: selected.chapters }, (_, i) => ({
+      value: i + 1,
+      label: String(i + 1),
+    }));
+  }, [book]);
+
+  return (
+    <PlasmicScriptures
+      root={{ ref }}
+      {...props}
+      bookSelect={{
+        props: {
+          options: bookOptions,
+          value: book,
+          onChange: (value: any) => {
+            setBook(value as string);
+            setChapter(undefined);
+          },
+        },
+      }}
+      chapterSelect={{
+        props: {
+          options: chapterOptions,
+          value: chapter,
+          onChange: (value: any) => setChapter(value as number),
+        },
+      }}
+    />
+  );
 }
 
 const Scriptures = React.forwardRef(Scriptures_);
