@@ -8,6 +8,7 @@ import {
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
+import { logger } from "../lib/logger";
 
 interface Verse {
   verse: number;
@@ -41,13 +42,34 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
 
   React.useEffect(() => {
     if (version && book && chapter) {
+      logger.debug(
+        `Fetching verses for ${book} chapter ${chapter} from version ${version}`
+      );
       fetch(
         `/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`
       )
-        .then((res) => res.json())
-        .then((data) => setVerses(data))
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status} ${res.statusText}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setVerses(data);
+          const found = bibleBooks.find((b) => b.name === book);
+          if (found) {
+            logger.debug(
+              `Loaded ${found.name} chapter ${chapter} successfully`
+            );
+            alert(`Loaded ${found.name} chapter ${chapter} successfully`);
+          } else {
+            logger.debug(`Book not in list: ${book}`);
+            alert(`Book "${book}" was not found.`);
+          }
+        })
         .catch((err) => {
-          console.error("Failed to load verses", err);
+          logger.error("Failed to load verses", err);
+          alert(`Failed to load ${book} chapter ${chapter}: ${err.message}`);
           setVerses([]);
         });
     } else {
@@ -91,8 +113,10 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
             options: bookOptions,
             value: book,
             onChange: (value: any) => {
-              setBook(value as string);
-              setChapter(undefined);
+              const newBook = value as string;
+              logger.debug(`Selected book ${newBook}`);
+              setBook(newBook);
+              setChapter(1);
             },
           },
         }}
@@ -100,7 +124,11 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
           props: {
             options: chapterOptions,
             value: chapter,
-            onChange: (value: any) => setChapter(value as number),
+            onChange: (value: any) => {
+              const chapNum = value as number;
+              logger.debug(`Selected chapter ${chapNum}`);
+              setChapter(chapNum);
+            },
           },
         }}
       />
