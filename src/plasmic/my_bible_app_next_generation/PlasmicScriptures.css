@@ -21,15 +21,28 @@
 .Scriptures__root__qLpk > * {
   grid-column: 4;
 }
-.Scriptures__freeBox___84Ldl {
-  display: grid;
+.Scriptures__freeBox___8FacG {
+  display: flex;
+  flex-direction: row;
   position: relative;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
   max-width: 100%;
   grid-column-start: 3 !important;
   grid-column-end: -3 !important;
+  padding: 8px;
+}
+.Scriptures__freeBox___84Ldl {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 200px;
+  min-width: 0;
   padding: 8px;
   border-width: 2px;
   border-style: none;
@@ -144,53 +157,4 @@
 .Scriptures__chapterSelect__qRrA9.__wab_instance {
   max-width: 100%;
   object-fit: cover;
-}
-.Scriptures__freeBox__ziWeg {
-  display: grid;
-  position: relative;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  grid-column-start: 3 !important;
-  grid-column-end: -3 !important;
-  padding: 8px;
-}
-.Scriptures__freeBox___2XulX {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 0;
-  padding: 8px;
-}
-.Scriptures__text__zmMFx {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.Scriptures__freeBox__gVsja {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 0;
-  padding: 8px;
-}
-.Scriptures__text__qNdsl {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
 }
