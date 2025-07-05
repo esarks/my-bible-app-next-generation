@@ -21,7 +21,131 @@
 .Scriptures__root__qLpk > * {
   grid-column: 4;
 }
-.Scriptures__freeBox__zODj {
+.Scriptures__freeBox___84Ldl {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  grid-column-start: 3 !important;
+  grid-column-end: -3 !important;
+  padding: 8px;
+  border-width: 2px;
+  border-style: none;
+}
+.Scriptures__freeBox__oLxC2 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__text___2YlfF {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 18px;
+  text-align: right;
+  min-width: 0;
+}
+.Scriptures__freeBox__nEmXx {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__versionSelect___3Qlat.__wab_instance {
+  max-width: 100%;
+  object-fit: cover;
+}
+.Scriptures__freeBox__vvfdn {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__text__ePKfg {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 18px;
+  text-align: right;
+  min-width: 0;
+}
+.Scriptures__freeBox__jnFwE {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__bookSelect__tir3Y.__wab_instance {
+  max-width: 100%;
+  object-fit: cover;
+}
+.Scriptures__freeBox__icey {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__text__wBzOl {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  font-size: 18px;
+  text-align: right;
+  min-width: 0;
+}
+.Scriptures__freeBox__c0CHr {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__chapterSelect__qRrA9.__wab_instance {
+  max-width: 100%;
+  object-fit: cover;
+}
+.Scriptures__freeBox__ziWeg {
   display: grid;
   position: relative;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -32,7 +156,7 @@
   grid-column-end: -3 !important;
   padding: 8px;
 }
-.Scriptures__freeBox__eP3Nl {
+.Scriptures__freeBox___2XulX {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -44,14 +168,14 @@
   min-width: 0;
   padding: 8px;
 }
-.Scriptures__text__sNwCr {
+.Scriptures__text__zmMFx {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-.Scriptures__freeBox__axE27 {
+.Scriptures__freeBox__gVsja {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -63,7 +187,7 @@
   min-width: 0;
   padding: 8px;
 }
-.Scriptures__text___4By88 {
+.Scriptures__text__qNdsl {
   position: relative;
   width: 100%;
   height: auto;
