@@ -40,6 +40,24 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
   );
   const [verses, setVerses] = React.useState<Verse[]>([]);
 
+  // Initialize default selections so the page shows content immediately
+  React.useEffect(() => {
+    if (!version) {
+      setVersion(bibleVersions[0]?.module);
+      setBook(bibleBooks[0]?.name);
+      setChapter(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // When the user picks a new version reset book and chapter to defaults
+  React.useEffect(() => {
+    if (version && book === undefined) {
+      setBook(bibleBooks[0]?.name);
+      setChapter(1);
+    }
+  }, [version, book]);
+
   React.useEffect(() => {
     if (version && book && chapter) {
       logger.debug(
@@ -132,6 +150,11 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
           },
         }}
       />
+      {book && chapter && (
+        <h2 style={{ padding: "1rem" }}>
+          {book} {chapter}
+        </h2>
+      )}
       <div
         style={{
           padding: "1rem",
