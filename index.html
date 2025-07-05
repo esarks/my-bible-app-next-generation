@@ -3,38 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>My Bible App</title>
-    <style>
-      /* Simple placeholder grid matching the requested layout */
-      .StudioPlaceholder {
-        display: grid;
-        grid-template:
-          "topBar topBar topBar topBar" 47px
-          "leftToolbar leftPanel canvasArea rightPanel" auto / 56px 302px auto 303px;
-        grid-gap: 1px;
-        background: #ddd;
-      }
-      .placeholder_topBar {
-        grid-area: topBar;
-        padding-left: 10px;
-        display: flex;
-        align-items: center;
-      }
-      .placeholder_leftToolbar { grid-area: leftToolbar; }
-      .placeholder_leftPanel { grid-area: leftPanel; }
-      .placeholder_canvasArea { grid-area: canvasArea; background: #f9f9f8; }
-      .placeholder_rightPanel { grid-area: rightPanel; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div class="StudioPlaceholder">
-      <div class="placeholder_topBar">Top Bar</div>
-      <div class="placeholder_leftToolbar">Left Toolbar</div>
-      <div class="placeholder_leftPanel">Left Panel</div>
-      <div class="placeholder_canvasArea">
-        <div id="root"></div>
-      </div>
-      <div class="placeholder_rightPanel">Right Panel</div>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
