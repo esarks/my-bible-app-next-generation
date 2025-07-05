@@ -9,6 +9,7 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
 import { logger } from "../lib/logger";
+import { flushSync } from "react-dom";
 
 interface Verse {
   verse: number;
@@ -82,7 +83,18 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
             setVerses([]);
             return;
           }
-          setVerses(data);
+          flushSync(() => {
+            setVerses(data);
+          });
+          try {
+            data.forEach((v, idx) => {
+              logger.info(
+                `Displaying verse ${idx + 1}/${data.length}: ${v.text}`
+              );
+            });
+          } catch (err) {
+            logger.error("Failed logging verses", err);
+          }
           if (found) {
             logger.debug(
               `Loaded ${found.name} chapter ${chapter} successfully`
