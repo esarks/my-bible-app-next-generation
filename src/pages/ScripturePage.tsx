@@ -1,6 +1,6 @@
 import React from "react";
 import PageLayoutWrapper from "../components/PageLayoutWrapper";
-import { PlasmicComponent } from "@plasmicapp/loader-react";
+import Scriptures from "../components/Scriptures";
 import { logger } from "../lib/logger";
 
 export default function ScripturesPage() {
@@ -9,7 +9,7 @@ export default function ScripturesPage() {
   }, []);
   return (
     <PageLayoutWrapper>
-      <PlasmicComponent component="Scriptures" />
+      <Scriptures />
     </PageLayoutWrapper>
   );
 }
