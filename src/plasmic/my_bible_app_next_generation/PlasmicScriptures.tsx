@@ -126,12 +126,6 @@ function PlasmicScriptures__RenderFunc(props: {
   const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
-        path: "chapterSelect.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "versionSelect.value",
         type: "private",
         variableType: "text",
@@ -139,6 +133,12 @@ function PlasmicScriptures__RenderFunc(props: {
       },
       {
         path: "bookSelect.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "chapterSelect.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -187,181 +187,143 @@ function PlasmicScriptures__RenderFunc(props: {
               className={classNames(
                 "plasmic_default__all",
                 "plasmic_default__div",
-                "Scriptures__freeBox___84Ldl"
+                "Scriptures__freeBox__oLxC2"
               )}
             >
               <div
                 className={classNames(
                   "plasmic_default__all",
                   "plasmic_default__div",
-                  "Scriptures__freeBox__oLxC2"
+                  "__wab_text",
+                  "Scriptures__text___2YlfF"
                 )}
               >
-                <div
-                  className={classNames(
-                    "plasmic_default__all",
-                    "plasmic_default__div",
-                    "__wab_text",
-                    "Scriptures__text___2YlfF"
-                  )}
-                >
-                  {"Version:"}
-                </div>
+                {"Version:"}
               </div>
-              <div
+              <AntdSelect
+                data-plasmic-name={"versionSelect"}
+                data-plasmic-override={overrides.versionSelect}
                 className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "Scriptures__freeBox__nEmXx"
+                  "__wab_instance",
+                  "Scriptures__versionSelect___3Qlat"
                 )}
-              >
-                <AntdSelect
-                  data-plasmic-name={"versionSelect"}
-                  data-plasmic-override={overrides.versionSelect}
-                  className={classNames(
-                    "__wab_instance",
-                    "Scriptures__versionSelect___3Qlat"
-                  )}
-                  defaultStylesClassName={classNames(
-                    "root_reset_chwrzvw5hacDdCDtmYaSSb",
-                    "plasmic_default_styles",
-                    "plasmic_mixins",
-                    "plasmic_tokens"
-                  )}
-                  onChange={async (...eventArgs: any) => {
-                    generateStateOnChangeProp($state, [
-                      "versionSelect",
-                      "value"
-                    ]).apply(null, eventArgs);
-                  }}
-                  options={[
-                    { value: "option1", label: "Option 1", type: "option" },
-                    { value: "option2", label: "Option 2", type: "option" }
-                  ]}
-                  placeholder={"Select..."}
-                  popupScopeClassName={
-                    "Scriptures__versionSelect___3Qlat__popup"
-                  }
-                  value={generateStateValueProp($state, [
+                defaultStylesClassName={classNames(
+                  "root_reset_chwrzvw5hacDdCDtmYaSSb",
+                  "plasmic_default_styles",
+                  "plasmic_mixins",
+                  "plasmic_tokens"
+                )}
+                onChange={async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
                     "versionSelect",
                     "value"
-                  ])}
-                />
-              </div>
+                  ]).apply(null, eventArgs);
+                }}
+                options={[
+                  { value: "option1", label: "Option 1", type: "option" },
+                  { value: "option2", label: "Option 2", type: "option" }
+                ]}
+                placeholder={"Select..."}
+                popupScopeClassName={"Scriptures__versionSelect___3Qlat__popup"}
+                value={generateStateValueProp($state, [
+                  "versionSelect",
+                  "value"
+                ])}
+              />
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox__kjHjd"
+              )}
+            >
               <div
                 className={classNames(
                   "plasmic_default__all",
                   "plasmic_default__div",
-                  "Scriptures__freeBox__vvfdn"
+                  "__wab_text",
+                  "Scriptures__text__ePKfg"
                 )}
               >
-                <div
-                  className={classNames(
-                    "plasmic_default__all",
-                    "plasmic_default__div",
-                    "__wab_text",
-                    "Scriptures__text__ePKfg"
-                  )}
-                >
-                  {"Book:"}
-                </div>
+                {"Book:"}
               </div>
-              <div
+              <AntdSelect
+                data-plasmic-name={"bookSelect"}
+                data-plasmic-override={overrides.bookSelect}
                 className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "Scriptures__freeBox__jnFwE"
+                  "__wab_instance",
+                  "Scriptures__bookSelect__tir3Y"
                 )}
-              >
-                <AntdSelect
-                  data-plasmic-name={"bookSelect"}
-                  data-plasmic-override={overrides.bookSelect}
-                  className={classNames(
-                    "__wab_instance",
-                    "Scriptures__bookSelect__tir3Y"
-                  )}
-                  defaultStylesClassName={classNames(
-                    "root_reset_chwrzvw5hacDdCDtmYaSSb",
-                    "plasmic_default_styles",
-                    "plasmic_mixins",
-                    "plasmic_tokens"
-                  )}
-                  onChange={async (...eventArgs: any) => {
-                    generateStateOnChangeProp($state, [
-                      "bookSelect",
-                      "value"
-                    ]).apply(null, eventArgs);
-                  }}
-                  options={[
-                    { value: "option1", label: "Option 1", type: "option" },
-                    { value: "option2", label: "Option 2", type: "option" }
-                  ]}
-                  placeholder={"Select..."}
-                  popupScopeClassName={"Scriptures__bookSelect__tir3Y__popup"}
-                  value={generateStateValueProp($state, [
+                defaultStylesClassName={classNames(
+                  "root_reset_chwrzvw5hacDdCDtmYaSSb",
+                  "plasmic_default_styles",
+                  "plasmic_mixins",
+                  "plasmic_tokens"
+                )}
+                onChange={async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
                     "bookSelect",
                     "value"
-                  ])}
-                />
-              </div>
+                  ]).apply(null, eventArgs);
+                }}
+                options={[
+                  { value: "option1", label: "Option 1", type: "option" },
+                  { value: "option2", label: "Option 2", type: "option" }
+                ]}
+                placeholder={"Select..."}
+                popupScopeClassName={"Scriptures__bookSelect__tir3Y__popup"}
+                suffixIcon={null}
+                value={generateStateValueProp($state, ["bookSelect", "value"])}
+              />
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox__iCjGb"
+              )}
+            >
               <div
                 className={classNames(
                   "plasmic_default__all",
                   "plasmic_default__div",
-                  "Scriptures__freeBox__icey"
+                  "__wab_text",
+                  "Scriptures__text__y3Bf"
                 )}
               >
-                <div
-                  className={classNames(
-                    "plasmic_default__all",
-                    "plasmic_default__div",
-                    "__wab_text",
-                    "Scriptures__text__wBzOl"
-                  )}
-                >
-                  {"Chapter:"}
-                </div>
+                {"Chapter:"}
               </div>
-              <div
+              <AntdSelect
+                data-plasmic-name={"chapterSelect"}
+                data-plasmic-override={overrides.chapterSelect}
                 className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "Scriptures__freeBox__c0CHr"
+                  "__wab_instance",
+                  "Scriptures__chapterSelect__awZk"
                 )}
-              >
-                <AntdSelect
-                  data-plasmic-name={"chapterSelect"}
-                  data-plasmic-override={overrides.chapterSelect}
-                  className={classNames(
-                    "__wab_instance",
-                    "Scriptures__chapterSelect__qRrA9"
-                  )}
-                  defaultStylesClassName={classNames(
-                    "root_reset_chwrzvw5hacDdCDtmYaSSb",
-                    "plasmic_default_styles",
-                    "plasmic_mixins",
-                    "plasmic_tokens"
-                  )}
-                  onChange={async (...eventArgs: any) => {
-                    generateStateOnChangeProp($state, [
-                      "chapterSelect",
-                      "value"
-                    ]).apply(null, eventArgs);
-                  }}
-                  options={[
-                    { value: "option1", label: "Option 1", type: "option" },
-                    { value: "option2", label: "Option 2", type: "option" }
-                  ]}
-                  placeholder={"Select..."}
-                  popupScopeClassName={
-                    "Scriptures__chapterSelect__qRrA9__popup"
-                  }
-                  value={generateStateValueProp($state, [
+                defaultStylesClassName={classNames(
+                  "root_reset_chwrzvw5hacDdCDtmYaSSb",
+                  "plasmic_default_styles",
+                  "plasmic_mixins",
+                  "plasmic_tokens"
+                )}
+                onChange={async (...eventArgs: any) => {
+                  generateStateOnChangeProp($state, [
                     "chapterSelect",
                     "value"
-                  ])}
-                />
-              </div>
+                  ]).apply(null, eventArgs);
+                }}
+                options={[
+                  { value: "option1", label: "Option 1", type: "option" },
+                  { value: "option2", label: "Option 2", type: "option" }
+                ]}
+                placeholder={"Select..."}
+                popupScopeClassName={"Scriptures__chapterSelect__awZk__popup"}
+                value={generateStateValueProp($state, [
+                  "chapterSelect",
+                  "value"
+                ])}
+              />
             </div>
           </div>
         </div>
