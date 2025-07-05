@@ -141,6 +141,51 @@ function PlasmicScriptures__RenderFunc(props: {
             data-plasmic-name={"pageLayout"}
             data-plasmic-override={overrides.pageLayout}
           />
+
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Scriptures__freeBox__zODj"
+            )}
+          >
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox__eP3Nl"
+              )}
+            >
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Scriptures__text__sNwCr"
+                )}
+              >
+                {"Enter some text"}
+              </div>
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox__axE27"
+              )}
+            >
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Scriptures__text___4By88"
+                )}
+              >
+                {"Enter some text"}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </React.Fragment>
