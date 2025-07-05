@@ -5,6 +5,7 @@ import {
   PlasmicScriptures,
   DefaultScripturesProps
 } from "../plasmic/my_bible_app_next_generation/PlasmicScriptures";
+import PageLayoutWrapper from "./PageLayoutWrapper";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
@@ -132,78 +133,76 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
   }, [book]);
 
   return (
-    <div ref={ref}>
-      <PlasmicScriptures
-        {...props}
-        versionSelect={{
-          props: {
-            options: versions,
-            value: version,
-            onChange: (val: any) => {
-              setVersion(val as string);
-              setBook(undefined);
-              setChapter(undefined);
-            },
-          },
-        }}
-        bookSelect={{
-          props: {
-            options: bookOptions,
-            value: book,
-            onChange: (value: any) => {
-              const newBook = value as string;
-              logger.debug(`Selected book ${newBook}`);
-              setBook(newBook);
-              setChapter(1);
-            },
-          },
-        }}
-        chapterSelect={{
-          props: {
-            options: chapterOptions,
-            value: chapter,
-            onChange: (value: any) => {
-              const chapNum = value as number;
-              logger.debug(`Selected chapter ${chapNum}`);
-              setChapter(chapNum);
-            },
-          },
-        }}
-        pageLayout={{
-          props: {
-            children: (
-              <div style={{ padding: "1rem" }}>
-                {book && chapter && (
-                  <h2>
-                    {book} {chapter}
-                  </h2>
-                )}
-                <div
-                  style={{
-                    paddingTop: "1rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.5rem",
-                  }}
-                >
-                  {verses.map((v) => (
-                    <div
-                      key={v.verse}
-                      style={{ display: "flex", gap: "0.5rem" }}
-                    >
-                      <div style={{ width: "2rem", textAlign: "right" }}>
-                        {v.verse}
-                      </div>
-                      <div>{v.text}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ),
-          },
-        }}
-      />
-    </div>
+    <PageLayoutWrapper>
+      <div ref={ref} style={{ padding: "1rem" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.5rem",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+            <span>Version:</span>
+            <PlasmicScriptures.versionSelect
+              options={versions}
+              value={version}
+              onChange={(val: any) => {
+                setVersion(val as string);
+                setBook(undefined);
+                setChapter(undefined);
+              }}
+            />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+            <span>Book:</span>
+            <PlasmicScriptures.bookSelect
+              options={bookOptions}
+              value={book}
+              onChange={(value: any) => {
+                const newBook = value as string;
+                logger.debug(`Selected book ${newBook}`);
+                setBook(newBook);
+                setChapter(1);
+              }}
+            />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+            <span>Chapter:</span>
+            <PlasmicScriptures.chapterSelect
+              options={chapterOptions}
+              value={chapter}
+              onChange={(value: any) => {
+                const chapNum = value as number;
+                logger.debug(`Selected chapter ${chapNum}`);
+                setChapter(chapNum);
+              }}
+            />
+          </div>
+        </div>
+        {book && chapter && (
+          <h2 style={{ marginTop: "1rem" }}>
+            {book} {chapter}
+          </h2>
+        )}
+        <div
+          style={{
+            paddingTop: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+          }}
+        >
+          {verses.map((v) => (
+            <div key={v.verse} style={{ display: "flex", gap: "0.5rem" }}>
+              <div style={{ width: "2rem", textAlign: "right" }}>{v.verse}</div>
+              <div>{v.text}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </PageLayoutWrapper>
   );
 }
 
