@@ -72,9 +72,17 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
           }
           return res.json();
         })
-        .then((data) => {
-          setVerses(data);
+        .then((data: Verse[]) => {
           const found = bibleBooks.find((b) => b.name === book);
+          if (!data.length) {
+            logger.warn(
+              `No verses returned for ${book} chapter ${chapter} from version ${version}`
+            );
+            alert(`No verses found for ${book} chapter ${chapter}`);
+            setVerses([]);
+            return;
+          }
+          setVerses(data);
           if (found) {
             logger.debug(
               `Loaded ${found.name} chapter ${chapter} successfully`
