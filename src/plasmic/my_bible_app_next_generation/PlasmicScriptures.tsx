@@ -180,216 +180,187 @@ function PlasmicScriptures__RenderFunc(props: {
             className={classNames(
               "plasmic_default__all",
               "plasmic_default__div",
-              "Scriptures__freeBox___84Ldl"
+              "Scriptures__freeBox___8FacG"
             )}
           >
             <div
               className={classNames(
                 "plasmic_default__all",
                 "plasmic_default__div",
-                "Scriptures__freeBox__oLxC2"
+                "Scriptures__freeBox___84Ldl"
               )}
             >
               <div
                 className={classNames(
                   "plasmic_default__all",
                   "plasmic_default__div",
-                  "__wab_text",
-                  "Scriptures__text___2YlfF"
+                  "Scriptures__freeBox__oLxC2"
                 )}
               >
-                {"Version:"}
+                <div
+                  className={classNames(
+                    "plasmic_default__all",
+                    "plasmic_default__div",
+                    "__wab_text",
+                    "Scriptures__text___2YlfF"
+                  )}
+                >
+                  {"Version:"}
+                </div>
               </div>
-            </div>
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "Scriptures__freeBox__nEmXx"
-              )}
-            >
-              <AntdSelect
-                data-plasmic-name={"versionSelect"}
-                data-plasmic-override={overrides.versionSelect}
+              <div
                 className={classNames(
-                  "__wab_instance",
-                  "Scriptures__versionSelect___3Qlat"
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "Scriptures__freeBox__nEmXx"
                 )}
-                defaultStylesClassName={classNames(
-                  "root_reset_chwrzvw5hacDdCDtmYaSSb",
-                  "plasmic_default_styles",
-                  "plasmic_mixins",
-                  "plasmic_tokens"
-                )}
-                onChange={async (...eventArgs: any) => {
-                  generateStateOnChangeProp($state, [
+              >
+                <AntdSelect
+                  data-plasmic-name={"versionSelect"}
+                  data-plasmic-override={overrides.versionSelect}
+                  className={classNames(
+                    "__wab_instance",
+                    "Scriptures__versionSelect___3Qlat"
+                  )}
+                  defaultStylesClassName={classNames(
+                    "root_reset_chwrzvw5hacDdCDtmYaSSb",
+                    "plasmic_default_styles",
+                    "plasmic_mixins",
+                    "plasmic_tokens"
+                  )}
+                  onChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "versionSelect",
+                      "value"
+                    ]).apply(null, eventArgs);
+                  }}
+                  options={[
+                    { value: "option1", label: "Option 1", type: "option" },
+                    { value: "option2", label: "Option 2", type: "option" }
+                  ]}
+                  placeholder={"Select..."}
+                  popupScopeClassName={
+                    "Scriptures__versionSelect___3Qlat__popup"
+                  }
+                  value={generateStateValueProp($state, [
                     "versionSelect",
                     "value"
-                  ]).apply(null, eventArgs);
-                }}
-                options={[
-                  { value: "option1", label: "Option 1", type: "option" },
-                  { value: "option2", label: "Option 2", type: "option" }
-                ]}
-                placeholder={"Select..."}
-                popupScopeClassName={"Scriptures__versionSelect___3Qlat__popup"}
-                value={generateStateValueProp($state, [
-                  "versionSelect",
-                  "value"
-                ])}
-              />
-            </div>
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "Scriptures__freeBox__vvfdn"
-              )}
-            >
+                  ])}
+                />
+              </div>
               <div
                 className={classNames(
                   "plasmic_default__all",
                   "plasmic_default__div",
-                  "__wab_text",
-                  "Scriptures__text__ePKfg"
+                  "Scriptures__freeBox__vvfdn"
                 )}
               >
-                {"Book:"}
+                <div
+                  className={classNames(
+                    "plasmic_default__all",
+                    "plasmic_default__div",
+                    "__wab_text",
+                    "Scriptures__text__ePKfg"
+                  )}
+                >
+                  {"Book:"}
+                </div>
               </div>
-            </div>
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "Scriptures__freeBox__jnFwE"
-              )}
-            >
-              <AntdSelect
-                data-plasmic-name={"bookSelect"}
-                data-plasmic-override={overrides.bookSelect}
+              <div
                 className={classNames(
-                  "__wab_instance",
-                  "Scriptures__bookSelect__tir3Y"
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "Scriptures__freeBox__jnFwE"
                 )}
-                defaultStylesClassName={classNames(
-                  "root_reset_chwrzvw5hacDdCDtmYaSSb",
-                  "plasmic_default_styles",
-                  "plasmic_mixins",
-                  "plasmic_tokens"
-                )}
-                onChange={async (...eventArgs: any) => {
-                  generateStateOnChangeProp($state, [
+              >
+                <AntdSelect
+                  data-plasmic-name={"bookSelect"}
+                  data-plasmic-override={overrides.bookSelect}
+                  className={classNames(
+                    "__wab_instance",
+                    "Scriptures__bookSelect__tir3Y"
+                  )}
+                  defaultStylesClassName={classNames(
+                    "root_reset_chwrzvw5hacDdCDtmYaSSb",
+                    "plasmic_default_styles",
+                    "plasmic_mixins",
+                    "plasmic_tokens"
+                  )}
+                  onChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "bookSelect",
+                      "value"
+                    ]).apply(null, eventArgs);
+                  }}
+                  options={[
+                    { value: "option1", label: "Option 1", type: "option" },
+                    { value: "option2", label: "Option 2", type: "option" }
+                  ]}
+                  placeholder={"Select..."}
+                  popupScopeClassName={"Scriptures__bookSelect__tir3Y__popup"}
+                  value={generateStateValueProp($state, [
                     "bookSelect",
                     "value"
-                  ]).apply(null, eventArgs);
-                }}
-                options={[
-                  { value: "option1", label: "Option 1", type: "option" },
-                  { value: "option2", label: "Option 2", type: "option" }
-                ]}
-                placeholder={"Select..."}
-                popupScopeClassName={"Scriptures__bookSelect__tir3Y__popup"}
-                value={generateStateValueProp($state, ["bookSelect", "value"])}
-              />
-            </div>
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "Scriptures__freeBox__icey"
-              )}
-            >
+                  ])}
+                />
+              </div>
               <div
                 className={classNames(
                   "plasmic_default__all",
                   "plasmic_default__div",
-                  "__wab_text",
-                  "Scriptures__text__wBzOl"
+                  "Scriptures__freeBox__icey"
                 )}
               >
-                {"Chapter:"}
+                <div
+                  className={classNames(
+                    "plasmic_default__all",
+                    "plasmic_default__div",
+                    "__wab_text",
+                    "Scriptures__text__wBzOl"
+                  )}
+                >
+                  {"Chapter:"}
+                </div>
               </div>
-            </div>
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "Scriptures__freeBox__c0CHr"
-              )}
-            >
-              <AntdSelect
-                data-plasmic-name={"chapterSelect"}
-                data-plasmic-override={overrides.chapterSelect}
+              <div
                 className={classNames(
-                  "__wab_instance",
-                  "Scriptures__chapterSelect__qRrA9"
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "Scriptures__freeBox__c0CHr"
                 )}
-                defaultStylesClassName={classNames(
-                  "root_reset_chwrzvw5hacDdCDtmYaSSb",
-                  "plasmic_default_styles",
-                  "plasmic_mixins",
-                  "plasmic_tokens"
-                )}
-                onChange={async (...eventArgs: any) => {
-                  generateStateOnChangeProp($state, [
+              >
+                <AntdSelect
+                  data-plasmic-name={"chapterSelect"}
+                  data-plasmic-override={overrides.chapterSelect}
+                  className={classNames(
+                    "__wab_instance",
+                    "Scriptures__chapterSelect__qRrA9"
+                  )}
+                  defaultStylesClassName={classNames(
+                    "root_reset_chwrzvw5hacDdCDtmYaSSb",
+                    "plasmic_default_styles",
+                    "plasmic_mixins",
+                    "plasmic_tokens"
+                  )}
+                  onChange={async (...eventArgs: any) => {
+                    generateStateOnChangeProp($state, [
+                      "chapterSelect",
+                      "value"
+                    ]).apply(null, eventArgs);
+                  }}
+                  options={[
+                    { value: "option1", label: "Option 1", type: "option" },
+                    { value: "option2", label: "Option 2", type: "option" }
+                  ]}
+                  placeholder={"Select..."}
+                  popupScopeClassName={
+                    "Scriptures__chapterSelect__qRrA9__popup"
+                  }
+                  value={generateStateValueProp($state, [
                     "chapterSelect",
                     "value"
-                  ]).apply(null, eventArgs);
-                }}
-                options={[
-                  { value: "option1", label: "Option 1", type: "option" },
-                  { value: "option2", label: "Option 2", type: "option" }
-                ]}
-                placeholder={"Select..."}
-                popupScopeClassName={"Scriptures__chapterSelect__qRrA9__popup"}
-                value={generateStateValueProp($state, [
-                  "chapterSelect",
-                  "value"
-                ])}
-              />
-            </div>
-          </div>
-          <div
-            className={classNames(
-              "plasmic_default__all",
-              "plasmic_default__div",
-              "Scriptures__freeBox__ziWeg"
-            )}
-          >
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "Scriptures__freeBox___2XulX"
-              )}
-            >
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "__wab_text",
-                  "Scriptures__text__zmMFx"
-                )}
-              >
-                {"Text"}
-              </div>
-            </div>
-            <div
-              className={classNames(
-                "plasmic_default__all",
-                "plasmic_default__div",
-                "Scriptures__freeBox__gVsja"
-              )}
-            >
-              <div
-                className={classNames(
-                  "plasmic_default__all",
-                  "plasmic_default__div",
-                  "__wab_text",
-                  "Scriptures__text__qNdsl"
-                )}
-              >
-                {"Text"}
+                  ])}
+                />
               </div>
             </div>
           </div>
