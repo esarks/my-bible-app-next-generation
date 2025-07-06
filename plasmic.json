@@ -98,6 +98,19 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/scriptures"
+        },
+        {
+          "id": "CmsshMtLcT2f",
+          "name": "ScriptureNotesGrid",
+          "type": "managed",
+          "projectId": "chwrzvw5hacDdCDtmYaSSb",
+          "renderModuleFilePath": "../plasmic/my_bible_app_next_generation/PlasmicScriptureNotesGrid.tsx",
+          "importSpec": {
+            "modulePath": "ScriptureNotesGrid.tsx"
+          },
+          "cssFilePath": "../plasmic/my_bible_app_next_generation/PlasmicScriptureNotesGrid.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
