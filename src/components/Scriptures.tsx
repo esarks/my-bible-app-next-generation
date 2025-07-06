@@ -8,7 +8,6 @@ import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
 import { logger } from "../lib/logger";
 import { flushSync } from "react-dom";
-import { VerseNotesSection } from "./VerseNotesSection"; // <-- adjust path if needed
 
 interface Verse {
   verse: number;
@@ -88,8 +87,8 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
         value: chapter,
         onChange: (c) => setChapter(c as number),
       }}
-      // Inject verse display into notesContent slot
-      notesContent={{
+      // Inject verse display into ScriptureNotesGrid slot
+      ScriptureNotesGrid={{
         children: verses.map((v) => (
           <div
             key={v.verse}
