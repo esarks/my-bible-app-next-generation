@@ -3,9 +3,12 @@
 import * as React from "react";
 import {
   PlasmicScriptureNotesGrid,
-  DefaultScriptureNotesGridProps
+  DefaultScriptureNotesGridProps,
 } from "../plasmic/my_bible_app_next_generation/PlasmicScriptureNotesGrid";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
+import { supabase } from "../lib/supabaseClient";
+import { useAuth } from "../AuthContext";
+import { logger } from "../lib/logger";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -21,28 +24,109 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 // You can also stop extending from DefaultScriptureNotesGridProps altogether and have
 // total control over the props for your component.
 export interface ScriptureNotesGridProps
-  extends DefaultScriptureNotesGridProps {}
+  extends DefaultScriptureNotesGridProps {
+  book: string;
+  chapter: number;
+  verse: number;
+  text: string;
+}
 
 function ScriptureNotesGrid_(
-  props: ScriptureNotesGridProps,
+  { book, chapter, verse, text, ...rest }: ScriptureNotesGridProps,
   ref: HTMLElementRefOf<"div">
 ) {
-  // Use PlasmicScriptureNotesGrid to render this component as it was
-  // designed in Plasmic, by activating the appropriate variants,
-  // attaching the appropriate event handlers, etc.  You
-  // can also install whatever React hooks you need here to manage state or
-  // fetch data.
-  //
-  // Props you can pass into PlasmicScriptureNotesGrid are:
-  // 1. Variants you want to activate,
-  // 2. Contents for slots you want to fill,
-  // 3. Overrides for any named node in the component to attach behavior and data,
-  // 4. Props to set on the root node.
-  //
-  // By default, we are just piping all ScriptureNotesGridProps here, but feel free
-  // to do whatever works for you.
+  const { profile } = useAuth();
+  const loginId = profile?.phoneNumber;
+  const [noteId, setNoteId] = React.useState<string | null>(null);
+  const [content, setContent] = React.useState<string>("");
 
-  return <PlasmicScriptureNotesGrid scriptureNotesGrid={{ ref }} {...props} />;
+  // Fetch existing note when context or location changes
+  React.useEffect(() => {
+    const fetchNote = async () => {
+      if (!supabase || !loginId) {
+        logger.warn("[ScriptureNotesGrid] Supabase or loginId missing");
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("Note")
+        .select("id,content")
+        .eq("loginId", loginId)
+        .eq("book", book)
+        .eq("chapter", chapter)
+        .eq("verse", verse)
+        .maybeSingle();
+
+      if (error) {
+        logger.error("[ScriptureNotesGrid] Fetch note", error);
+      } else if (data) {
+        setNoteId(data.id);
+        setContent(data.content ?? "");
+      } else {
+        setNoteId(null);
+        setContent("");
+      }
+    };
+
+    fetchNote();
+  }, [loginId, book, chapter, verse]);
+
+  const saveNote = async () => {
+    if (!supabase || !loginId) {
+      logger.warn("[ScriptureNotesGrid] Cannot save without Supabase or loginId");
+      return;
+    }
+
+    const id = noteId ?? crypto.randomUUID();
+    const { error } = await supabase
+      .from("Note")
+      .upsert({
+        id,
+        loginId,
+        book,
+        chapter,
+        verse,
+        content,
+        updatedAt: new Date().toISOString(),
+      })
+      .select("id")
+      .single();
+
+    if (error) {
+      logger.error("[ScriptureNotesGrid] Save note", error);
+    } else {
+      setNoteId(id);
+    }
+  };
+
+  return (
+    <PlasmicScriptureNotesGrid
+      scriptureNotesGrid={{ ref }}
+      scriptureText={{
+        children: (
+          <>
+            <div style={{ fontWeight: "bold", marginBottom: "0.25rem" }}>
+              Verse {verse}
+            </div>
+            <div>{text}</div>
+          </>
+        ),
+      }}
+      noteText={{
+        children: (
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            onBlur={saveNote}
+            placeholder={`Notes for verse ${verse}`}
+            rows={2}
+            style={{ width: "100%" }}
+          />
+        ),
+      }}
+      {...rest}
+    />
+  );
 }
 
 const ScriptureNotesGrid = React.forwardRef(ScriptureNotesGrid_);
