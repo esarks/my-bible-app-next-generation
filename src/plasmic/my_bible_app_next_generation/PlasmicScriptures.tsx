@@ -90,6 +90,7 @@ export type PlasmicScriptures__OverridesType = {
   bookNotesButton?: Flex__<typeof AntdButton>;
   chapterNotes?: Flex__<"div">;
   chapterNotesButton?: Flex__<typeof AntdButton>;
+  scriptureNotesGrid?: Flex__<"div">;
   scriptureText?: Flex__<"div">;
   noteText?: Flex__<"div">;
 };
@@ -420,10 +421,12 @@ function PlasmicScriptures__RenderFunc(props: {
             </div>
           </div>
           <div
+            data-plasmic-name={"scriptureNotesGrid"}
+            data-plasmic-override={overrides.scriptureNotesGrid}
             className={classNames(
               "plasmic_default__all",
               "plasmic_default__div",
-              "Scriptures__freeBox__to844"
+              "Scriptures__scriptureNotesGrid__to844"
             )}
           >
             <div
@@ -484,6 +487,7 @@ const PlasmicDescendants = {
     "bookNotesButton",
     "chapterNotes",
     "chapterNotesButton",
+    "scriptureNotesGrid",
     "scriptureText",
     "noteText"
   ],
@@ -495,6 +499,7 @@ const PlasmicDescendants = {
   bookNotesButton: ["bookNotesButton"],
   chapterNotes: ["chapterNotes"],
   chapterNotesButton: ["chapterNotesButton"],
+  scriptureNotesGrid: ["scriptureNotesGrid", "scriptureText", "noteText"],
   scriptureText: ["scriptureText"],
   noteText: ["noteText"]
 } as const;
@@ -511,6 +516,7 @@ type NodeDefaultElementType = {
   bookNotesButton: typeof AntdButton;
   chapterNotes: "div";
   chapterNotesButton: typeof AntdButton;
+  scriptureNotesGrid: "div";
   scriptureText: "div";
   noteText: "div";
 };
@@ -608,6 +614,7 @@ export const PlasmicScriptures = Object.assign(
     bookNotesButton: makeNodeComponent("bookNotesButton"),
     chapterNotes: makeNodeComponent("chapterNotes"),
     chapterNotesButton: makeNodeComponent("chapterNotesButton"),
+    scriptureNotesGrid: makeNodeComponent("scriptureNotesGrid"),
     scriptureText: makeNodeComponent("scriptureText"),
     noteText: makeNodeComponent("noteText"),
 
