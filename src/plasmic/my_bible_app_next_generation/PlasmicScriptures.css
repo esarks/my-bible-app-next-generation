@@ -5,7 +5,7 @@
   width: 100%;
   height: 100%;
   align-content: flex-start;
-  justify-items: flex-end;
+  justify-items: center;
   justify-content: flex-start;
   align-items: center;
   min-width: 0;
@@ -21,19 +21,18 @@
 .Scriptures__root__qLpk > * {
   grid-column: 4;
 }
-.Scriptures__freeBox___8FacG {
-  display: flex;
-  flex-direction: row;
+.Scriptures__freeBox___84Ldl {
+  display: grid;
   position: relative;
-  align-items: stretch;
-  justify-content: flex-start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   width: 100%;
   height: auto;
   max-width: 100%;
-  max-height: none;
   grid-column-start: 3 !important;
   grid-column-end: -3 !important;
   padding: 8px;
+  border-width: 2px;
+  border-style: none;
 }
 .Scriptures__freeBox__oLxC2 {
   display: flex;
@@ -56,11 +55,23 @@
   text-align: right;
   min-width: 0;
 }
+.Scriptures__freeBox__nEmXx {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 8px;
+}
 .Scriptures__versionSelect___3Qlat.__wab_instance {
   max-width: 100%;
   object-fit: cover;
 }
-.Scriptures__freeBox__kjHjd {
+.Scriptures__freeBox__vvfdn {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -81,11 +92,23 @@
   text-align: right;
   min-width: 0;
 }
+.Scriptures__freeBox__jnFwE {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 8px;
+}
 .Scriptures__bookSelect__tir3Y.__wab_instance {
   max-width: 100%;
   object-fit: cover;
 }
-.Scriptures__freeBox__iCjGb {
+.Scriptures__freeBox__icey {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -97,7 +120,7 @@
   min-width: 0;
   padding: 8px;
 }
-.Scriptures__text__y3Bf {
+.Scriptures__text__wBzOl {
   position: relative;
   width: 100%;
   height: auto;
@@ -106,11 +129,23 @@
   text-align: right;
   min-width: 0;
 }
-.Scriptures__chapterSelect__awZk.__wab_instance {
+.Scriptures__freeBox__c0CHr {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__chapterSelect__qRrA9.__wab_instance {
   max-width: 100%;
   object-fit: cover;
 }
-.Scriptures__freeBox__mG0SS {
+.Scriptures__freeBox__ziWeg {
   display: grid;
   position: relative;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -121,7 +156,7 @@
   grid-column-end: -3 !important;
   padding: 8px;
 }
-.Scriptures__freeBox__u7Mg7 {
+.Scriptures__freeBox___2XulX {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -133,25 +168,14 @@
   min-width: 0;
   padding: 8px;
 }
-.Scriptures__bookNotes__aNkig {
+.Scriptures__text__zmMFx {
   position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
   min-width: 0;
 }
-.Scriptures__bookNotesButton__lUzeV.__wab_instance {
-  max-width: 100%;
-  object-fit: cover;
-}
-.Scriptures__text__wC0Zf {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.Scriptures__freeBox__mIggl {
+.Scriptures__freeBox__gVsja {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -163,67 +187,7 @@
   min-width: 0;
   padding: 8px;
 }
-.Scriptures__chapterNotes__btbug {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.Scriptures__chapterNotesButton__ch5Rk.__wab_instance {
-  max-width: 100%;
-  object-fit: cover;
-}
-.Scriptures__text__lqzKb {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.Scriptures__freeBox__to844 {
-  display: grid;
-  position: relative;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  grid-column-start: 3 !important;
-  grid-column-end: -3 !important;
-  padding: 8px;
-}
-.Scriptures__freeBox___7PktD {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 0;
-  padding: 8px;
-}
-.Scriptures__scriptureText___4CpIh {
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  min-width: 0;
-}
-.Scriptures__freeBox__zMo85 {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 0;
-  padding: 8px;
-}
-.Scriptures__noteText___1FTjz {
+.Scriptures__text__qNdsl {
   position: relative;
   width: 100%;
   height: auto;
