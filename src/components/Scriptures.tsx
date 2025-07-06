@@ -18,19 +18,6 @@ interface Verse {
   text: string;
 }
 
-// Your component props start with props for variants and slots you defined
-// in Plasmic, but you can add more here, like event handlers that you can
-// attach to named nodes in your component.
-//
-// If you don't want to expose certain variants or slots as a prop, you can use
-// Omit to hide them:
-//
-// interface ScripturesProps extends Omit<DefaultScripturesProps, "hideProps1"|"hideProp2"> {
-//   // etc.
-// }
-//
-// You can also stop extending from DefaultScripturesProps altogether and have
-// total control over the props for your component.
 export interface ScripturesProps extends DefaultScripturesProps {}
 
 function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
@@ -43,17 +30,14 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
   );
   const [verses, setVerses] = React.useState<Verse[]>([]);
 
-  // Initialize default selections so the page shows content immediately
   React.useEffect(() => {
     if (!version) {
       setVersion(bibleVersions[0]?.module);
       setBook(bibleBooks[0]?.name);
       setChapter(1);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // When the user picks a new version reset book and chapter to defaults
   React.useEffect(() => {
     if (version && book === undefined) {
       setBook(bibleBooks[0]?.name);
@@ -140,12 +124,14 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
           style={{
             display: "flex",
             flexWrap: "wrap",
-            gap: "0.5rem",
-            alignItems: "center",
+            justifyContent: "center",
+            gap: "2rem",
+            paddingBottom: "1rem",
+            marginTop: "1rem",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
-            <span>Version:</span>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: 100 }}>
+            <label style={{ marginBottom: "0.25rem", fontWeight: "bold" }}>Version:</label>
             <PlasmicScriptures.versionSelect
               options={versions}
               value={version}
@@ -156,8 +142,8 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
               }}
             />
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
-            <span>Book:</span>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: 100 }}>
+            <label style={{ marginBottom: "0.25rem", fontWeight: "bold" }}>Book:</label>
             <PlasmicScriptures.bookSelect
               options={bookOptions}
               value={book}
@@ -169,8 +155,8 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
               }}
             />
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
-            <span>Chapter:</span>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: 100 }}>
+            <label style={{ marginBottom: "0.25rem", fontWeight: "bold" }}>Chapter:</label>
             <PlasmicScriptures.chapterSelect
               options={chapterOptions}
               value={chapter}
@@ -182,11 +168,13 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
             />
           </div>
         </div>
+
         {book && chapter && (
           <h2 style={{ marginTop: "1rem" }}>
             {book} {chapter}
           </h2>
         )}
+
         <div
           style={{
             paddingTop: "1rem",
