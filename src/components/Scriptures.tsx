@@ -51,15 +51,51 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
     }
   }, []);
 
+  // When the version changes and no book is selected, reset to defaults
+  React.useEffect(() => {
+    if (version && book === undefined) {
+      setBook(bibleBooks[0]?.name);
+      setChapter(1);
+    }
+  }, [version, book]);
+
   React.useEffect(() => {
     if (version && book && chapter) {
-      fetch(`/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`)
-        .then((res) => res.json())
-        .then((data: Verse[]) => flushSync(() => setVerses(data)))
+      logger.debug(
+        `Fetching verses for ${book} chapter ${chapter} from version ${version}`
+      );
+      fetch(
+        `/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`
+      )
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status} ${res.statusText}`);
+          }
+          return res.json();
+        })
+        .then((data: Verse[]) => {
+          if (!data.length) {
+            logger.warn(
+              `No verses returned for ${book} chapter ${chapter} from version ${version}`
+            );
+            setVerses([]);
+            return;
+          }
+          flushSync(() => {
+            setVerses(data);
+          });
+          data.forEach((v, idx) => {
+            logger.info(
+              `Displaying verse ${idx + 1}/${data.length}: ${v.text}`
+            );
+          });
+        })
         .catch((err) => {
           logger.error("Failed to load verses", err);
           setVerses([]);
         });
+    } else {
+      setVerses([]);
     }
   }, [version, book, chapter]);
 
@@ -90,15 +126,22 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
       }}
       // Inject verse display into ScriptureNotesGrid slot
       ScriptureNotesGrid={{
-        children: verses.map((v) => (
-          <ScriptureNotesGrid
-            key={v.verse}
-            book={book!}
-            chapter={chapter!}
-            verse={v.verse}
-            text={v.text}
-          />
-        )),
+        children: [
+          book && chapter ? (
+            <h2 key="heading" style={{ marginTop: "1rem" }}>
+              {book} {chapter}
+            </h2>
+          ) : null,
+          ...verses.map((v) => (
+            <ScriptureNotesGrid
+              key={v.verse}
+              book={book!}
+              chapter={chapter!}
+              verse={v.verse}
+              text={v.text}
+            />
+          )),
+        ],
       }}
       {...props}
     />
