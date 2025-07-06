@@ -5,7 +5,7 @@ import {
 } from "../plasmic/my_bible_app_next_generation/PlasmicProfile";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../AuthContext";
-import { logger } from "../lib/logger";
+import { logger, logSupabaseError } from "../lib/logger";
 
 export interface ProfileProps extends DefaultProfileProps {}
 
@@ -35,7 +35,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
         .single();
 
       if (error) {
-        logger.error("[fetchProfile]", error);
+        logSupabaseError('fetchProfile', error);
       } else if (data) {
         setProfileId(data.id ?? null);
         setPhone(data.phoneNumber ?? "");
@@ -67,7 +67,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
     const { error } = await supabase.from("UserProfile").upsert(profile);
 
     if (error) {
-      logger.error("[handleSave]", error);
+      logSupabaseError('handleSave', error);
       alert("Failed to save profile");
     } else {
       setProfileId(newId);
@@ -89,7 +89,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       .maybeSingle();
 
     if (error) {
-      logger.error("[handleQuery]", error);
+      logSupabaseError('handleQuery', error);
       alert("Failed to fetch profile");
     } else if (data) {
       setProfileId(data.id ?? null);
