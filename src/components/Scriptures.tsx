@@ -93,25 +93,10 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
         children: verses.map((v) => (
           <ScriptureNotesGrid
             key={v.verse}
-            scriptureText={{
-              children: (
-                <>
-                  <div style={{ fontWeight: "bold", marginBottom: "0.25rem" }}>
-                    Verse {v.verse}
-                  </div>
-                  <div>{v.text}</div>
-                </>
-              ),
-            }}
-            noteText={{
-              children: (
-                <textarea
-                  placeholder={`Notes for verse ${v.verse}`}
-                  style={{ width: "100%" }}
-                  rows={2}
-                />
-              ),
-            }}
+            book={book!}
+            chapter={chapter!}
+            verse={v.verse}
+            text={v.text}
           />
         )),
       }}
