@@ -7,7 +7,7 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../AuthContext";
-import { logger } from "../lib/logger";
+import { logger, logSupabaseError } from "../lib/logger";
 
 export interface LoginProps extends DefaultLoginProps {}
 
@@ -88,6 +88,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
           .single();
 
         if (error) {
+          logSupabaseError('handleVerify fetch profile', error);
           logger.warn('[handleVerify] Profile not found, creating new');
           const { data: newProfile, error: insertError } = await supabase
             .from('UserProfile')
@@ -95,10 +96,10 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
             .select('*')
             .single();
           if (insertError) {
-            logger.error('[handleVerify] Insert error:', insertError);
-          } else {
-            setProfile(newProfile);
-          }
+            logSupabaseError('handleVerify insert', insertError);
+            } else {
+              setProfile(newProfile);
+            }
         } else if (profileData) {
           setProfile(profileData);
         } else {

@@ -8,7 +8,7 @@ import {
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../AuthContext";
-import { logger } from "../lib/logger";
+import { logger, logSupabaseError } from "../lib/logger";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -58,7 +58,7 @@ function ScriptureNotesGrid_(
         .maybeSingle();
 
       if (error) {
-        logger.error("[ScriptureNotesGrid] Fetch note", error);
+        logSupabaseError('ScriptureNotesGrid fetchNote', error);
       } else if (data) {
         setNoteId(data.id);
         setContent(data.content ?? "");
@@ -93,7 +93,7 @@ function ScriptureNotesGrid_(
       .single();
 
     if (error) {
-      logger.error("[ScriptureNotesGrid] Save note", error);
+      logSupabaseError('ScriptureNotesGrid saveNote', error);
     } else {
       setNoteId(id);
     }
