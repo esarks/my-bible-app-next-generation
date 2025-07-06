@@ -55,6 +55,8 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
+
 import "@plasmicapp/react-web/lib/plasmic.css";
 import "../defaultStyles.css"; // plasmic-import: global/defaultcss
 import "../antd_5_hostless/plasmic.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
@@ -78,6 +80,8 @@ export type PlasmicScriptureNotesGrid__OverridesType = {
   scriptureNotesGrid?: Flex__<"div">;
   scriptureText?: Flex__<"div">;
   noteText?: Flex__<"div">;
+  addNotesButton?: Flex__<typeof AntdButton>;
+  text?: Flex__<"div">;
 };
 
 export interface DefaultScriptureNotesGridProps {
@@ -171,15 +175,44 @@ function PlasmicScriptureNotesGrid__RenderFunc(props: {
         >
           {"Enter some text"}
         </div>
+        <AntdButton
+          data-plasmic-name={"addNotesButton"}
+          data-plasmic-override={overrides.addNotesButton}
+          className={classNames(
+            "__wab_instance",
+            "ScriptureNotesGrid__addNotesButton__whxAx"
+          )}
+        >
+          <div
+            data-plasmic-name={"text"}
+            data-plasmic-override={overrides.text}
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "__wab_text",
+              "ScriptureNotesGrid__text__aZdPy"
+            )}
+          >
+            {"Button"}
+          </div>
+        </AntdButton>
       </div>
     </div>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  scriptureNotesGrid: ["scriptureNotesGrid", "scriptureText", "noteText"],
+  scriptureNotesGrid: [
+    "scriptureNotesGrid",
+    "scriptureText",
+    "noteText",
+    "addNotesButton",
+    "text"
+  ],
   scriptureText: ["scriptureText"],
-  noteText: ["noteText"]
+  noteText: ["noteText"],
+  addNotesButton: ["addNotesButton", "text"],
+  text: ["text"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -188,6 +221,8 @@ type NodeDefaultElementType = {
   scriptureNotesGrid: "div";
   scriptureText: "div";
   noteText: "div";
+  addNotesButton: typeof AntdButton;
+  text: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -252,6 +287,8 @@ export const PlasmicScriptureNotesGrid = Object.assign(
     // Helper components rendering sub-elements
     scriptureText: makeNodeComponent("scriptureText"),
     noteText: makeNodeComponent("noteText"),
+    addNotesButton: makeNodeComponent("addNotesButton"),
+    text: makeNodeComponent("text"),
 
     // Metadata about props expected for PlasmicScriptureNotesGrid
     internalVariantProps: PlasmicScriptureNotesGrid__VariantProps,
