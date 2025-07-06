@@ -8,6 +8,7 @@ import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
 import { logger } from "../lib/logger";
 import { flushSync } from "react-dom";
+import ScriptureNotesGrid from "./ScriptureNotesGrid";
 
 interface Verse {
   verse: number;
@@ -90,23 +91,28 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
       // Inject verse display into ScriptureNotesGrid slot
       ScriptureNotesGrid={{
         children: verses.map((v) => (
-          <div
+          <ScriptureNotesGrid
             key={v.verse}
-            style={{
-              borderBottom: "1px solid #eee",
-              padding: "0.5rem 0",
+            scriptureText={{
+              children: (
+                <>
+                  <div style={{ fontWeight: "bold", marginBottom: "0.25rem" }}>
+                    Verse {v.verse}
+                  </div>
+                  <div>{v.text}</div>
+                </>
+              ),
             }}
-          >
-            <div style={{ fontWeight: "bold", marginBottom: "0.25rem" }}>
-              Verse {v.verse}
-            </div>
-            <div>{v.text}</div>
-            <textarea
-              placeholder={`Notes for verse ${v.verse}`}
-              style={{ marginTop: "0.5rem", width: "100%" }}
-              rows={2}
-            />
-          </div>
+            noteText={{
+              children: (
+                <textarea
+                  placeholder={`Notes for verse ${v.verse}`}
+                  style={{ width: "100%" }}
+                  rows={2}
+                />
+              ),
+            }}
+          />
         )),
       }}
       {...props}
