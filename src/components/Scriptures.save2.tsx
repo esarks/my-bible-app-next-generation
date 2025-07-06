@@ -8,7 +8,6 @@ import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
 import { logger } from "../lib/logger";
 import { flushSync } from "react-dom";
-import { VerseNotesSection } from "./VerseNotesSection"; // <-- adjust path if needed
 
 interface Verse {
   verse: number;
@@ -88,28 +87,7 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
         value: chapter,
         onChange: (c) => setChapter(c as number),
       }}
-      // Inject verse display into notesContent slot
-      notesContent={{
-        children: verses.map((v) => (
-          <div
-            key={v.verse}
-            style={{
-              borderBottom: "1px solid #eee",
-              padding: "0.5rem 0",
-            }}
-          >
-            <div style={{ fontWeight: "bold", marginBottom: "0.25rem" }}>
-              Verse {v.verse}
-            </div>
-            <div>{v.text}</div>
-            <textarea
-              placeholder={`Notes for verse ${v.verse}`}
-              style={{ marginTop: "0.5rem", width: "100%" }}
-              rows={2}
-            />
-          </div>
-        )),
-      }}
+      // Optionally pass in verses as props for custom slots you define in Plasmic
       {...props}
     />
   );
