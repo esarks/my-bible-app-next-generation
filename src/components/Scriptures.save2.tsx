@@ -62,36 +62,41 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
     }
   }, [version, book, chapter]);
 
-  return (
-    <PlasmicScriptures
-      root={{ ref }}
-      versionSelect={{
-        options: versions,
-        value: version,
-        onChange: (v) => {
-          setVersion(v as string);
-          setBook(undefined);
-          setChapter(undefined);
-        },
-      }}
-      bookSelect={{
-        options: bookOptions,
-        value: book,
-        onChange: (b) => {
-          setBook(b as string);
-          setChapter(1);
-        },
-      }}
-      chapterSelect={{
-        options: chapterOptions,
-        value: chapter,
-        onChange: (c) => setChapter(c as number),
-      }}
-      // Optionally pass in verses as props for custom slots you define in Plasmic
-      {...props}
-    />
-  );
-}
+return (
+  <PlasmicScriptures
+    root={{ ref }}
+    versionSelect={{
+      options: versions,
+      value: version,
+      onChange: (v) => {
+        setVersion(v as string);
+        setBook(undefined);
+        setChapter(undefined);
+      },
+    }}
+    bookSelect={{
+      options: bookOptions,
+      value: book,
+      onChange: (b) => {
+        setBook(b as string);
+        setChapter(1);
+      },
+    }}
+    chapterSelect={{
+      options: chapterOptions,
+      value: chapter,
+      onChange: (c) => setChapter(c as number),
+    }}
+    ScriptureNotesGrid={{
+      children: verses.map((v) => (
+        <div key={v.verse}>
+          <strong>{v.verse}</strong>: {v.text}
+        </div>
+      )),
+    }}
+    {...props}
+  />
+);
 
 const Scriptures = React.forwardRef(Scriptures_);
 export default Scriptures;
