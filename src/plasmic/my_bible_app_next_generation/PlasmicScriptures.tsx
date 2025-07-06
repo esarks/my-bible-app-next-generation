@@ -61,7 +61,6 @@ import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import PageLayout from "../../components/PageLayout"; // plasmic-import: TZVmFGETAb0O/component
 import { AntdSelect } from "@plasmicpkgs/antd5/skinny/registerSelect";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
-import ScriptureNotesGrid from "../../components/ScriptureNotesGrid"; // plasmic-import: CmsshMtLcT2f/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 import "../defaultStyles.css"; // plasmic-import: global/defaultcss
@@ -77,9 +76,13 @@ export type PlasmicScriptures__VariantsArgs = {};
 type VariantPropType = keyof PlasmicScriptures__VariantsArgs;
 export const PlasmicScriptures__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicScriptures__ArgsType = { children?: React.ReactNode };
+export type PlasmicScriptures__ArgsType = {
+  scriptureNotesGrid?: React.ReactNode;
+};
 type ArgPropType = keyof PlasmicScriptures__ArgsType;
-export const PlasmicScriptures__ArgProps = new Array<ArgPropType>("children");
+export const PlasmicScriptures__ArgProps = new Array<ArgPropType>(
+  "scriptureNotesGrid"
+);
 
 export type PlasmicScriptures__OverridesType = {
   root?: Flex__<"div">;
@@ -94,7 +97,7 @@ export type PlasmicScriptures__OverridesType = {
 };
 
 export interface DefaultScripturesProps {
-  children?: React.ReactNode;
+  scriptureNotesGrid?: React.ReactNode;
   className?: string;
 }
 
@@ -419,18 +422,18 @@ function PlasmicScriptures__RenderFunc(props: {
               </AntdButton>
             </div>
           </div>
-          {renderPlasmicSlot({
-            defaultContents: (
-              <ScriptureNotesGrid
-                className={classNames(
-                  "__wab_instance",
-                  "Scriptures__scriptureNotesGrid__wsRlb"
-                )}
-              />
-            ),
-
-            value: args.children
-          })}
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Scriptures__freeBox__sTy0O"
+            )}
+          >
+            {renderPlasmicSlot({
+              defaultContents: null,
+              value: args.scriptureNotesGrid
+            })}
+          </div>
         </div>
       </div>
     </React.Fragment>

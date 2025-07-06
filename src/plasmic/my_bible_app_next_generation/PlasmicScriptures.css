@@ -181,6 +181,16 @@
   max-width: 100%;
   min-width: 0;
 }
-.Scriptures__scriptureNotesGrid__wsRlb.__wab_instance {
+.Scriptures__freeBox__sTy0O {
+  display: flex;
+  flex-direction: column;
   position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column-start: 3 !important;
+  grid-column-end: -3 !important;
+  padding: 8px;
 }
