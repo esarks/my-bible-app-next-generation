@@ -7,6 +7,7 @@ import {
 } from "../plasmic/my_bible_app_next_generation/PlasmicScriptures";
 import PageLayoutWrapper from "./PageLayoutWrapper";
 import ScriptureNotesGrid from "./ScriptureNotesGrid";
+import BookChapterNote from "./BookChapterNote";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
@@ -171,6 +172,14 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
           <h2 style={{ marginTop: "1rem" }}>
             {book} {chapter}
           </h2>
+        )}
+
+        {book && (
+          <BookChapterNote book={book} label="Book Notes" />
+        )}
+
+        {book && chapter && (
+          <BookChapterNote book={book} chapter={chapter} label="Chapter Notes" />
         )}
 
         <div
