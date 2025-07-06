@@ -1,140 +1,61 @@
 import * as React from "react";
-import {
-  PlasmicScriptures,
-  DefaultScripturesProps
-} from "../plasmic/my_bible_app_next_generation/PlasmicScriptures";
-import { HTMLElementRefOf } from "@plasmicapp/react-web";
-import { bibleBooks } from "../lib/bibleData";
-import { bibleVersions } from "../lib/bibleVersions";
-import { logger } from "../lib/logger";
-import { flushSync } from "react-dom";
+import { PlasmicScriptures } from "../plasmic/my_bible_app_next_generation/PlasmicScriptures";
+import VerseList from "../components/VerseList"; // Adjust path if needed
+import { getScripture } from "../services/api"; // Replace with your actual fetch logic
 
-interface Verse {
-  verse: number;
-  text: string;
-}
-
-export interface ScripturesProps extends DefaultScripturesProps {}
-
-function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
-  const [book, setBook] = React.useState<string | undefined>();
-  const [chapter, setChapter] = React.useState<number | undefined>();
-  const [version, setVersion] = React.useState<string | undefined>();
-  const [verses, setVerses] = React.useState<Verse[]>([]);
-
-  const versions = React.useMemo(
-    () => bibleVersions.map((v) => ({ value: v.module, label: v.shortname || v.name })),
-    []
-  );
-
-  const bookOptions = React.useMemo(
-    () => bibleBooks.map((b) => ({ value: b.name, label: b.name })),
-    []
-  );
-
-  const chapterOptions = React.useMemo(() => {
-    const selected = bibleBooks.find((b) => b.name === book);
-    return selected
-      ? Array.from({ length: selected.chapters }, (_, i) => ({
-          value: i + 1,
-          label: String(i + 1),
-        }))
-      : [];
-  }, [book]);
+function ScripturesPage() {
+  const [version, setVersion] = React.useState("ASV");
+  const [book, setBook] = React.useState("Genesis");
+  const [chapter, setChapter] = React.useState(1);
+  const [verses, setVerses] = React.useState([]);
 
   React.useEffect(() => {
-    if (!version) {
-      setVersion(bibleVersions[0]?.module);
-      setBook(bibleBooks[0]?.name);
-      setChapter(1);
+    async function fetchScripture() {
+      try {
+        const data = await getScripture(version, book, chapter);
+        setVerses(data.verses || []);
+        console.log(`Fetched ${data.verses?.length ?? 0} verses.`);
+      } catch (error) {
+        console.error("Error fetching scripture:", error);
+      }
     }
-  }, []);
-
-  // When the version changes and no book is selected, reset to defaults
-  React.useEffect(() => {
-    if (version && book === undefined) {
-      setBook(bibleBooks[0]?.name);
-      setChapter(1);
-    }
-  }, [version, book]);
-
-  React.useEffect(() => {
-    if (version && book && chapter) {
-      logger.debug(
-        `Fetching verses for ${book} chapter ${chapter} from version ${version}`
-      );
-      fetch(
-        `/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`
-      )
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(`HTTP ${res.status} ${res.statusText}`);
-          }
-          return res.json();
-        })
-        .then((data: Verse[]) => {
-          if (!data.length) {
-            logger.warn(
-              `No verses returned for ${book} chapter ${chapter} from version ${version}`
-            );
-            setVerses([]);
-            return;
-          }
-          flushSync(() => {
-            setVerses(data);
-          });
-          data.forEach((v, idx) => {
-            logger.info(
-              `Displaying verse ${idx + 1}/${data.length}: ${v.text}`
-            );
-          });
-        })
-        .catch((err) => {
-          logger.error("Failed to load verses", err);
-          setVerses([]);
-        });
-    } else {
-      setVerses([]);
-    }
+    fetchScripture();
   }, [version, book, chapter]);
 
   return (
     <PlasmicScriptures
-      root={{ ref }}
+      // These match the names of the AntdSelects in your Plasmic design
       versionSelect={{
-        options: versions,
         value: version,
-        onChange: (v) => {
-          setVersion(v as string);
-          setBook(undefined);
-          setChapter(undefined);
-        },
+        onChange: (value: string) => setVersion(value),
+        options: [
+          { value: "ASV", label: "ASV" },
+          { value: "KJV", label: "KJV" },
+          { value: "NIV", label: "NIV" },
+        ],
       }}
       bookSelect={{
-        options: bookOptions,
         value: book,
-        onChange: (b) => {
-          setBook(b as string);
-          setChapter(1);
-        },
+        onChange: (value: string) => setBook(value),
+        options: [
+          { value: "Genesis", label: "Genesis" },
+          { value: "Exodus", label: "Exodus" },
+          { value: "Matthew", label: "Matthew" },
+        ],
       }}
       chapterSelect={{
-        options: chapterOptions,
         value: chapter,
-        onChange: (c) => setChapter(c as number),
+        onChange: (value: number) => setChapter(Number(value)),
+        options: Array.from({ length: 50 }, (_, i) => ({
+          value: i + 1,
+          label: `${i + 1}`,
+        })),
       }}
-      // Pass verse content into ScriptureNotesGrid slot
-      ScriptureNotesGrid={{
-        children: verses.map((v) => (
-          <div key={v.verse} style={{ marginBottom: "0.75rem" }}>
-            <strong>{v.verse}</strong>: {v.text}
-          </div>
-        )),
-      }}
-      {...props}
+      scriptureNotesGrid={
+        <VerseList verses={verses} />
+      }
     />
   );
 }
 
-const Scriptures = React.forwardRef(Scriptures_);
-export default Scriptures;
+export default ScripturesPage;
