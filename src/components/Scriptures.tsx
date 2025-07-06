@@ -3,7 +3,7 @@
 import * as React from "react";
 import {
   PlasmicScriptures,
-  DefaultScripturesProps
+  DefaultScripturesProps,
 } from "../plasmic/my_bible_app_next_generation/PlasmicScriptures";
 import PageLayoutWrapper from "./PageLayoutWrapper";
 import ScriptureNotesGrid from "./ScriptureNotesGrid";
@@ -24,11 +24,12 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
   const [book, setBook] = React.useState<string | undefined>(undefined);
   const [chapter, setChapter] = React.useState<number | undefined>(undefined);
   const [version, setVersion] = React.useState<string | undefined>(undefined);
+  const [verses, setVerses] = React.useState<Verse[]>([]);
+
   const versions = React.useMemo(
     () => bibleVersions.map((v) => ({ value: v.module, label: v.shortname || v.name })),
     []
   );
-  const [verses, setVerses] = React.useState<Verse[]>([]);
 
   React.useEffect(() => {
     if (!version) {
@@ -47,12 +48,8 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
 
   React.useEffect(() => {
     if (version && book && chapter) {
-      logger.debug(
-        `Fetching verses for ${book} chapter ${chapter} from version ${version}`
-      );
-      fetch(
-        `/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`
-      )
+      logger.debug(`Fetching verses for ${book} chapter ${chapter} from version ${version}`);
+      fetch(`/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`HTTP ${res.status} ${res.statusText}`);
@@ -62,9 +59,7 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
         .then((data: Verse[]) => {
           const found = bibleBooks.find((b) => b.name === book);
           if (!data.length) {
-            logger.warn(
-              `No verses returned for ${book} chapter ${chapter} from version ${version}`
-            );
+            logger.warn(`No verses returned for ${book} chapter ${chapter} from version ${version}`);
             alert(`No verses found for ${book} chapter ${chapter}`);
             setVerses([]);
             return;
@@ -74,18 +69,13 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
           });
           try {
             data.forEach((v, idx) => {
-              logger.info(
-                `Displaying verse ${idx + 1}/${data.length}: ${v.text}`
-              );
+              logger.info(`Displaying verse ${idx + 1}/${data.length}: ${v.text}`);
             });
           } catch (err) {
             logger.error("Failed logging verses", err);
           }
           if (found) {
-            logger.debug(
-              `Loaded ${found.name} chapter ${chapter} successfully`
-            );
-            alert(`Loaded ${found.name} chapter ${chapter} successfully`);
+            logger.debug(`Loaded ${found.name} chapter ${chapter} successfully`);
           } else {
             logger.debug(`Book not in list: ${book}`);
             alert(`Book "${book}" was not found.`);
@@ -109,7 +99,7 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
   const chapterOptions = React.useMemo(() => {
     const selected = bibleBooks.find((b) => b.name === book);
     if (!selected) {
-      return [] as { value: number; label: string }[];
+      return [];
     }
     return Array.from({ length: selected.chapters }, (_, i) => ({
       value: i + 1,
@@ -125,47 +115,55 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            gap: "2rem",
-            paddingBottom: "1rem",
-            marginTop: "1rem",
+            alignItems: "flex-end",
+            gap: "1rem",
+            marginBottom: "1rem",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: 100 }}>
-            <label style={{ marginBottom: "0.25rem", fontWeight: "bold" }}>Version:</label>
-            <PlasmicScriptures.versionSelect
-              options={versions}
-              value={version}
-              onChange={(val: any) => {
-                setVersion(val as string);
-                setBook(undefined);
-                setChapter(undefined);
-              }}
-            />
+          <div style={{ display: "flex", flexDirection: "column", width: "150px" }}>
+            <label style={{ marginBottom: "0.25rem", fontWeight: 500 }}>Version:</label>
+            <div style={{ width: "100%" }}>
+              <PlasmicScriptures.versionSelect
+                options={versions}
+                value={version}
+                onChange={(val: any) => {
+                  setVersion(val as string);
+                  setBook(undefined);
+                  setChapter(undefined);
+                }}
+              />
+            </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: 100 }}>
-            <label style={{ marginBottom: "0.25rem", fontWeight: "bold" }}>Book:</label>
-            <PlasmicScriptures.bookSelect
-              options={bookOptions}
-              value={book}
-              onChange={(value: any) => {
-                const newBook = value as string;
-                logger.debug(`Selected book ${newBook}`);
-                setBook(newBook);
-                setChapter(1);
-              }}
-            />
+
+          <div style={{ display: "flex", flexDirection: "column", width: "150px" }}>
+            <label style={{ marginBottom: "0.25rem", fontWeight: 500 }}>Book:</label>
+            <div style={{ width: "100%" }}>
+              <PlasmicScriptures.bookSelect
+                options={bookOptions}
+                value={book}
+                onChange={(value: any) => {
+                  const newBook = value as string;
+                  logger.debug(`Selected book ${newBook}`);
+                  setBook(newBook);
+                  setChapter(1);
+                }}
+              />
+            </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: 100 }}>
-            <label style={{ marginBottom: "0.25rem", fontWeight: "bold" }}>Chapter:</label>
-            <PlasmicScriptures.chapterSelect
-              options={chapterOptions}
-              value={chapter}
-              onChange={(value: any) => {
-                const chapNum = value as number;
-                logger.debug(`Selected chapter ${chapNum}`);
-                setChapter(chapNum);
-              }}
-            />
+
+          <div style={{ display: "flex", flexDirection: "column", width: "100px" }}>
+            <label style={{ marginBottom: "0.25rem", fontWeight: 500 }}>Chapter:</label>
+            <div style={{ width: "100%" }}>
+              <PlasmicScriptures.chapterSelect
+                options={chapterOptions}
+                value={chapter}
+                onChange={(value: any) => {
+                  const chapNum = value as number;
+                  logger.debug(`Selected chapter ${chapNum}`);
+                  setChapter(chapNum);
+                }}
+              />
+            </div>
           </div>
         </div>
 
