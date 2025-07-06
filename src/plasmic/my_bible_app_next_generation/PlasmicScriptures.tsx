@@ -360,7 +360,7 @@ function PlasmicScriptures__RenderFunc(props: {
                   "Scriptures__bookNotes__aNkig"
                 )}
               >
-                {"Enter some text"}
+                {"Book Notes:"}
               </div>
               <AntdButton
                 data-plasmic-name={"bookNotesButton"}
@@ -378,7 +378,7 @@ function PlasmicScriptures__RenderFunc(props: {
                     "Scriptures__text__wC0Zf"
                   )}
                 >
-                  {"Button"}
+                  {"Notes"}
                 </div>
               </AntdButton>
             </div>
@@ -399,7 +399,7 @@ function PlasmicScriptures__RenderFunc(props: {
                   "Scriptures__chapterNotes__btbug"
                 )}
               >
-                {"Enter some text"}
+                {"Chapter Notes:"}
               </div>
               <AntdButton
                 data-plasmic-name={"chapterNotesButton"}
@@ -417,7 +417,7 @@ function PlasmicScriptures__RenderFunc(props: {
                     "Scriptures__text__lqzKb"
                   )}
                 >
-                  {"Button"}
+                  {"Notes"}
                 </div>
               </AntdButton>
             </div>
