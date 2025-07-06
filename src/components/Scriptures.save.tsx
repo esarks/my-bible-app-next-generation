@@ -6,6 +6,7 @@ import {
   DefaultScripturesProps
 } from "../plasmic/my_bible_app_next_generation/PlasmicScriptures";
 import PageLayoutWrapper from "./PageLayoutWrapper";
+import ScriptureNotesGrid from "./ScriptureNotesGrid";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
@@ -195,10 +196,13 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
           }}
         >
           {verses.map((v) => (
-            <div key={v.verse} style={{ display: "flex", gap: "0.5rem" }}>
-              <div style={{ width: "2rem", textAlign: "right" }}>{v.verse}</div>
-              <div>{v.text}</div>
-            </div>
+            <ScriptureNotesGrid
+              key={v.verse}
+              book={book!}
+              chapter={chapter!}
+              verse={v.verse}
+              text={v.text}
+            />
           ))}
         </div>
       </div>
