@@ -426,7 +426,7 @@ function PlasmicScriptures__RenderFunc(props: {
             className={classNames(
               "plasmic_default__all",
               "plasmic_default__div",
-              "Scriptures__freeBox__ww3Yt"
+              "Scriptures__freeBox__sTy0O"
             )}
           >
             {renderPlasmicSlot({
