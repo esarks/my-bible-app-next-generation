@@ -1,69 +1,58 @@
 import * as React from "react";
 import { PlasmicScriptures } from "../plasmic/my_bible_app_next_generation/PlasmicScriptures";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import VerseList from "../components/VerseList"; // Adjust path if needed
+import { getScripture } from "../services/api"; // Replace with your actual fetch logic
 
 function ScripturesPage() {
-  const [version, setVersion] = useState("ASV");
-  const [book, setBook] = useState("Genesis");
-  const [chapter, setChapter] = useState("1");
-  const [verses, setVerses] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [version, setVersion] = React.useState("ASV");
+  const [book, setBook] = React.useState("Genesis");
+  const [chapter, setChapter] = React.useState(1);
+  const [verses, setVerses] = React.useState([]);
 
-  useEffect(() => {
-    async function fetchScriptures() {
-      setLoading(true);
+  React.useEffect(() => {
+    async function fetchScripture() {
       try {
-        const res = await fetch(
-          `https://api.scripture.api.bible/v1/bibles/${version}/books/${book}/chapters/${chapter}`,
-          {
-            headers: {
-              "api-key": import.meta.env.VITE_BIBLE_API_KEY as string,
-            },
-          }
-        );
-
-        const data = await res.json();
-        const verseList = data?.data?.content?.map((verse: any) => ({
-          reference: verse.reference,
-          text: verse.text,
-        }));
-
-        console.info(`[INFO] Fetched ${verseList?.length ?? 0} verses.`);
-        setVerses(verseList ?? []);
-      } catch (err) {
-        console.error("Failed to fetch scriptures", err);
-        setVerses([]);
-      } finally {
-        setLoading(false);
+        const data = await getScripture(version, book, chapter);
+        setVerses(data.verses || []);
+        console.log(`Fetched ${data.verses?.length ?? 0} verses.`);
+      } catch (error) {
+        console.error("Error fetching scripture:", error);
       }
     }
-
-    fetchScriptures();
+    fetchScripture();
   }, [version, book, chapter]);
 
   return (
     <PlasmicScriptures
-      version={version}
-      onVersionChange={(e) => setVersion(e.target.value)}
-      book={book}
-      onBookChange={(e) => setBook(e.target.value)}
-      chapter={chapter}
-      onChapterChange={(e) => setChapter(e.target.value)}
+      // These match the names of the AntdSelects in your Plasmic design
+      versionSelect={{
+        value: version,
+        onChange: (value: string) => setVersion(value),
+        options: [
+          { value: "ASV", label: "ASV" },
+          { value: "KJV", label: "KJV" },
+          { value: "NIV", label: "NIV" },
+        ],
+      }}
+      bookSelect={{
+        value: book,
+        onChange: (value: string) => setBook(value),
+        options: [
+          { value: "Genesis", label: "Genesis" },
+          { value: "Exodus", label: "Exodus" },
+          { value: "Matthew", label: "Matthew" },
+        ],
+      }}
+      chapterSelect={{
+        value: chapter,
+        onChange: (value: number) => setChapter(Number(value)),
+        options: Array.from({ length: 50 }, (_, i) => ({
+          value: i + 1,
+          label: `${i + 1}`,
+        })),
+      }}
       scriptureNotesGrid={
-        loading ? (
-          <div>Loading...</div>
-        ) : verses.length > 0 ? (
-          <div className="flex flex-col gap-2">
-            {verses.map((v, idx) => (
-              <div key={idx}>
-                <strong>{v.reference}:</strong> {v.text}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div>No verses found.</div>
-        )
+        <VerseList verses={verses} />
       }
     />
   );
