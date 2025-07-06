@@ -30,7 +30,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  max-height: var(--token-sPi98nT-JyUw);
+  max-height: none;
   grid-column-start: 3 !important;
   grid-column-end: -3 !important;
   padding: 8px;
@@ -109,4 +109,124 @@
 .Scriptures__chapterSelect__awZk.__wab_instance {
   max-width: 100%;
   object-fit: cover;
+}
+.Scriptures__freeBox__mG0SS {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  grid-column-start: 3 !important;
+  grid-column-end: -3 !important;
+  padding: 8px;
+}
+.Scriptures__freeBox__u7Mg7 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__bookNotes__aNkig {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.Scriptures__bookNotesButton__lUzeV.__wab_instance {
+  max-width: 100%;
+  object-fit: cover;
+}
+.Scriptures__text__wC0Zf {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.Scriptures__freeBox__mIggl {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__chapterNotes__btbug {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.Scriptures__chapterNotesButton__ch5Rk.__wab_instance {
+  max-width: 100%;
+  object-fit: cover;
+}
+.Scriptures__text__lqzKb {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.Scriptures__freeBox__to844 {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  grid-column-start: 3 !important;
+  grid-column-end: -3 !important;
+  padding: 8px;
+}
+.Scriptures__freeBox___7PktD {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__scriptureText___4CpIh {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.Scriptures__freeBox__zMo85 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+}
+.Scriptures__noteText___1FTjz {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
 }

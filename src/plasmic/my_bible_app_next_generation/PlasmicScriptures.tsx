@@ -60,6 +60,7 @@ import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 
 import PageLayout from "../../components/PageLayout"; // plasmic-import: TZVmFGETAb0O/component
 import { AntdSelect } from "@plasmicpkgs/antd5/skinny/registerSelect";
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 import "../defaultStyles.css"; // plasmic-import: global/defaultcss
@@ -85,6 +86,12 @@ export type PlasmicScriptures__OverridesType = {
   versionSelect?: Flex__<typeof AntdSelect>;
   bookSelect?: Flex__<typeof AntdSelect>;
   chapterSelect?: Flex__<typeof AntdSelect>;
+  bookNotes?: Flex__<"div">;
+  bookNotesButton?: Flex__<typeof AntdButton>;
+  chapterNotes?: Flex__<"div">;
+  chapterNotesButton?: Flex__<typeof AntdButton>;
+  scriptureText?: Flex__<"div">;
+  noteText?: Flex__<"div">;
 };
 
 export interface DefaultScripturesProps {
@@ -326,6 +333,140 @@ function PlasmicScriptures__RenderFunc(props: {
               />
             </div>
           </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Scriptures__freeBox__mG0SS"
+            )}
+          >
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox__u7Mg7"
+              )}
+            >
+              <div
+                data-plasmic-name={"bookNotes"}
+                data-plasmic-override={overrides.bookNotes}
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Scriptures__bookNotes__aNkig"
+                )}
+              >
+                {"Enter some text"}
+              </div>
+              <AntdButton
+                data-plasmic-name={"bookNotesButton"}
+                data-plasmic-override={overrides.bookNotesButton}
+                className={classNames(
+                  "__wab_instance",
+                  "Scriptures__bookNotesButton__lUzeV"
+                )}
+              >
+                <div
+                  className={classNames(
+                    "plasmic_default__all",
+                    "plasmic_default__div",
+                    "__wab_text",
+                    "Scriptures__text__wC0Zf"
+                  )}
+                >
+                  {"Button"}
+                </div>
+              </AntdButton>
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox__mIggl"
+              )}
+            >
+              <div
+                data-plasmic-name={"chapterNotes"}
+                data-plasmic-override={overrides.chapterNotes}
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Scriptures__chapterNotes__btbug"
+                )}
+              >
+                {"Enter some text"}
+              </div>
+              <AntdButton
+                data-plasmic-name={"chapterNotesButton"}
+                data-plasmic-override={overrides.chapterNotesButton}
+                className={classNames(
+                  "__wab_instance",
+                  "Scriptures__chapterNotesButton__ch5Rk"
+                )}
+              >
+                <div
+                  className={classNames(
+                    "plasmic_default__all",
+                    "plasmic_default__div",
+                    "__wab_text",
+                    "Scriptures__text__lqzKb"
+                  )}
+                >
+                  {"Button"}
+                </div>
+              </AntdButton>
+            </div>
+          </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Scriptures__freeBox__to844"
+            )}
+          >
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox___7PktD"
+              )}
+            >
+              <div
+                data-plasmic-name={"scriptureText"}
+                data-plasmic-override={overrides.scriptureText}
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Scriptures__scriptureText___4CpIh"
+                )}
+              >
+                {"Enter some text"}
+              </div>
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox__zMo85"
+              )}
+            >
+              <div
+                data-plasmic-name={"noteText"}
+                data-plasmic-override={overrides.noteText}
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Scriptures__noteText___1FTjz"
+                )}
+              >
+                {"Enter some text"}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </React.Fragment>
@@ -333,11 +474,29 @@ function PlasmicScriptures__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "pageLayout", "versionSelect", "bookSelect", "chapterSelect"],
+  root: [
+    "root",
+    "pageLayout",
+    "versionSelect",
+    "bookSelect",
+    "chapterSelect",
+    "bookNotes",
+    "bookNotesButton",
+    "chapterNotes",
+    "chapterNotesButton",
+    "scriptureText",
+    "noteText"
+  ],
   pageLayout: ["pageLayout"],
   versionSelect: ["versionSelect"],
   bookSelect: ["bookSelect"],
-  chapterSelect: ["chapterSelect"]
+  chapterSelect: ["chapterSelect"],
+  bookNotes: ["bookNotes"],
+  bookNotesButton: ["bookNotesButton"],
+  chapterNotes: ["chapterNotes"],
+  chapterNotesButton: ["chapterNotesButton"],
+  scriptureText: ["scriptureText"],
+  noteText: ["noteText"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -348,6 +507,12 @@ type NodeDefaultElementType = {
   versionSelect: typeof AntdSelect;
   bookSelect: typeof AntdSelect;
   chapterSelect: typeof AntdSelect;
+  bookNotes: "div";
+  bookNotesButton: typeof AntdButton;
+  chapterNotes: "div";
+  chapterNotesButton: typeof AntdButton;
+  scriptureText: "div";
+  noteText: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -439,6 +604,12 @@ export const PlasmicScriptures = Object.assign(
     versionSelect: makeNodeComponent("versionSelect"),
     bookSelect: makeNodeComponent("bookSelect"),
     chapterSelect: makeNodeComponent("chapterSelect"),
+    bookNotes: makeNodeComponent("bookNotes"),
+    bookNotesButton: makeNodeComponent("bookNotesButton"),
+    chapterNotes: makeNodeComponent("chapterNotes"),
+    chapterNotesButton: makeNodeComponent("chapterNotesButton"),
+    scriptureText: makeNodeComponent("scriptureText"),
+    noteText: makeNodeComponent("noteText"),
 
     // Metadata about props expected for PlasmicScriptures
     internalVariantProps: PlasmicScriptures__VariantProps,
