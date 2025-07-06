@@ -77,9 +77,9 @@ export type PlasmicScriptures__VariantsArgs = {};
 type VariantPropType = keyof PlasmicScriptures__VariantsArgs;
 export const PlasmicScriptures__VariantProps = new Array<VariantPropType>();
 
-export type PlasmicScriptures__ArgsType = {};
+export type PlasmicScriptures__ArgsType = { children?: React.ReactNode };
 type ArgPropType = keyof PlasmicScriptures__ArgsType;
-export const PlasmicScriptures__ArgProps = new Array<ArgPropType>();
+export const PlasmicScriptures__ArgProps = new Array<ArgPropType>("children");
 
 export type PlasmicScriptures__OverridesType = {
   root?: Flex__<"div">;
@@ -91,10 +91,10 @@ export type PlasmicScriptures__OverridesType = {
   bookNotesButton?: Flex__<typeof AntdButton>;
   chapterNotes?: Flex__<"div">;
   chapterNotesButton?: Flex__<typeof AntdButton>;
-  scriptureNotesGrid?: Flex__<typeof ScriptureNotesGrid>;
 };
 
 export interface DefaultScripturesProps {
+  children?: React.ReactNode;
   className?: string;
 }
 
@@ -419,14 +419,18 @@ function PlasmicScriptures__RenderFunc(props: {
               </AntdButton>
             </div>
           </div>
-          <ScriptureNotesGrid
-            data-plasmic-name={"scriptureNotesGrid"}
-            data-plasmic-override={overrides.scriptureNotesGrid}
-            className={classNames(
-              "__wab_instance",
-              "Scriptures__scriptureNotesGrid__qj6Sk"
-            )}
-          />
+          {renderPlasmicSlot({
+            defaultContents: (
+              <ScriptureNotesGrid
+                className={classNames(
+                  "__wab_instance",
+                  "Scriptures__scriptureNotesGrid__wsRlb"
+                )}
+              />
+            ),
+
+            value: args.children
+          })}
         </div>
       </div>
     </React.Fragment>
@@ -443,8 +447,7 @@ const PlasmicDescendants = {
     "bookNotes",
     "bookNotesButton",
     "chapterNotes",
-    "chapterNotesButton",
-    "scriptureNotesGrid"
+    "chapterNotesButton"
   ],
   pageLayout: ["pageLayout"],
   versionSelect: ["versionSelect"],
@@ -453,8 +456,7 @@ const PlasmicDescendants = {
   bookNotes: ["bookNotes"],
   bookNotesButton: ["bookNotesButton"],
   chapterNotes: ["chapterNotes"],
-  chapterNotesButton: ["chapterNotesButton"],
-  scriptureNotesGrid: ["scriptureNotesGrid"]
+  chapterNotesButton: ["chapterNotesButton"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -469,7 +471,6 @@ type NodeDefaultElementType = {
   bookNotesButton: typeof AntdButton;
   chapterNotes: "div";
   chapterNotesButton: typeof AntdButton;
-  scriptureNotesGrid: typeof ScriptureNotesGrid;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -565,7 +566,6 @@ export const PlasmicScriptures = Object.assign(
     bookNotesButton: makeNodeComponent("bookNotesButton"),
     chapterNotes: makeNodeComponent("chapterNotes"),
     chapterNotesButton: makeNodeComponent("chapterNotesButton"),
-    scriptureNotesGrid: makeNodeComponent("scriptureNotesGrid"),
 
     // Metadata about props expected for PlasmicScriptures
     internalVariantProps: PlasmicScriptures__VariantProps,
