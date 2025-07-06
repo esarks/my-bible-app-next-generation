@@ -467,6 +467,50 @@ function PlasmicScriptures__RenderFunc(props: {
               </div>
             </div>
           </div>
+          <div
+            className={classNames(
+              "plasmic_default__all",
+              "plasmic_default__div",
+              "Scriptures__freeBox___2Br5"
+            )}
+          >
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox__lOs81"
+              )}
+            >
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Scriptures__text__kjqLp"
+                )}
+              >
+                {"Enter some text"}
+              </div>
+            </div>
+            <div
+              className={classNames(
+                "plasmic_default__all",
+                "plasmic_default__div",
+                "Scriptures__freeBox__zxNkq"
+              )}
+            >
+              <div
+                className={classNames(
+                  "plasmic_default__all",
+                  "plasmic_default__div",
+                  "__wab_text",
+                  "Scriptures__text__cVt1"
+                )}
+              >
+                {"Enter some text"}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </React.Fragment>
