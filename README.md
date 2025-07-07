@@ -66,3 +66,18 @@ npm test
 
 This executes all specs in `backend/test/` and verifies that phone numbers are
 normalized correctly.
+
+## Go Example for SQLite and MongoDB
+
+A small Go program is provided in [`go-example/`](go-example/) for retrieving scriptures from a SQLite database and logging notes stored in MongoDB. Follow these steps to try it out:
+
+1. Ensure Go 1.20+ is installed.
+2. Set the required environment variables as described in [`go-example/README.md`](go-example/README.md). At minimum you must specify `BOOK`, `CHAPTER`, `MONGO_URI`, `MONGO_DB` and `MONGO_NOTES_COLLECTION`.
+3. From the `go-example` directory, run:
+
+```bash
+cd go-example
+go run .
+```
+
+The program logs the verses and notes it retrieves. If nothing is returned, you will see `no verses found` or `no notes found` in the output which helps confirm the queries executed.
