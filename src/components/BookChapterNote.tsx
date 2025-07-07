@@ -56,6 +56,11 @@ export default function BookChapterNote({ book, chapter, label }: BookChapterNot
     }
 
     const id = noteId ?? crypto.randomUUID();
+    const prefix =
+      chapter === undefined
+        ? `Notes for Book ${book}`
+        : `Notes for Chapter ${book} ${chapter}`;
+
     const { error } = await supabase
       .from("Note")
       .upsert({
@@ -64,7 +69,7 @@ export default function BookChapterNote({ book, chapter, label }: BookChapterNot
         book,
         chapter: chapter ?? null,
         verse: null,
-        content,
+        content: `${prefix}: ${content}`,
         updatedAt: new Date().toISOString(),
       })
       .select("id")
