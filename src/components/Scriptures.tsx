@@ -26,7 +26,9 @@ interface Note {
 
 function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
   const { profile } = useAuth();
-  const loginId = profile?.phoneNumber ?? "";
+  const loginId =
+    profile?.phoneNumber ||
+    (typeof window !== "undefined" ? localStorage.getItem("loginId") || undefined : undefined);
   const userName = profile?.name ?? "";
 
   const [book, setBook] = React.useState<string | undefined>(undefined);
@@ -62,7 +64,11 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
 
   React.useEffect(() => {
     const loadNotes = async () => {
-      if (!loginId || !book || chapter === undefined) return;
+      if (!supabase || !loginId || !book || chapter === undefined) {
+        logger.warn("[Scriptures] Cannot load notes - missing supabase or loginId");
+        setNotes([]);
+        return;
+      }
 
       try {
         const [bookNoteRes, chapterNoteRes, verseNotesRes] = await Promise.all([
