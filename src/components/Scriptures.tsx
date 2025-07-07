@@ -3,6 +3,7 @@
 import * as React from "react";
 import PageLayoutWrapper from "./PageLayoutWrapper";
 import ScriptureNotesGrid from "./ScriptureNotesGrid";
+import BookChapterNote from "./BookChapterNote";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
@@ -170,6 +171,14 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
               placeholder={`Chapter notes for [${chapter}]`}
             />
           </>
+        )}
+
+        {book && (
+          <BookChapterNote book={book} label="Book Notes" />
+        )}
+
+        {book && chapter && (
+          <BookChapterNote book={book} chapter={chapter} label="Chapter Notes" />
         )}
 
         <div
