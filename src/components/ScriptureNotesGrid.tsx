@@ -10,35 +10,27 @@ import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../AuthContext";
 import { logger, logSupabaseError } from "../lib/logger";
 
-// Your component props start with props for variants and slots you defined
-// in Plasmic, but you can add more here, like event handlers that you can
-// attach to named nodes in your component.
-//
-// If you don't want to expose certain variants or slots as a prop, you can use
-// Omit to hide them:
-//
-// interface ScriptureNotesGridProps extends Omit<DefaultScriptureNotesGridProps, "hideProps1"|"hideProp2"> {
-//   // etc.
-// }
-//
-// You can also stop extending from DefaultScriptureNotesGridProps altogether and have
-// total control over the props for your component.
+// Extend props with noteContent to avoid DOM warning
 export interface ScriptureNotesGridProps
   extends DefaultScriptureNotesGridProps {
   book: string;
   chapter: number;
   verse: number;
   text: string;
+  noteContent?: string;
 }
 
 function ScriptureNotesGrid_(
-  { book, chapter, verse, text, ...rest }: ScriptureNotesGridProps,
+  { book, chapter, verse, text, noteContent, ...rest }: ScriptureNotesGridProps,
   ref: HTMLElementRefOf<"div">
 ) {
   const { profile } = useAuth();
   const loginId =
     profile?.phoneNumber ||
-    (typeof window !== "undefined" ? localStorage.getItem("loginId") || undefined : undefined);
+    (typeof window !== "undefined"
+      ? localStorage.getItem("loginId") || undefined
+      : undefined);
+
   const [noteId, setNoteId] = React.useState<string | null>(null);
   const [content, setContent] = React.useState<string>("");
 
@@ -60,22 +52,24 @@ function ScriptureNotesGrid_(
         .maybeSingle();
 
       if (error) {
-        logSupabaseError('ScriptureNotesGrid fetchNote', error);
+        logSupabaseError("ScriptureNotesGrid fetchNote", error);
       } else if (data) {
         setNoteId(data.id);
         setContent(data.content ?? "");
       } else {
         setNoteId(null);
-        setContent("");
+        setContent(noteContent ?? ""); // ✅ fallback to noteContent if no DB note exists
       }
     };
 
     fetchNote();
-  }, [loginId, book, chapter, verse]);
+  }, [loginId, book, chapter, verse, noteContent]);
 
   const saveNote = async () => {
     if (!supabase || !loginId) {
-      logger.warn("[ScriptureNotesGrid] Cannot save without Supabase or loginId");
+      logger.warn(
+        "[ScriptureNotesGrid] Cannot save without Supabase or loginId"
+      );
       return;
     }
 
@@ -96,7 +90,7 @@ function ScriptureNotesGrid_(
       .single();
 
     if (error) {
-      logSupabaseError('ScriptureNotesGrid saveNote', error);
+      logSupabaseError("ScriptureNotesGrid saveNote", error);
     } else {
       setNoteId(id);
     }
