@@ -23,6 +23,11 @@ export default function BookChapterNote({ book, chapter, label }: BookChapterNot
         logger.warn("[BookChapterNote] Supabase or loginId missing");
         return;
       }
+      logger.debug(
+        `[BookChapterNote] Fetching note for ${book} ${
+          chapter !== undefined ? `chapter ${chapter}` : ""
+        }`
+      );
       let query = supabase
         .from("Note")
         .select("id,content")
@@ -40,9 +45,15 @@ export default function BookChapterNote({ book, chapter, label }: BookChapterNot
       if (error) {
         logSupabaseError('BookChapterNote fetchNote', error);
       } else if (data) {
+        logger.debug(
+          `[BookChapterNote] Loaded note ${data.id} with content length ${
+            data.content?.length ?? 0
+          }`
+        );
         setNoteId(data.id);
         setContent(data.content ?? "");
       } else {
+        logger.debug("[BookChapterNote] No note found");
         setNoteId(null);
         setContent("");
       }

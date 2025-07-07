@@ -70,6 +70,10 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
         return;
       }
 
+      logger.debug(
+        `[Scriptures] Loading notes for ${book} chapter ${chapter} (loginId=${loginId})`
+      );
+
       try {
         const [bookNoteRes, chapterNoteRes, verseNotesRes] = await Promise.all([
           supabase
@@ -103,6 +107,14 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
         if (bookNoteRes.data) notesArray.push(bookNoteRes.data);
         if (chapterNoteRes.data) notesArray.push(chapterNoteRes.data);
         if (verseNotesRes.data) notesArray.push(...verseNotesRes.data);
+
+        logger.debug(
+          `[Scriptures] Loaded ${notesArray.length} notes (book=${
+            bookNoteRes.data ? 1 : 0
+          }, chapter=${chapterNoteRes.data ? 1 : 0}, verses=${
+            verseNotesRes.data ? verseNotesRes.data.length : 0
+          })`
+        );
 
         setNotes(notesArray);
       } catch (error) {
@@ -198,6 +210,11 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
                 n.chapter === chapter &&
                 n.verse != null &&
                 n.verse === v.verse
+            );
+            logger.debug(
+              `[Scriptures] Displaying verse ${v.verse} with note length ${
+                note?.content?.length ?? 0
+              }`
             );
             return (
               <ScriptureNotesGrid
