@@ -36,7 +36,9 @@ function ScriptureNotesGrid_(
   ref: HTMLElementRefOf<"div">
 ) {
   const { profile } = useAuth();
-  const loginId = profile?.phoneNumber;
+  const loginId =
+    profile?.phoneNumber ||
+    (typeof window !== "undefined" ? localStorage.getItem("loginId") || undefined : undefined);
   const [noteId, setNoteId] = React.useState<string | null>(null);
   const [content, setContent] = React.useState<string>("");
 

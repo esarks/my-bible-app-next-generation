@@ -13,6 +13,7 @@ import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
 import { logger } from "../lib/logger";
 import { flushSync } from "react-dom";
+import { useAuth } from "../AuthContext";
 
 interface Verse {
   verse: number;
@@ -22,6 +23,7 @@ interface Verse {
 export interface ScripturesProps extends DefaultScripturesProps {}
 
 function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
+  const { profile } = useAuth();
   const [book, setBook] = React.useState<string | undefined>(undefined);
   const [chapter, setChapter] = React.useState<number | undefined>(undefined);
   const [version, setVersion] = React.useState<string | undefined>(undefined);
@@ -110,7 +112,12 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
 
   return (
     <PageLayoutWrapper>
-      <div ref={ref} style={{ padding: "1rem" }}>
+      <div ref={ref} style={{ padding: "1rem", position: "relative" }}>
+        {profile && (
+          <div style={{ position: "absolute", top: 0, left: 0 }}>
+            <strong>{profile.name}</strong> {profile.phoneNumber}
+          </div>
+        )}
         <div
           style={{
             display: "flex",
