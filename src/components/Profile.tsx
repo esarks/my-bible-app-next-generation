@@ -10,7 +10,7 @@ import { logger, logSupabaseError } from "../lib/logger";
 export interface ProfileProps extends DefaultProfileProps {}
 
 function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
-  const { profile: authProfile } = useAuth();
+  const { profile: authProfile, setProfile } = useAuth();
   const [phone, setPhone] = React.useState(authProfile?.phoneNumber ?? "");
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -48,6 +48,16 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
     fetchProfile();
   }, [authProfile?.phoneNumber]);
 
+  React.useEffect(() => {
+    if (authProfile?.phoneNumber) {
+      try {
+        localStorage.setItem("loginId", authProfile.phoneNumber);
+      } catch {
+        // ignore storage errors
+      }
+    }
+  }, [authProfile?.phoneNumber]);
+
   const handleSave = async () => {
     if (!supabase) {
       logger.error("[handleSave] Supabase client is not initialized");
@@ -71,6 +81,12 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       alert("Failed to save profile");
     } else {
       setProfileId(newId);
+      setProfile(profile);
+      try {
+        localStorage.setItem("loginId", phone);
+      } catch {
+        // ignore storage errors
+      }
       alert("Profile saved successfully");
     }
   };
@@ -97,6 +113,12 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       setName(data.name ?? "");
       setEmail(data.email ?? "");
       setIsEmailVerified(data.emailVerified ? "true" : "false");
+      setProfile(data);
+      try {
+        localStorage.setItem("loginId", data.phoneNumber ?? "");
+      } catch {
+        // ignore storage errors
+      }
     } else {
       alert("No profile found");
     }
