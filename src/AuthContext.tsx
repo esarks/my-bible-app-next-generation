@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 export interface AuthContextType {
   isVerified: boolean;
@@ -11,7 +11,35 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isVerified, setIsVerified] = useState(false);
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(() => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+    try {
+      const stored = localStorage.getItem("profile");
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    try {
+      if (profile) {
+        localStorage.setItem("profile", JSON.stringify(profile));
+        if (profile.phoneNumber) {
+          localStorage.setItem("loginId", profile.phoneNumber);
+        }
+      } else {
+        localStorage.removeItem("profile");
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, [profile]);
 
   return (
     <AuthContext.Provider value={{ isVerified, setIsVerified, profile, setProfile }}>

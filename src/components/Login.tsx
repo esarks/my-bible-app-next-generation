@@ -75,7 +75,14 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         if (!supabase) {
           logger.error('[handleVerify] Supabase client is not initialized');
           alert('Verification succeeded, but Supabase is not configured.');
-          setProfile({ phoneNumber: phone });
+          const tempProfile = { phoneNumber: phone };
+          setProfile(tempProfile);
+          try {
+            localStorage.setItem('loginId', phone);
+            localStorage.setItem('profile', JSON.stringify(tempProfile));
+          } catch {
+            // ignore storage errors
+          }
           setIsVerified(true);
           navigate('/profile');
           return;
@@ -97,13 +104,32 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
             .single();
           if (insertError) {
             logSupabaseError('handleVerify insert', insertError);
-            } else {
-              setProfile(newProfile);
+          } else if (newProfile) {
+            setProfile(newProfile);
+            try {
+              localStorage.setItem('loginId', newProfile.phoneNumber ?? '');
+              localStorage.setItem('profile', JSON.stringify(newProfile));
+            } catch {
+              // ignore storage errors
             }
+          }
         } else if (profileData) {
           setProfile(profileData);
+          try {
+            localStorage.setItem('loginId', profileData.phoneNumber ?? '');
+            localStorage.setItem('profile', JSON.stringify(profileData));
+          } catch {
+            // ignore storage errors
+          }
         } else {
-          setProfile({ phoneNumber: phone });
+          const tempProfile = { phoneNumber: phone };
+          setProfile(tempProfile);
+          try {
+            localStorage.setItem('loginId', phone);
+            localStorage.setItem('profile', JSON.stringify(tempProfile));
+          } catch {
+            // ignore storage errors
+          }
         }
 
         setIsVerified(true);
