@@ -42,6 +42,10 @@ function ScriptureNotesGrid_(
         return;
       }
 
+      logger.debug(
+        `[ScriptureNotesGrid] Fetching note for ${book} chapter ${chapter} verse ${verse}`
+      );
+
       const { data, error } = await supabase
         .from("Note")
         .select("id,content")
@@ -54,9 +58,15 @@ function ScriptureNotesGrid_(
       if (error) {
         logSupabaseError("ScriptureNotesGrid fetchNote", error);
       } else if (data) {
+        logger.debug(
+          `[ScriptureNotesGrid] Loaded note ${data.id} with content length ${
+            data.content?.length ?? 0
+          }`
+        );
         setNoteId(data.id);
         setContent(data.content ?? "");
       } else {
+        logger.debug("[ScriptureNotesGrid] No note found");
         setNoteId(null);
         setContent(noteContent ?? ""); // ✅ fallback to noteContent if no DB note exists
       }
