@@ -78,6 +78,8 @@ function ScriptureNotesGrid_(
     }
 
     const id = noteId ?? crypto.randomUUID();
+    const prefix = `Notes for Scripture ${book} ${chapter}:${verse} - ${text}`;
+
     const { error } = await supabase
       .from("Note")
       .upsert({
@@ -86,7 +88,7 @@ function ScriptureNotesGrid_(
         book,
         chapter,
         verse,
-        content,
+        content: `${prefix}: ${content}`,
         updatedAt: new Date().toISOString(),
       })
       .select("id")
