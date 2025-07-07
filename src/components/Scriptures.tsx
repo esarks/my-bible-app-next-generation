@@ -1,34 +1,39 @@
-// Fully manual Scriptures.tsx with full control and no Plasmic dependency
-
+// Fully manual Scriptures.tsx with user info and full notes support
 import * as React from "react";
 import PageLayoutWrapper from "./PageLayoutWrapper";
 import ScriptureNotesGrid from "./ScriptureNotesGrid";
-import BookChapterNote from "./BookChapterNote";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
 import { logger } from "../lib/logger";
 import { flushSync } from "react-dom";
 import { useAuth } from "../AuthContext";
+import { supabase } from "../lib/supabaseClient";
 
 interface Verse {
   verse: number;
   text: string;
 }
 
-export interface ScripturesProps {}
+interface Note {
+  id: string;
+  loginId: string;
+  book: string;
+  chapter?: number;
+  verse?: number;
+  content: string;
+}
 
-function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
+function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
   const { profile } = useAuth();
+  const loginId = profile?.phoneNumber ?? "";
+  const userName = profile?.name ?? "";
+
   const [book, setBook] = React.useState<string | undefined>(undefined);
   const [chapter, setChapter] = React.useState<number | undefined>(undefined);
   const [version, setVersion] = React.useState<string | undefined>(undefined);
   const [verses, setVerses] = React.useState<Verse[]>([]);
-
-  const versions = React.useMemo(
-    () => bibleVersions.map((v) => ({ value: v.module, label: v.shortname || v.name })),
-    []
-  );
+  const [notes, setNotes] = React.useState<Note[]>([]);
 
   React.useEffect(() => {
     if (!version) {
@@ -40,78 +45,85 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
 
   React.useEffect(() => {
     if (version && book && chapter) {
-      logger.debug(`Fetching verses for ${book} chapter ${chapter} from version ${version}`);
+      logger.debug(`Fetching verses for ${book} chapter ${chapter}`);
       fetch(`/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(`HTTP ${res.status} ${res.statusText}`);
-          }
-          return res.json();
-        })
+        .then((res) => res.json())
         .then((data: Verse[]) => {
-          const found = bibleBooks.find((b) => b.name === book);
-          if (!data.length) {
-            logger.warn(`No verses returned for ${book} chapter ${chapter} from version ${version}`);
-            alert(`No verses found for ${book} chapter ${chapter}`);
-            setVerses([]);
-            return;
-          }
           flushSync(() => {
             setVerses(data);
           });
-          if (found) {
-            logger.debug(`Loaded ${found.name} chapter ${chapter} successfully`);
-          } else {
-            logger.debug(`Book not in list: ${book}`);
-            alert(`Book "${book}" was not found.`);
-          }
         })
         .catch((err) => {
-          logger.error("Failed to load verses", err);
-          alert(`Failed to load ${book} chapter ${chapter}: ${err.message}`);
+          logger.error("Error fetching verses", err);
           setVerses([]);
         });
-    } else {
-      setVerses([]);
     }
   }, [version, book, chapter]);
 
-  const bookOptions = React.useMemo(
-    () => bibleBooks.map((b) => ({ value: b.name, label: b.name })),
-    []
-  );
+  React.useEffect(() => {
+    const loadNotes = async () => {
+      if (!loginId || !book || chapter === undefined) return;
 
+      try {
+        const [bookNoteRes, chapterNoteRes, verseNotesRes] = await Promise.all([
+          supabase
+            .from("Note")
+            .select("*")
+            .eq("loginId", loginId)
+            .eq("book", book)
+            .is("chapter", null)
+            .is("verse", null)
+            .maybeSingle(),
+
+          supabase
+            .from("Note")
+            .select("*")
+            .eq("loginId", loginId)
+            .eq("book", book)
+            .eq("chapter", chapter)
+            .is("verse", null)
+            .maybeSingle(),
+
+          supabase
+            .from("Note")
+            .select("*")
+            .eq("loginId", loginId)
+            .eq("book", book)
+            .eq("chapter", chapter)
+            .not("verse", "is", null),
+        ]);
+
+        const notesArray: Note[] = [];
+        if (bookNoteRes.data) notesArray.push(bookNoteRes.data);
+        if (chapterNoteRes.data) notesArray.push(chapterNoteRes.data);
+        if (verseNotesRes.data) notesArray.push(...verseNotesRes.data);
+
+        setNotes(notesArray);
+      } catch (error) {
+        logger.error("Error loading notes", error);
+      }
+    };
+
+    loadNotes();
+  }, [loginId, book, chapter]);
+
+  const versions = bibleVersions.map((v) => ({ value: v.module, label: v.shortname || v.name }));
+  const bookOptions = bibleBooks.map((b) => ({ value: b.name, label: b.name }));
   const chapterOptions = React.useMemo(() => {
-    const selected = bibleBooks.find((b) => b.name === book);
-    if (!selected) {
-      return [];
-    }
-    return Array.from({ length: selected.chapters }, (_, i) => ({
-      value: i + 1,
-      label: String(i + 1),
-    }));
+    const b = bibleBooks.find((x) => x.name === book);
+    return b ? Array.from({ length: b.chapters }, (_, i) => ({ value: i + 1, label: String(i + 1) })) : [];
   }, [book]);
 
   return (
     <PageLayoutWrapper>
-      <div ref={ref} style={{ padding: "1rem", position: "relative" }}>
-        {profile && (
-          <div style={{ position: "absolute", top: 0, left: 0 }}>
-            <strong>{profile.name}</strong> {profile.phoneNumber}
-          </div>
-        )}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            alignItems: "flex-end",
-            gap: "1rem",
-            marginBottom: "1rem",
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column", width: "150px" }}>
-            <label style={{ marginBottom: "0.25rem", fontWeight: 500 }}>Version:</label>
+      <div ref={ref} style={{ padding: "1rem" }}>
+        <div style={{ marginBottom: "1rem" }}>
+          <strong>User:</strong> {userName || "(no name)"} | <strong>Phone:</strong> {loginId}
+        </div>
+
+        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label>Version:</label>
             <select
               value={version}
               onChange={(e) => {
@@ -121,91 +133,77 @@ function Scriptures_(props: ScripturesProps, ref: HTMLElementRefOf<"div">) {
               }}
             >
               {versions.map((v) => (
-                <option key={v.value} value={v.value}>
-                  {v.label}
-                </option>
+                <option key={v.value} value={v.value}>{v.label}</option>
               ))}
             </select>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", width: "150px" }}>
-            <label style={{ marginBottom: "0.25rem", fontWeight: 500 }}>Book:</label>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label>Book:</label>
             <select
               value={book}
               onChange={(e) => {
-                const newBook = e.target.value;
-                logger.debug(`Selected book ${newBook}`);
-                setBook(newBook);
+                setBook(e.target.value);
                 setChapter(1);
               }}
             >
               {bookOptions.map((b) => (
-                <option key={b.value} value={b.value}>
-                  {b.label}
-                </option>
+                <option key={b.value} value={b.value}>{b.label}</option>
               ))}
             </select>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", width: "100px" }}>
-            <label style={{ marginBottom: "0.25rem", fontWeight: 500 }}>Chapter:</label>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label>Chapter:</label>
             <select
               value={chapter}
-              onChange={(e) => {
-                const chapNum = parseInt(e.target.value);
-                logger.debug(`Selected chapter ${chapNum}`);
-                setChapter(chapNum);
-              }}
+              onChange={(e) => setChapter(parseInt(e.target.value))}
             >
               {chapterOptions.map((c) => (
-                <option key={c.value} value={c.value}>
-                  {c.label}
-                </option>
+                <option key={c.value} value={c.value}>{c.label}</option>
               ))}
             </select>
           </div>
         </div>
 
         {book && chapter && (
-          <>
-            <h2 style={{ marginTop: "1rem" }}>{book} {chapter}</h2>
-            <textarea
-              style={{ width: "100%", minHeight: "60px", marginTop: "1rem" }}
-              placeholder={`Book notes for [${book}]`}
-            />
-            <textarea
-              style={{ width: "100%", minHeight: "60px", marginTop: "0.5rem" }}
-              placeholder={`Chapter notes for [${chapter}]`}
-            />
-          </>
+          <h2 style={{ marginTop: "1rem" }}>{book} {chapter}</h2>
         )}
 
         {book && (
-          <BookChapterNote book={book} label="Book Notes" />
+          <div style={{ marginTop: "1rem" }}>
+            <strong>Book Notes [{book}]:</strong>
+            <div>{notes.find(n => n.book === book && n.chapter == null && n.verse == null)?.content ?? "(none)"}</div>
+          </div>
         )}
 
         {book && chapter && (
-          <BookChapterNote book={book} chapter={chapter} label="Chapter Notes" />
+          <div style={{ marginTop: "1rem" }}>
+            <strong>Chapter Notes [{chapter}]:</strong>
+            <div>{notes.find(n => n.book === book && n.chapter === chapter && n.verse == null)?.content ?? "(none)"}</div>
+          </div>
         )}
 
-        <div
-          style={{
-            paddingTop: "1rem",
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.5rem",
-          }}
-        >
-          {verses.map((v) => (
-            <ScriptureNotesGrid
-              key={v.verse}
-              book={book!}
-              chapter={chapter!}
-              verse={v.verse}
-              text={v.text}
-              placeholder={`Verse notes for [${v.verse}]`}
-            />
-          ))}
+        <div style={{ paddingTop: "1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          {verses.map((v) => {
+            const note = notes.find(
+              (n) =>
+                n.book === book &&
+                n.chapter === chapter &&
+                n.verse != null &&
+                n.verse === v.verse
+            );
+            return (
+              <ScriptureNotesGrid
+                key={v.verse}
+                book={book!}
+                chapter={chapter!}
+                verse={v.verse}
+                text={v.text}
+                noteContent={note?.content}
+              />
+            );
+          })}
         </div>
       </div>
     </PageLayoutWrapper>
