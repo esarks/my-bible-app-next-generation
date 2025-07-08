@@ -7,9 +7,10 @@ export interface BookChapterNoteProps {
   book: string;
   chapter?: number;
   label: string;
+  onSaved?: () => void;
 }
 
-export default function BookChapterNote({ book, chapter, label }: BookChapterNoteProps) {
+export default function BookChapterNote({ book, chapter, label, onSaved }: BookChapterNoteProps) {
   const { profile } = useAuth();
   const loginId =
     profile?.id ||
@@ -91,6 +92,7 @@ export default function BookChapterNote({ book, chapter, label }: BookChapterNot
       logSupabaseError('BookChapterNote saveNote', error);
     } else {
       setNoteId(id);
+      onSaved?.();
     }
   };
 
