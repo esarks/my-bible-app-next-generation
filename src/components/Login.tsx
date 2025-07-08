@@ -75,10 +75,10 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         if (!supabase) {
           logger.error('[handleVerify] Supabase client is not initialized');
           alert('Verification succeeded, but Supabase is not configured.');
-          const tempProfile = { phoneNumber: phone };
+          const tempProfile = { id: phone, phoneNumber: phone };
           setProfile(tempProfile);
           try {
-            localStorage.setItem('loginId', phone);
+            localStorage.setItem('loginId', tempProfile.id);
             localStorage.setItem('profile', JSON.stringify(tempProfile));
           } catch {
             // ignore storage errors
@@ -107,7 +107,7 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
           } else if (newProfile) {
             setProfile(newProfile);
             try {
-              localStorage.setItem('loginId', newProfile.phoneNumber ?? '');
+              localStorage.setItem('loginId', newProfile.id ?? '');
               localStorage.setItem('profile', JSON.stringify(newProfile));
             } catch {
               // ignore storage errors
@@ -116,16 +116,16 @@ function Login_(props: LoginProps, ref: HTMLElementRefOf<"div">) {
         } else if (profileData) {
           setProfile(profileData);
           try {
-            localStorage.setItem('loginId', profileData.phoneNumber ?? '');
+            localStorage.setItem('loginId', profileData.id ?? '');
             localStorage.setItem('profile', JSON.stringify(profileData));
           } catch {
             // ignore storage errors
           }
         } else {
-          const tempProfile = { phoneNumber: phone };
+          const tempProfile = { id: phone, phoneNumber: phone };
           setProfile(tempProfile);
           try {
-            localStorage.setItem('loginId', phone);
+            localStorage.setItem('loginId', tempProfile.id);
             localStorage.setItem('profile', JSON.stringify(tempProfile));
           } catch {
             // ignore storage errors
