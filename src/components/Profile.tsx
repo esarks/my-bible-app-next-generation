@@ -49,14 +49,14 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
   }, [authProfile?.phoneNumber]);
 
   React.useEffect(() => {
-    if (authProfile?.phoneNumber) {
+    if (authProfile?.id) {
       try {
-        localStorage.setItem("loginId", authProfile.phoneNumber);
+        localStorage.setItem("loginId", authProfile.id);
       } catch {
         // ignore storage errors
       }
     }
-  }, [authProfile?.phoneNumber]);
+  }, [authProfile?.id]);
 
   const handleSave = async () => {
     if (!supabase) {
@@ -83,7 +83,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       setProfileId(newId);
       setProfile(profile);
       try {
-        localStorage.setItem("loginId", phone);
+        localStorage.setItem("loginId", newId);
       } catch {
         // ignore storage errors
       }
@@ -115,7 +115,7 @@ function Profile_(props: ProfileProps, ref: React.Ref<HTMLDivElement>) {
       setIsEmailVerified(data.emailVerified ? "true" : "false");
       setProfile(data);
       try {
-        localStorage.setItem("loginId", data.phoneNumber ?? "");
+        localStorage.setItem("loginId", data.id ?? "");
       } catch {
         // ignore storage errors
       }

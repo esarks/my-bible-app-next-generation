@@ -27,7 +27,7 @@ interface Note {
 function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
   const { profile } = useAuth();
   const loginId =
-    profile?.phoneNumber ||
+    profile?.id ||
     (typeof window !== "undefined" ? localStorage.getItem("loginId") || undefined : undefined);
   const userName = profile?.name ?? "";
 
@@ -136,7 +136,7 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
     <PageLayoutWrapper>
       <div ref={ref} style={{ padding: "1rem" }}>
         <div style={{ marginBottom: "1rem" }}>
-          <strong>User:</strong> {userName || "(no name)"} | <strong>Phone:</strong> {loginId}
+          <strong>User:</strong> {userName || "(no name)"} | <strong>ID:</strong> {loginId}
         </div>
 
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>

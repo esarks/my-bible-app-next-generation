@@ -26,7 +26,7 @@ function ScriptureNotesGrid_(
 ) {
   const { profile } = useAuth();
   const loginId =
-    profile?.phoneNumber ||
+    profile?.id ||
     (typeof window !== "undefined"
       ? localStorage.getItem("loginId") || undefined
       : undefined);

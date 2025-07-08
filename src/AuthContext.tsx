@@ -30,8 +30,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       if (profile) {
         localStorage.setItem("profile", JSON.stringify(profile));
-        if (profile.phoneNumber) {
-          localStorage.setItem("loginId", profile.phoneNumber);
+        if (profile.id) {
+          localStorage.setItem("loginId", profile.id);
         }
       } else {
         localStorage.removeItem("profile");
