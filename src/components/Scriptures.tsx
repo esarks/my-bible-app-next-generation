@@ -37,8 +37,6 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
   const [version, setVersion] = React.useState<string | undefined>(undefined);
   const [verses, setVerses] = React.useState<Verse[]>([]);
   const [notes, setNotes] = React.useState<Note[]>([]);
-  const [showBookNote, setShowBookNote] = React.useState(false);
-  const [showChapterNote, setShowChapterNote] = React.useState(false);
 
   React.useEffect(() => {
     if (!version) {
@@ -208,35 +206,23 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
         {book && (
           <div style={{ marginTop: "1rem" }}>
             <strong>Book Notes [{book}]:</strong>
-            <div>{notes.find(n => n.book === book && n.chapter == null && n.verse == null)?.content ?? "(none)"}</div>
-            <button onClick={() => setShowBookNote(!showBookNote)} style={{ marginTop: '0.5rem' }}>
-              {showBookNote ? 'Hide' : 'Add'} Book Note
-            </button>
-            {showBookNote && (
-              <BookChapterNote
-                book={book}
-                label={`Notes for ${book}`}
-                onSaved={fetchNotes}
-              />
-            )}
+            <BookChapterNote
+              book={book}
+              label={`Notes for ${book}`}
+              onSaved={fetchNotes}
+            />
           </div>
         )}
 
         {book && chapter && (
           <div style={{ marginTop: "1rem" }}>
             <strong>Chapter Notes [{chapter}]:</strong>
-            <div>{notes.find(n => n.book === book && n.chapter === chapter && n.verse == null)?.content ?? "(none)"}</div>
-            <button onClick={() => setShowChapterNote(!showChapterNote)} style={{ marginTop: '0.5rem' }}>
-              {showChapterNote ? 'Hide' : 'Add'} Chapter Note
-            </button>
-            {showChapterNote && (
-              <BookChapterNote
-                book={book}
-                chapter={chapter}
-                label={`Notes for ${book} ${chapter}`}
-                onSaved={fetchNotes}
-              />
-            )}
+            <BookChapterNote
+              book={book}
+              chapter={chapter}
+              label={`Notes for ${book} ${chapter}`}
+              onSaved={fetchNotes}
+            />
           </div>
         )}
 

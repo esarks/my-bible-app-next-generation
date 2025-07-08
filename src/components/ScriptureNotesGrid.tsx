@@ -34,13 +34,11 @@ function ScriptureNotesGrid_(
 
   const [noteId, setNoteId] = React.useState<string | null>(null);
   const [content, setContent] = React.useState<string>(noteContent ?? "");
-  const [showNote, setShowNote] = React.useState<boolean>(!!noteContent);
+  const [savedContent, setSavedContent] = React.useState<string>(noteContent ?? "");
 
   React.useEffect(() => {
     setContent(noteContent ?? "");
-    if (noteContent) {
-      setShowNote(true);
-    }
+    setSavedContent(noteContent ?? "");
   }, [noteContent]);
 
   const saveNote = async () => {
@@ -71,6 +69,7 @@ function ScriptureNotesGrid_(
       logSupabaseError("ScriptureNotesGrid saveNote", error);
     } else {
       setNoteId(id);
+      setSavedContent(content);
       onSave?.(content);
     }
   };
@@ -90,26 +89,30 @@ function ScriptureNotesGrid_(
       }}
       noteText={{
         children: (
-          showNote ? (
+          <>
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              onBlur={saveNote}
               placeholder={`Notes for verse ${verse}`}
               rows={2}
               style={{ width: "100%" }}
             />
-          ) : null
+            <button
+              onClick={saveNote}
+              disabled={content === savedContent}
+              style={{
+                marginTop: "0.25rem",
+                backgroundColor:
+                  content !== savedContent ? "#69c0ff" : "#f0f0f0",
+                cursor: content !== savedContent ? "pointer" : "default",
+              }}
+            >
+              Update
+            </button>
+          </>
         ),
       }}
-      addNotesButton={{
-        children: showNote
-          ? "Hide Notes"
-          : content
-          ? "Edit Notes"
-          : "Add Notes",
-        onClick: () => setShowNote(!showNote),
-      }}
+      addNotesButton={{ style: { display: "none" } }}
       {...rest}
     />
   );
