@@ -18,10 +18,11 @@ export interface ScriptureNotesGridProps
   verse: number;
   text: string;
   noteContent?: string;
+  onSave?: (content: string) => void;
 }
 
 function ScriptureNotesGrid_(
-  { book, chapter, verse, text, noteContent, ...rest }: ScriptureNotesGridProps,
+  { book, chapter, verse, text, noteContent, onSave, ...rest }: ScriptureNotesGridProps,
   ref: HTMLElementRefOf<"div">
 ) {
   const { profile } = useAuth();
@@ -33,9 +34,13 @@ function ScriptureNotesGrid_(
 
   const [noteId, setNoteId] = React.useState<string | null>(null);
   const [content, setContent] = React.useState<string>(noteContent ?? "");
+  const [showNote, setShowNote] = React.useState<boolean>(!!noteContent);
 
   React.useEffect(() => {
     setContent(noteContent ?? "");
+    if (noteContent) {
+      setShowNote(true);
+    }
   }, [noteContent]);
 
   const saveNote = async () => {
@@ -66,6 +71,7 @@ function ScriptureNotesGrid_(
       logSupabaseError("ScriptureNotesGrid saveNote", error);
     } else {
       setNoteId(id);
+      onSave?.(content);
     }
   };
 
@@ -84,15 +90,25 @@ function ScriptureNotesGrid_(
       }}
       noteText={{
         children: (
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            onBlur={saveNote}
-            placeholder={`Notes for verse ${verse}`}
-            rows={2}
-            style={{ width: "100%" }}
-          />
+          showNote ? (
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              onBlur={saveNote}
+              placeholder={`Notes for verse ${verse}`}
+              rows={2}
+              style={{ width: "100%" }}
+            />
+          ) : null
         ),
+      }}
+      addNotesButton={{
+        children: showNote
+          ? "Hide Notes"
+          : content
+          ? "Edit Notes"
+          : "Add Notes",
+        onClick: () => setShowNote(!showNote),
       }}
       {...rest}
     />

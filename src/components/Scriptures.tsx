@@ -2,6 +2,7 @@
 import * as React from "react";
 import PageLayoutWrapper from "./PageLayoutWrapper";
 import ScriptureNotesGrid from "./ScriptureNotesGrid";
+import BookChapterNote from "./BookChapterNote";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
@@ -36,6 +37,8 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
   const [version, setVersion] = React.useState<string | undefined>(undefined);
   const [verses, setVerses] = React.useState<Verse[]>([]);
   const [notes, setNotes] = React.useState<Note[]>([]);
+  const [showBookNote, setShowBookNote] = React.useState(false);
+  const [showChapterNote, setShowChapterNote] = React.useState(false);
 
   React.useEffect(() => {
     if (!version) {
@@ -62,13 +65,12 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
     }
   }, [version, book, chapter]);
 
-  React.useEffect(() => {
-    const loadNotes = async () => {
-      if (!supabase || !loginId || !book || chapter === undefined) {
-        logger.warn("[Scriptures] Cannot load notes - missing supabase or loginId");
-        setNotes([]);
-        return;
-      }
+  const fetchNotes = React.useCallback(async () => {
+    if (!supabase || !loginId || !book || chapter === undefined) {
+      logger.warn("[Scriptures] Cannot load notes - missing supabase or loginId");
+      setNotes([]);
+      return;
+    }
 
       logger.debug(
         `[Scriptures] Loading notes for ${book} chapter ${chapter} (loginId=${loginId})`
@@ -130,14 +132,15 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
           })`
         );
 
-        setNotes(notesArray);
-      } catch (error) {
-        logger.error("Error loading notes", error);
-      }
-    };
-
-    loadNotes();
+      setNotes(notesArray);
+    } catch (error) {
+      logger.error("Error loading notes", error);
+    }
   }, [loginId, book, chapter]);
+
+  React.useEffect(() => {
+    fetchNotes();
+  }, [fetchNotes]);
 
   const versions = bibleVersions.map((v) => ({ value: v.module, label: v.shortname || v.name }));
   const bookOptions = bibleBooks.map((b) => ({ value: b.name, label: b.name }));
@@ -206,6 +209,16 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
           <div style={{ marginTop: "1rem" }}>
             <strong>Book Notes [{book}]:</strong>
             <div>{notes.find(n => n.book === book && n.chapter == null && n.verse == null)?.content ?? "(none)"}</div>
+            <button onClick={() => setShowBookNote(!showBookNote)} style={{ marginTop: '0.5rem' }}>
+              {showBookNote ? 'Hide' : 'Add'} Book Note
+            </button>
+            {showBookNote && (
+              <BookChapterNote
+                book={book}
+                label={`Notes for ${book}`}
+                onSaved={fetchNotes}
+              />
+            )}
           </div>
         )}
 
@@ -213,6 +226,17 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
           <div style={{ marginTop: "1rem" }}>
             <strong>Chapter Notes [{chapter}]:</strong>
             <div>{notes.find(n => n.book === book && n.chapter === chapter && n.verse == null)?.content ?? "(none)"}</div>
+            <button onClick={() => setShowChapterNote(!showChapterNote)} style={{ marginTop: '0.5rem' }}>
+              {showChapterNote ? 'Hide' : 'Add'} Chapter Note
+            </button>
+            {showChapterNote && (
+              <BookChapterNote
+                book={book}
+                chapter={chapter}
+                label={`Notes for ${book} ${chapter}`}
+                onSaved={fetchNotes}
+              />
+            )}
           </div>
         )}
 
@@ -238,6 +262,7 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
                 verse={v.verse}
                 text={v.text}
                 noteContent={note?.content}
+                onSave={() => fetchNotes()}
               />
             );
           })}
