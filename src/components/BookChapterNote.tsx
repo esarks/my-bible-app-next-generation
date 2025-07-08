@@ -40,6 +40,9 @@ export default function BookChapterNote({ book, chapter, label }: BookChapterNot
         query = query.eq("chapter", chapter);
       }
 
+      // If multiple notes exist, grab the most recently updated one
+      query = query.order("updatedAt", { ascending: false }).limit(1);
+
       const { data, error } = await query.maybeSingle();
 
       if (error) {
