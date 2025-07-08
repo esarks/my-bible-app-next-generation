@@ -83,6 +83,8 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
             .eq("book", book)
             .is("chapter", null)
             .is("verse", null)
+            .order("updatedAt", { ascending: false })
+            .limit(1)
             .maybeSingle(),
 
           supabase
@@ -92,6 +94,8 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
             .eq("book", book)
             .eq("chapter", chapter)
             .is("verse", null)
+            .order("updatedAt", { ascending: false })
+            .limit(1)
             .maybeSingle(),
 
           supabase
@@ -100,13 +104,23 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
             .eq("loginId", loginId)
             .eq("book", book)
             .eq("chapter", chapter)
-            .not("verse", "is", null),
+            .not("verse", "is", null)
+            .order("updatedAt", { ascending: false }),
         ]);
 
         const notesArray: Note[] = [];
         if (bookNoteRes.data) notesArray.push(bookNoteRes.data);
         if (chapterNoteRes.data) notesArray.push(chapterNoteRes.data);
-        if (verseNotesRes.data) notesArray.push(...verseNotesRes.data);
+        if (verseNotesRes.data) {
+          const unique = new Map<number, Note>();
+          for (const vn of verseNotesRes.data) {
+            const key = vn.verse!;
+            if (!unique.has(key)) {
+              unique.set(key, vn);
+            }
+          }
+          notesArray.push(...unique.values());
+        }
 
         logger.debug(
           `[Scriptures] Loaded ${notesArray.length} notes (book=${

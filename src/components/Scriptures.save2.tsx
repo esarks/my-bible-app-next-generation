@@ -97,6 +97,7 @@ return (
     {...props}
   />
 );
+}
 
 const Scriptures = React.forwardRef(Scriptures_);
 export default Scriptures;
