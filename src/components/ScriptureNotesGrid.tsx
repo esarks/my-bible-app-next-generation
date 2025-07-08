@@ -34,6 +34,10 @@ function ScriptureNotesGrid_(
   const [noteId, setNoteId] = React.useState<string | null>(null);
   const [content, setContent] = React.useState<string>(noteContent ?? "");
 
+  React.useEffect(() => {
+    setContent(noteContent ?? "");
+  }, [noteContent]);
+
   const saveNote = async () => {
     if (!supabase || !loginId) {
       logger.warn(
