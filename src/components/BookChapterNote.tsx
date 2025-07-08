@@ -17,6 +17,7 @@ export default function BookChapterNote({ book, chapter, label, onSaved }: BookC
     (typeof window !== "undefined" ? localStorage.getItem("loginId") || undefined : undefined);
   const [noteId, setNoteId] = React.useState<string | null>(null);
   const [content, setContent] = React.useState<string>("");
+  const [savedContent, setSavedContent] = React.useState<string>("");
 
   React.useEffect(() => {
     const fetchNote = async () => {
@@ -56,10 +57,12 @@ export default function BookChapterNote({ book, chapter, label, onSaved }: BookC
         );
         setNoteId(data.id);
         setContent(data.content ?? "");
+        setSavedContent(data.content ?? "");
       } else {
         logger.debug("[BookChapterNote] No note found");
         setNoteId(null);
         setContent("");
+        setSavedContent("");
       }
     };
 
@@ -92,6 +95,7 @@ export default function BookChapterNote({ book, chapter, label, onSaved }: BookC
       logSupabaseError('BookChapterNote saveNote', error);
     } else {
       setNoteId(id);
+      setSavedContent(content);
       onSaved?.();
     }
   };
@@ -102,11 +106,21 @@ export default function BookChapterNote({ book, chapter, label, onSaved }: BookC
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        onBlur={saveNote}
         rows={3}
         style={{ width: "100%" }}
         placeholder={label}
       />
+      <button
+        onClick={saveNote}
+        disabled={content === savedContent}
+        style={{
+          marginTop: "0.25rem",
+          backgroundColor: content !== savedContent ? "#69c0ff" : "#f0f0f0",
+          cursor: content !== savedContent ? "pointer" : "default",
+        }}
+      >
+        Update
+      </button>
     </div>
   );
 }
