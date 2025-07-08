@@ -32,48 +32,7 @@ function ScriptureNotesGrid_(
       : undefined);
 
   const [noteId, setNoteId] = React.useState<string | null>(null);
-  const [content, setContent] = React.useState<string>("");
-
-  // Fetch existing note when context or location changes
-  React.useEffect(() => {
-    const fetchNote = async () => {
-      if (!supabase || !loginId) {
-        logger.warn("[ScriptureNotesGrid] Supabase or loginId missing");
-        return;
-      }
-
-      logger.debug(
-        `[ScriptureNotesGrid] Fetching note for ${book} chapter ${chapter} verse ${verse}`
-      );
-
-      const { data, error } = await supabase
-        .from("Note")
-        .select("id,content")
-        .eq("loginId", loginId)
-        .eq("book", book)
-        .eq("chapter", chapter)
-        .eq("verse", verse)
-        .maybeSingle();
-
-      if (error) {
-        logSupabaseError("ScriptureNotesGrid fetchNote", error);
-      } else if (data) {
-        logger.debug(
-          `[ScriptureNotesGrid] Loaded note ${data.id} with content length ${
-            data.content?.length ?? 0
-          }`
-        );
-        setNoteId(data.id);
-        setContent(data.content ?? "");
-      } else {
-        logger.debug("[ScriptureNotesGrid] No note found");
-        setNoteId(null);
-        setContent(noteContent ?? ""); // ✅ fallback to noteContent if no DB note exists
-      }
-    };
-
-    fetchNote();
-  }, [loginId, book, chapter, verse, noteContent]);
+  const [content, setContent] = React.useState<string>(noteContent ?? "");
 
   const saveNote = async () => {
     if (!supabase || !loginId) {
