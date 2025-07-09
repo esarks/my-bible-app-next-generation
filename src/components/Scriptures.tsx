@@ -8,6 +8,7 @@ import { bibleBooks } from "../lib/bibleData";
 import { bibleVersions } from "../lib/bibleVersions";
 import { logger } from "../lib/logger";
 import { flushSync } from "react-dom";
+import { getScripture } from "../services/api";
 import { useAuth } from "../AuthContext";
 import { supabase } from "../lib/supabaseClient";
 
@@ -49,19 +50,7 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
   React.useEffect(() => {
     if (version && book && chapter) {
       logger.debug(`Fetching verses for ${book} chapter ${chapter}`);
-      fetch(`/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`)
-        .then(async (res) => {
-          if (!res.ok) {
-            logger.error(`Error fetching verses: ${res.status}`);
-            return [];
-          }
-          const data = await res.json();
-          if (!Array.isArray(data)) {
-            logger.error("Scripture response is not an array", data);
-            return [];
-          }
-          return data as Verse[];
-        })
+      getScripture(version, book, chapter)
         .then((data) => {
           flushSync(() => {
             setVerses(data);

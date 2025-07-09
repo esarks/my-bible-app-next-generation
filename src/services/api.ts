@@ -10,6 +10,10 @@ export async function getScripture(
   book: string,
   chapter: number
 ): Promise<Verse[]> {
+  if (version === "niv_api") {
+    return getPassageVerses(book, chapter);
+  }
+
   const res = await fetch(
     `/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`
   );
@@ -38,4 +42,27 @@ export async function getPassageHtml(
     throw new Error(data.error || "Failed to fetch passage");
   }
   return data.data?.content || "";
+}
+
+export async function getPassageVerses(
+  book: string,
+  chapter: number,
+  bibleId = "de4e12af7f28f599-01"
+): Promise<Verse[]> {
+  const html = await getPassageHtml(book, chapter, undefined, bibleId);
+  const verses: Verse[] = [];
+
+  if (typeof window !== "undefined") {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    doc.querySelectorAll('span[data-type="verse"]').forEach((el) => {
+      const num = parseInt(el.getAttribute("data-number") || "", 10);
+      const text = el.textContent || "";
+      if (!isNaN(num)) {
+        verses.push({ book, chapter, verse: num, text });
+      }
+    });
+  }
+
+  return verses;
 }
