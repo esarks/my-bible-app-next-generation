@@ -9,6 +9,7 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../AuthContext";
 import { logger, logSupabaseError } from "../lib/logger";
+import AutoSizeTextarea from "./AutoSizeTextarea";
 
 // Extend props with noteContent to avoid DOM warning
 export interface ScriptureNotesGridProps
@@ -90,11 +91,10 @@ function ScriptureNotesGrid_(
       noteText={{
         children: (
           <>
-            <textarea
+            <AutoSizeTextarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder={content ? undefined : ""}
-              rows={2}
               style={{ width: "100%" }}
             />
             <button

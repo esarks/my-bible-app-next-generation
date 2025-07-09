@@ -2,6 +2,7 @@ import * as React from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../AuthContext";
 import { logger, logSupabaseError } from "../lib/logger";
+import AutoSizeTextarea from "./AutoSizeTextarea";
 
 export interface BookChapterNoteProps {
   book: string;
@@ -103,10 +104,9 @@ export default function BookChapterNote({ book, chapter, label, onSaved }: BookC
   return (
     <div style={{ width: "100%", marginBottom: "1rem" }}>
       <div style={{ fontWeight: "bold", marginBottom: "0.25rem" }}>{label}</div>
-      <textarea
+      <AutoSizeTextarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        rows={3}
         style={{ width: "100%" }}
         placeholder={content ? undefined : ""}
       />
