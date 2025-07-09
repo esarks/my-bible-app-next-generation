@@ -108,7 +108,7 @@ export default function BookChapterNote({ book, chapter, label, onSaved }: BookC
         onChange={(e) => setContent(e.target.value)}
         rows={3}
         style={{ width: "100%" }}
-        placeholder={label}
+        placeholder={content ? undefined : ""}
       />
       <button
         onClick={saveNote}

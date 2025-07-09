@@ -93,7 +93,7 @@ function ScriptureNotesGrid_(
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder={`Notes for verse ${verse}`}
+              placeholder={content ? undefined : ""}
               rows={2}
               style={{ width: "100%" }}
             />
