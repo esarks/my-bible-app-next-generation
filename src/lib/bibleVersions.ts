@@ -15,4 +15,9 @@ export const bibleVersions: BibleVersion[] = [
   { module: "net", shortname: "NET", name: "NET Bible\u00ae" },
   { module: "tyndale", shortname: "Tyndale", name: "Tyndale Bible" },
   { module: "web", shortname: "WEB", name: "World English Bible" },
+  {
+    module: "niv_api",
+    shortname: "NIV (API)",
+    name: "New International Version via API.Bible",
+  },
 ];

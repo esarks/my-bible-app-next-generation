@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import ScripturePage from "./pages/ScripturePage";
 import HomePage from "./pages/HomePage";
+import ApiBiblePage from "./pages/ApiBiblePage";
 import { logger } from "./lib/logger";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path="login" element={<LoginPage />} />
       <Route path="profile" element={<ProfilePage />} />
       <Route path="scriptures" element={<ScripturePage />} />
+      <Route path="passage" element={<ApiBiblePage />} />
     </Routes>
   );
 }

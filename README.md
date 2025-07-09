@@ -32,6 +32,11 @@ This project contains a Vite based React frontend and a simple Express backend.
    - **Supabase**: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
    - **Plasmic**: `PLASMIC_PROJECT_ID`, `PLASMIC_PUBLIC_TOKEN`
 
+The backend exposes a proxy route for API.Bible requests at
+`/api/api-bible/:bibleId`. Query it with `book`, `chapter` and optional `verse`
+to retrieve HTML passages. Example:
+`/api/api-bible/de4e12af7f28f599-01?book=Genesis&chapter=1&verse=1`.
+
 ## Running the Project
 
 Start the Vite dev server:

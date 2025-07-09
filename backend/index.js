@@ -51,6 +51,14 @@ try {
   logger.error("Failed to load ./routes/bibles.js", err.message);
 }
 
+try {
+  const apiBibleRoute = require(path.join(__dirname, "routes", "api-bible"));
+  app.use("/api/api-bible", apiBibleRoute);
+  logger.info("Loaded /api/api-bible");
+} catch (err) {
+  logger.error("Failed to load ./routes/api-bible.js", err.message);
+}
+
 // Start server
 app.listen(port, () => {
   logger.info(`Server listening on port ${port}`);
