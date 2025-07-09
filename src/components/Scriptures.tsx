@@ -50,8 +50,19 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
     if (version && book && chapter) {
       logger.debug(`Fetching verses for ${book} chapter ${chapter}`);
       fetch(`/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`)
-        .then((res) => res.json())
-        .then((data: Verse[]) => {
+        .then(async (res) => {
+          if (!res.ok) {
+            logger.error(`Error fetching verses: ${res.status}`);
+            return [];
+          }
+          const data = await res.json();
+          if (!Array.isArray(data)) {
+            logger.error("Scripture response is not an array", data);
+            return [];
+          }
+          return data as Verse[];
+        })
+        .then((data) => {
           flushSync(() => {
             setVerses(data);
           });

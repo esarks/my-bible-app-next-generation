@@ -37,6 +37,10 @@ The backend exposes a proxy route for API.Bible requests at
 to retrieve HTML passages. Example:
 `/api/api-bible/de4e12af7f28f599-01?book=Genesis&chapter=1&verse=1`.
 
+The included "NIV (API)" bible version relies on this route. Because NIV text
+is not bundled in the repository, a valid `BIBLE_API_KEY` and outbound network
+access are required to load this translation at runtime.
+
 ## Running the Project
 
 Start the Vite dev server:
