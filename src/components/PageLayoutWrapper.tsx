@@ -13,7 +13,8 @@ export default function PageLayoutWrapper({ children }: { children: React.ReactN
             <Link to="/" style={{ marginRight: "1rem" }}>Home</Link>
             <Link to="/login" style={{ marginRight: "1rem" }}>Login</Link>
             <Link to="/profile" style={{ marginRight: "1rem" }}>Profile</Link>
-            <Link to="/scriptures">Scriptures</Link>
+            <Link to="/scriptures" style={{ marginRight: "1rem" }}>Scriptures</Link>
+            <Link to="/passage">API.Bible Demo</Link>
           </nav>
         ),
       }}
