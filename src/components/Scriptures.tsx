@@ -247,7 +247,7 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
                 chapter={chapter!}
                 verse={v.verse}
                 text={v.text}
-                noteContent={note?.content}
+                noteContent={note?.content || ""}
                 onSave={() => fetchNotes()}
               />
             );
