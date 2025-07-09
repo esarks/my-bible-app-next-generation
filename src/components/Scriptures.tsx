@@ -138,7 +138,7 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
 
   React.useEffect(() => {
     fetchNotes();
-  }, [fetchNotes]);
+  }, [fetchNotes, version]);
 
   const versions = bibleVersions.map((v) => ({ value: v.module, label: v.shortname || v.name }));
   const bookOptions = bibleBooks.map((b) => ({ value: b.name, label: b.name }));
@@ -161,8 +161,6 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
               value={version}
               onChange={(e) => {
                 setVersion(e.target.value);
-                setBook(undefined);
-                setChapter(undefined);
               }}
             >
               {versions.map((v) => (
