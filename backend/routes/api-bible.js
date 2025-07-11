@@ -5,7 +5,10 @@ const logger = require("../utils/logger");
 const BIBLE_API_KEY = process.env.BIBLE_API_KEY;
 const DEFAULT_BIBLE_ID = "de4e12af7f28f599-01";
 
-router.get("/:bibleId?", async (req, res) => {
+// Express 5 no longer supports the legacy `?` optional parameter syntax.
+// Define a single handler function and register it for both
+// `/` and `/:bibleId` routes instead.
+async function getPassage(req, res) {
   if (!BIBLE_API_KEY) {
     return res.status(500).json({ error: "BIBLE_API_KEY not configured" });
   }
@@ -32,6 +35,9 @@ router.get("/:bibleId?", async (req, res) => {
     logger.error("[api-bible] fetch failed", err);
     res.status(500).json({ error: "failed to fetch" });
   }
-});
+}
+
+router.get("/:bibleId", getPassage);
+router.get("/", getPassage);
 
 module.exports = router;
