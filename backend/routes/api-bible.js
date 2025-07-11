@@ -13,12 +13,19 @@ async function getPassage(req, res) {
     return res.status(500).json({ error: "BIBLE_API_KEY not configured" });
   }
   const { book, chapter, verse } = req.query;
+  logger.info("[api-bible] incoming", {
+    book,
+    chapter,
+    verse,
+    params: req.params,
+  });
   if (!book || !chapter) {
     return res.status(400).json({ error: "book and chapter required" });
   }
   const bibleId = req.params.bibleId || DEFAULT_BIBLE_ID;
   const reference = verse ? `${book} ${chapter}:${verse}` : `${book} ${chapter}`;
   const url = `https://api.scripture.api.bible/v1/bibles/${bibleId}/passages?content-type=html&reference=${encodeURIComponent(reference)}`;
+  logger.debug("[api-bible] url", url);
 
   try {
     const response = await fetch(url, {
@@ -26,8 +33,10 @@ async function getPassage(req, res) {
         "api-key": BIBLE_API_KEY,
       },
     });
+    logger.info("[api-bible] response", response.status);
     const data = await response.json();
     if (!response.ok) {
+      logger.warn("[api-bible] non-ok", data);
       return res.status(response.status).json(data);
     }
     res.json(data);
