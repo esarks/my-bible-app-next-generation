@@ -8,7 +8,10 @@ const logger = require("./utils/logger");
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Verify critical Twilio environment variables before loading routes
+// Warn if Twilio environment variables are missing, but continue to start.
+// Individual routes already check for required variables and return
+// appropriate errors so the server can still function for non-Twilio
+// features like Bible retrieval even when these are absent.
 const requiredTwilioVars = [
   "TWILIO_SID",
   "TWILIO_AUTH_TOKEN",
@@ -16,10 +19,9 @@ const requiredTwilioVars = [
 ];
 const missingTwilioVars = requiredTwilioVars.filter((v) => !process.env[v]);
 if (missingTwilioVars.length) {
-  logger.error(
-    `[server] Missing environment variables: ${missingTwilioVars.join(", ")}`
+  logger.warn(
+    `[server] Missing Twilio environment variables: ${missingTwilioVars.join(", ")}`
   );
-  process.exit(1);
 }
 
 // Middleware
