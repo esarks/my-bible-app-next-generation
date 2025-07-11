@@ -5,6 +5,8 @@ export type Verse = {
   text: string;
 };
 
+import { logger } from "../lib/logger";
+
 export async function getScripture(
   version: string,
   book: string,
@@ -35,7 +37,9 @@ export async function getPassageHtml(
 ): Promise<string> {
   const params = new URLSearchParams({ book, chapter: String(chapter) });
   if (verse !== undefined) params.append("verse", String(verse));
-  const res = await fetch(`/api/api-bible/${bibleId}?${params.toString()}`);
+  const url = `/api/api-bible/${bibleId}?${params.toString()}`;
+  logger.info("[api] fetch", url);
+  const res = await fetch(url);
 
   const data = await res.json();
   if (!res.ok) {
