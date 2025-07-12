@@ -2,9 +2,16 @@ import type { PostgrestError } from '@supabase/supabase-js';
 
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
+function stringify(arg: any): string {
+  if (arg instanceof Error) {
+    return arg.stack || arg.message;
+  }
+  return typeof arg === 'string' ? arg : JSON.stringify(arg);
+}
+
 function format(level: LogLevel, args: any[]): string {
   const time = new Date().toISOString();
-  const msg = args.map((a) => (typeof a === 'string' ? a : JSON.stringify(a))).join(' ');
+  const msg = args.map((a) => stringify(a)).join(' ');
   return `[${time}] [${level.toUpperCase()}] ${msg}`;
 }
 

@@ -24,6 +24,10 @@ if (missingTwilioVars.length) {
   );
 }
 
+if (!process.env.BIBLE_API_KEY) {
+  logger.warn('[server] BIBLE_API_KEY not configured - NIV API requests will fail');
+}
+
 // Middleware
 app.use(cors());
 app.use(express.json());

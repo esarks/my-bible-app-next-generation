@@ -46,6 +46,7 @@ async function getPassage(req, res) {
     res.json(data);
   } catch (err) {
     logger.error("[api-bible] fetch failed", err);
+    logger.error("[api-bible] error message", err instanceof Error ? err.message : err);
     res.status(500).json({ error: "failed to fetch" });
   }
 }

@@ -58,6 +58,7 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
         })
         .catch((err) => {
           logger.error("Error fetching verses", err);
+          logger.error("Error message", err instanceof Error ? err.message : err);
           setVerses([]);
         });
     }

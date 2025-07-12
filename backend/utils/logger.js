@@ -1,6 +1,13 @@
+function stringify(arg) {
+  if (arg instanceof Error) {
+    return arg.stack || arg.message;
+  }
+  return typeof arg === 'string' ? arg : JSON.stringify(arg);
+}
+
 function format(level, args) {
   const time = new Date().toISOString();
-  const msg = args.map((a) => (typeof a === 'string' ? a : JSON.stringify(a))).join(' ');
+  const msg = args.map(stringify).join(' ');
   return `[${time}] [${level.toUpperCase()}] ${msg}`;
 }
 
