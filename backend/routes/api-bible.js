@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const logger = require("../utils/logger");
+const { getOsisCode } = require("../utils/bookOsis");
 
 const BIBLE_API_KEY = process.env.BIBLE_API_KEY;
 const DEFAULT_BIBLE_ID = "de4e12af7f28f599-01";
@@ -23,7 +24,10 @@ async function getPassage(req, res) {
     return res.status(400).json({ error: "book and chapter required" });
   }
   const bibleId = req.params.bibleId || DEFAULT_BIBLE_ID;
-  const reference = verse ? `${book} ${chapter}:${verse}` : `${book} ${chapter}`;
+  const osisBook = getOsisCode(book);
+  const reference = verse
+    ? `${osisBook} ${chapter}:${verse}`
+    : `${osisBook} ${chapter}`;
   const url = `https://api.scripture.api.bible/v1/bibles/${bibleId}/passages?content-type=html&reference=${encodeURIComponent(reference)}`;
   logger.debug("[api-bible] url", url);
 
