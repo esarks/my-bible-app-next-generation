@@ -33,7 +33,22 @@ export async function getScripture(
 
   const data = await res.json();
 
-  return data as Verse[];
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  return data.map((v: any, idx: number) => ({
+    book,
+    chapter,
+    verse: v.verse ?? idx + 1,
+    text: v.text ?? "",
+    html: v.html ?? undefined,
+    red: v.red ?? false,
+    italic: v.italic ?? false,
+    paragraph: v.paragraph ?? false,
+    strongs: v.strongs ?? [],
+    notes: v.notes ?? [],
+  }));
 }
 
 export async function getPassageHtml(
