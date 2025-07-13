@@ -3,6 +3,8 @@ export type Verse = {
   chapter: number;
   verse: number;
   text: string;
+  /** Raw HTML string with formatting like italics or red lettering. */
+  html?: string;
   red?: boolean;
   italic?: boolean;
   paragraph?: boolean;

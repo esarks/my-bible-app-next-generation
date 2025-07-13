@@ -16,6 +16,7 @@ import { flushSync } from "react-dom";
 interface Verse {
   verse: number;
   text: string;
+  html?: string;
 }
 
 // Your component props start with props for variants and slots you defined

@@ -15,6 +15,8 @@ import { supabase } from "../lib/supabaseClient";
 interface Verse {
   verse: number;
   text: string;
+  /** Optional HTML string for formatted text */
+  html?: string;
   red?: boolean;
   italic?: boolean;
   paragraph?: boolean;
@@ -245,12 +247,20 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
                 `red=${v.red ? 1 : 0}, ` +
                 `note length=${note?.content?.length ?? 0})`
             );
+            const verseContent = v.html ? (
+              <span
+                className={v.red ? "text-red-600" : undefined}
+                dangerouslySetInnerHTML={{ __html: v.html }}
+              />
+            ) : (
+              <span className={v.red ? "text-red-600" : undefined}>
+                {v.italic ? <em>{v.text}</em> : v.text}
+              </span>
+            );
             const formatted = (
               <>
-                {v.paragraph && <br />}
-                <span className={v.red ? "text-red-600" : undefined}>
-                  {v.italic ? <em>{v.text}</em> : v.text}
-                </span>
+                {v.paragraph && <span>¶ </span>}
+                {verseContent}
               </>
             );
             return (
