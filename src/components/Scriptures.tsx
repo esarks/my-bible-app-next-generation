@@ -240,9 +240,10 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
                 n.verse === v.verse
             );
             logger.debug(
-              `[Scriptures] Displaying verse ${v.verse} with note length ${
-                note?.content?.length ?? 0
-              }`
+              `[Scriptures] Displaying verse ${v.verse} ` +
+                `(metaNotes=${v.notes ? v.notes.length : 0}, ` +
+                `red=${v.red ? 1 : 0}, ` +
+                `note length=${note?.content?.length ?? 0})`
             );
             const formatted = (
               <>
