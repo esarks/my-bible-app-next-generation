@@ -54,6 +54,17 @@ router.get("/:version", (req, res) => {
     const verses = (data.verses || []).filter(
       (v) => v.book_name === book && v.chapter === chapNum
     );
+    if (process.env.NODE_ENV !== "test") {
+      const sample = verses[0];
+      logger.debug(
+        `[bibles] Loaded ${verses.length} verses from ${version}.json ` +
+          `(red_letter=${data.metadata?.red_letter}, italics=${data.metadata?.italics}, ` +
+          `notes field in sample=${sample?.notes ? "present" : "none"})`
+      );
+      if (sample) {
+        logger.debug("[bibles] Sample verse", sample);
+      }
+    }
     res.json(verses);
   } catch (err) {
     logger.error("[bibles] Error reading", err);
