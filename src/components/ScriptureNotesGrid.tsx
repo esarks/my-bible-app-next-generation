@@ -18,12 +18,15 @@ export interface ScriptureNotesGridProps
   chapter: number;
   verse: number;
   text: string;
+  formattedText?: React.ReactNode;
+  strongs?: string[];
+  metaNotes?: string[];
   noteContent?: string;
   onSave?: (content: string) => void;
 }
 
 function ScriptureNotesGrid_(
-  { book, chapter, verse, text, noteContent, onSave, ...rest }: ScriptureNotesGridProps,
+  { book, chapter, verse, text, formattedText, strongs, metaNotes, noteContent, onSave, ...rest }: ScriptureNotesGridProps,
   ref: HTMLElementRefOf<"div">
 ) {
   const { profile } = useAuth();
@@ -84,13 +87,25 @@ function ScriptureNotesGrid_(
             <div style={{ fontWeight: "bold", marginBottom: "0.25rem" }}>
               Verse {verse}
             </div>
-            <div>{text}</div>
+            <div>
+              {formattedText ? formattedText : text}
+            </div>
           </>
         ),
       }}
       noteText={{
         children: (
           <>
+            {(strongs && strongs.length > 0) || (metaNotes && metaNotes.length > 0) ? (
+              <div style={{ fontSize: "0.875rem", marginBottom: "0.25rem" }}>
+                {strongs && strongs.length > 0 && (
+                  <div>Strong's: {strongs.join(", ")}</div>
+                )}
+                {metaNotes && metaNotes.map((n, i) => (
+                  <div key={i}>{n}</div>
+                ))}
+              </div>
+            ) : null}
             <AutoSizeTextarea
               value={content}
               onChange={(e) => setContent(e.target.value)}

@@ -3,6 +3,11 @@ export type Verse = {
   chapter: number;
   verse: number;
   text: string;
+  red?: boolean;
+  italic?: boolean;
+  paragraph?: boolean;
+  strongs?: string[];
+  notes?: string[];
 };
 
 import { logger } from "../lib/logger";

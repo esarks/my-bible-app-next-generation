@@ -15,6 +15,11 @@ import { supabase } from "../lib/supabaseClient";
 interface Verse {
   verse: number;
   text: string;
+  red?: boolean;
+  italic?: boolean;
+  paragraph?: boolean;
+  strongs?: string[];
+  notes?: string[];
 }
 
 interface Note {
@@ -239,6 +244,14 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
                 note?.content?.length ?? 0
               }`
             );
+            const formatted = (
+              <>
+                {v.paragraph && <br />}
+                <span className={v.red ? "text-red-600" : undefined}>
+                  {v.italic ? <em>{v.text}</em> : v.text}
+                </span>
+              </>
+            );
             return (
               <ScriptureNotesGrid
                 key={v.verse}
@@ -246,6 +259,9 @@ function Scriptures_(props: {}, ref: HTMLElementRefOf<"div">) {
                 chapter={chapter!}
                 verse={v.verse}
                 text={v.text}
+                formattedText={formatted}
+                strongs={v.strongs}
+                metaNotes={v.notes}
                 noteContent={note?.content || ""}
                 onSave={() => fetchNotes()}
               />
