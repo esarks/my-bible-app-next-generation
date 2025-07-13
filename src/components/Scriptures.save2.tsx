@@ -12,6 +12,7 @@ import { flushSync } from "react-dom";
 interface Verse {
   verse: number;
   text: string;
+  html?: string;
 }
 
 export interface ScripturesProps extends DefaultScripturesProps {}
