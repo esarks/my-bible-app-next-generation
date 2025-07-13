@@ -5,22 +5,24 @@ const path = require("path");
 const logger = require("../utils/logger");
 
 const biblesDir = path.join(__dirname, "..", "bibles");
-let versionsCache = null;
+
+// The list of available bible versions is small, so we load the metadata on
+// each request instead of caching it. This allows changes to the underlying
+// JSON files (like net.json) to be picked up without restarting the server.
 
 function loadVersions() {
-  if (versionsCache) return versionsCache;
   try {
     const files = fs
       .readdirSync(biblesDir)
       .filter((f) => f.endsWith(".json"));
-    versionsCache = files.map((file) => {
+    const versions = files.map((file) => {
       const data = JSON.parse(
         fs.readFileSync(path.join(biblesDir, file), "utf8")
       );
       const { name, shortname, module } = data.metadata || {};
       return { name, shortname, module };
     });
-    return versionsCache;
+    return versions;
   } catch (err) {
     logger.error("[bibles] Failed to read versions", err);
     throw err;
