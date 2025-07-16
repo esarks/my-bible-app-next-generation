@@ -14,9 +14,6 @@ export type Verse = {
 
 import { logger } from "../lib/logger";
 
-/**
- * Loads scripture verses from local JSON files or API.
- */
 export async function getScripture(
   version: string,
   book: string,
@@ -27,33 +24,32 @@ export async function getScripture(
     return getPassageVerses(book, chapter);
   }
 
-  try {
-    // Dynamically load the appropriate Bible JSON file (e.g., net.json)
-    const module = await import(`../data/${version}.json`);
-    const data = module.default || module;
+  const res = await fetch(
+    `/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`
+  );
 
-    const chapterData = data?.[book]?.[chapter];
-    if (!Array.isArray(chapterData)) {
-      logger.warn(`[api] No array found for ${version} ${book} ${chapter}`);
-      return [];
-    }
+  if (!res.ok) {
+    throw new Error(`Failed to fetch scripture: ${res.statusText}`);
+  }
 
-    return chapterData.map((v: any, idx: number): Verse => ({
-      book,
-      chapter,
-      verse: v.verse ?? idx + 1,
-      text: v.text ?? "",
-      html: v.html ?? undefined,
-      red: v.red ?? false,
-      italic: v.italic ?? false,
-      paragraph: v.paragraph ?? false,
-      strongs: Array.isArray(v.strongs) ? v.strongs : [],
-      notes: Array.isArray(v.notes) ? v.notes : [],
-    }));
-  } catch (error) {
-    logger.error(`[api] Failed to load version=${version}`, error);
+  const data = await res.json();
+
+  if (!Array.isArray(data)) {
     return [];
   }
+
+  return data.map((v: any, idx: number) => ({
+    book,
+    chapter,
+    verse: v.verse ?? idx + 1,
+    text: v.text ?? "",
+    html: v.html ?? undefined,
+    red: v.red ?? false,
+    italic: v.italic ?? false,
+    paragraph: v.paragraph ?? false,
+    strongs: v.strongs ?? [],
+    notes: v.notes ?? [],
+  }));
 }
 
 /**
