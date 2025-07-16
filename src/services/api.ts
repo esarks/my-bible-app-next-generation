@@ -14,43 +14,51 @@ export type Verse = {
 
 import { logger } from "../lib/logger";
 
+/**
+ * Loads scripture verses from local JSON files or API.
+ */
 export async function getScripture(
   version: string,
   book: string,
   chapter: number
 ): Promise<Verse[]> {
+  // Handle NIV via external API
   if (version === "niv_api") {
     return getPassageVerses(book, chapter);
   }
 
-  const res = await fetch(
-    `/api/bibles/${version}?book=${encodeURIComponent(book)}&chapter=${chapter}`
-  );
+  try {
+    // Dynamically load the appropriate Bible JSON file (e.g., net.json)
+    const module = await import(`../data/${version}.json`);
+    const data = module.default || module;
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch scripture: ${res.statusText}`);
-  }
+    const chapterData = data?.[book]?.[chapter];
+    if (!Array.isArray(chapterData)) {
+      logger.warn(`[api] No array found for ${version} ${book} ${chapter}`);
+      return [];
+    }
 
-  const data = await res.json();
-
-  if (!Array.isArray(data)) {
+    return chapterData.map((v: any, idx: number): Verse => ({
+      book,
+      chapter,
+      verse: v.verse ?? idx + 1,
+      text: v.text ?? "",
+      html: v.html ?? undefined,
+      red: v.red ?? false,
+      italic: v.italic ?? false,
+      paragraph: v.paragraph ?? false,
+      strongs: Array.isArray(v.strongs) ? v.strongs : [],
+      notes: Array.isArray(v.notes) ? v.notes : [],
+    }));
+  } catch (error) {
+    logger.error(`[api] Failed to load version=${version}`, error);
     return [];
   }
-
-  return data.map((v: any, idx: number) => ({
-    book,
-    chapter,
-    verse: v.verse ?? idx + 1,
-    text: v.text ?? "",
-    html: v.html ?? undefined,
-    red: v.red ?? false,
-    italic: v.italic ?? false,
-    paragraph: v.paragraph ?? false,
-    strongs: v.strongs ?? [],
-    notes: v.notes ?? [],
-  }));
 }
 
+/**
+ * Gets raw HTML content for a Bible passage (used by NIV API).
+ */
 export async function getPassageHtml(
   book: string,
   chapter: number,
@@ -70,6 +78,9 @@ export async function getPassageHtml(
   return data.data?.content || "";
 }
 
+/**
+ * Parses raw HTML content into individual verses (NIV only).
+ */
 export async function getPassageVerses(
   book: string,
   chapter: number,
