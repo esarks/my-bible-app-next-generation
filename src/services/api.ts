@@ -1,5 +1,5 @@
 import { logger } from "../lib/logger";
-import net from "../data/net.json"; // <-- static import required
+import net from "../../backend/bibles/net.json"; // <-- static import required
 
 export type Verse = {
   book: string;
