@@ -60,6 +60,30 @@ function getStaticBibleData(
   book: string,
   chapter: number
 ): Verse[] {
+  // Some local Bible JSON files (like net.json) store verses in a flat array
+  // under a `verses` key instead of nested book/chapter objects. Detect this
+  // format and filter accordingly.
+  if (Array.isArray(bibleData.verses)) {
+    const normalizedBook = book.replace(/\s+/g, "").toLowerCase();
+    return bibleData.verses
+      .filter((v: any) => {
+        const name = String(v.book_name || "").replace(/\s+/g, "").toLowerCase();
+        return name === normalizedBook && v.chapter === chapter;
+      })
+      .map((v: any) => ({
+        book,
+        chapter,
+        verse: v.verse ?? 0,
+        text: v.text ?? "",
+        html: v.html ?? undefined,
+        red: v.red ?? false,
+        italic: v.italic ?? false,
+        paragraph: v.paragraph ?? false,
+        strongs: v.strongs ?? [],
+        notes: v.notes ?? [],
+      }));
+  }
+
   const normalizedBook = book.replace(/\s+/g, "").toLowerCase();
   const key = Object.keys(bibleData).find(
     (k) => k.replace(/\s+/g, "").toLowerCase() === normalizedBook
